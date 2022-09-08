@@ -16,6 +16,5 @@ public class UserService {
     public void registerNewUser(UserRequest request) {
         User user = userMapper.userRequestToUser(request);
         userRepository.save(user);
-
     }
 }
