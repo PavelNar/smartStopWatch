@@ -1,6 +1,7 @@
-package com.project.smartStopWatch.user;
+package com.project.smartStopWatch.domain.user;
 
-import com.project.smartStopWatch.login.LoginRequest;
+import com.project.smartStopWatch.app.login.LoginRequest;
+import com.project.smartStopWatch.app.user.UserRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -13,4 +14,7 @@ public interface UserMapper {
 
     @Mapping(source = "username", target = "userName")
     User loginRequestToUser(LoginRequest loginRequest);
+
+//    @Mapping(source = "id", target = "userId")
+//    LoginResponse userToLoginResponse(User user);
 }

@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.login;
+package com.project.smartStopWatch.app.login;
 
 import lombok.Data;
 

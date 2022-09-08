@@ -1,5 +1,6 @@
-package com.project.smartStopWatch.user;
+package com.project.smartStopWatch.domain.user;
 
+import com.project.smartStopWatch.app.user.UserRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,8 +14,9 @@ public class UserService {
     @Resource
     private UserRepository userRepository;
 
-    public void registerNewUser(UserRequest request) {
+    public User registerNewUser(UserRequest request) {
         User user = userMapper.userRequestToUser(request);
         userRepository.save(user);
+        return user;
     }
 }
