@@ -1,7 +1,10 @@
 package com.project.smartStopWatch.app.login;
 
+import com.project.smartStopWatch.app.user.UserRequest;
+import com.project.smartStopWatch.app.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -12,9 +15,15 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
-    @PostMapping("/login")
-    @Operation(summary = "Sisselogimine")
-    public Boolean login(LoginRequest loginRequest) {
-        return loginService.checkUserExists(loginRequest);
+    @PostMapping("/register/user")
+    @Operation(summary = "Uue kasutaja registreerimine")
+    public UserResponse registerNewUser(@RequestBody UserRequest request) {
+        return loginService.registerNewUser(request);
     }
+
+//    @PostMapping("/login")
+//    @Operation(summary = "Sisselogimine")
+//    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+//        return loginService.checkUserExists(loginRequest);
+//    }
 }
