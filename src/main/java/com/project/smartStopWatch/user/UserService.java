@@ -13,7 +13,7 @@ public class UserService {
     @Resource
     private UserRepository userRepository;
 
-    public void addUser(UserRequest request) {
+    public void registerNewUser(UserRequest request) {
         User user = userMapper.userRequestToUser(request);
         userRepository.save(user);
     }

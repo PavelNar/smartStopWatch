@@ -17,8 +17,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/add")
-    @Operation(summary = "Kasutaja lisamine")
+    @Operation(summary = "Uue kasutaja registreerimine")
     public void addUser(@RequestBody @Valid UserRequest request) {
-        userService.addUser(request);
+        userService.registerNewUser(request);
     }
 }
