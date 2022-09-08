@@ -1,5 +1,7 @@
-package com.project.smartStopWatch.user;
+package com.project.smartStopWatch.domain.user.userrole;
 
+import com.project.smartStopWatch.domain.user.User;
+import com.project.smartStopWatch.domain.user.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

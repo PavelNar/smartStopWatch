@@ -1,5 +1,6 @@
-package com.project.smartStopWatch.user;
+package com.project.smartStopWatch.domain.user;
 
+import com.project.smartStopWatch.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

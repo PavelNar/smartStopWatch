@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.user;
+package com.project.smartStopWatch.domain.user.role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

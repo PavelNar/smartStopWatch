@@ -1,8 +1,9 @@
-package com.project.smartStopWatch.login;
+package com.project.smartStopWatch.app.login;
 
-import com.project.smartStopWatch.user.User;
-import com.project.smartStopWatch.user.UserMapper;
-import com.project.smartStopWatch.user.UserRepository;
+import com.project.smartStopWatch.app.login.LoginRequest;
+import com.project.smartStopWatch.domain.user.User;
+import com.project.smartStopWatch.domain.user.UserMapper;
+import com.project.smartStopWatch.domain.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ public class LoginService {
 
     @Resource
     private UserRepository userRepository;
+
 
     public Boolean checkUserExists(LoginRequest loginRequest) {
         User user = userMapper.loginRequestToUser(loginRequest);

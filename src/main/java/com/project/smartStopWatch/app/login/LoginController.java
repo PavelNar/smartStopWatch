@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.login;
+package com.project.smartStopWatch.app.login;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
