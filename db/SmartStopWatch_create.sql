@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-07 08:33:23.333
+-- Last modification date: 2022-09-08 06:53:19.035
 
 -- tables
 -- Table: athlete
@@ -8,7 +8,7 @@ CREATE TABLE athlete (
     first_name varchar(255)  NOT NULL,
     last_name varchar(255)  NOT NULL,
     personal_code varchar(255)  NOT NULL,
-    CONSTRAINT athlete_ak_1 UNIQUE (personal_code) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT personal_code_ak UNIQUE (personal_code) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT athlete_pk PRIMARY KEY (id)
 );
 
@@ -78,6 +78,7 @@ CREATE TABLE "user" (
     id serial  NOT NULL,
     user_name varchar(255)  NOT NULL,
     password varchar(255)  NOT NULL,
+    CONSTRAINT user_name_ak UNIQUE (user_name) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
