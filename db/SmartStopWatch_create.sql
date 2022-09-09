@@ -1,14 +1,19 @@
+-- Kustutab public schema (mis põhimõtteliselt kustutab kõik tabelid)
+DROP SCHEMA public CASCADE;
+-- Loob uue public schema vajalikud õigused
+CREATE SCHEMA public
+-- taastab vajalikud andmebaasi õigused
+    GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-08 06:53:19.035
+-- Last modification date: 2022-09-09 12:07:44.961
 
 -- tables
 -- Table: athlete
 CREATE TABLE athlete (
     id serial  NOT NULL,
-    first_name varchar(255)  NOT NULL,
-    last_name varchar(255)  NOT NULL,
-    personal_code varchar(255)  NOT NULL,
-    CONSTRAINT personal_code_ak UNIQUE (personal_code) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    name varchar(255)  NOT NULL,
     CONSTRAINT athlete_pk PRIMARY KEY (id)
 );
 
@@ -56,6 +61,7 @@ CREATE TABLE split (
     "end" timestamp  NULL,
     athlete_id int  NOT NULL,
     athlete_event_id int  NOT NULL,
+    is_active boolean  NOT NULL DEFAULT true,
     CONSTRAINT split_pk PRIMARY KEY (id)
 );
 
@@ -63,6 +69,7 @@ CREATE TABLE split (
 CREATE TABLE split_length (
     id serial  NOT NULL,
     meters int  NOT NULL,
+    time_delay int  NOT NULL,
     CONSTRAINT split_length_pk PRIMARY KEY (id)
 );
 
@@ -76,18 +83,11 @@ CREATE TABLE stroke (
 -- Table: user
 CREATE TABLE "user" (
     id serial  NOT NULL,
+    role_id int  NOT NULL,
     user_name varchar(255)  NOT NULL,
     password varchar(255)  NOT NULL,
     CONSTRAINT user_name_ak UNIQUE (user_name) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT user_pk PRIMARY KEY (id)
-);
-
--- Table: user_role
-CREATE TABLE user_role (
-    id serial  NOT NULL,
-    role_id int  NOT NULL,
-    user_id int  NOT NULL,
-    CONSTRAINT user_role_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
@@ -147,18 +147,10 @@ ALTER TABLE split ADD CONSTRAINT split_athlete_event
     INITIALLY IMMEDIATE
 ;
 
--- Reference: user_role_role (table: user_role)
-ALTER TABLE user_role ADD CONSTRAINT user_role_role
+-- Reference: user_role (table: user)
+ALTER TABLE "user" ADD CONSTRAINT user_role
     FOREIGN KEY (role_id)
     REFERENCES role (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
--- Reference: user_role_user (table: user_role)
-ALTER TABLE user_role ADD CONSTRAINT user_role_user
-    FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
