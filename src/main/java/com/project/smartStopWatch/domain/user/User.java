@@ -1,5 +1,6 @@
 package com.project.smartStopWatch.domain.user;
 
+import com.project.smartStopWatch.domain.user.role.Role;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     @Size(max = 255)
     @NotNull

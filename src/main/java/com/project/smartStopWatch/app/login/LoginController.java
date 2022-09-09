@@ -17,13 +17,13 @@ public class LoginController {
 
     @PostMapping("/register/user")
     @Operation(summary = "Uue kasutaja registreerimine")
-    public UserResponse registerNewUser(@RequestBody UserRequest request) {
+    public LoginResponse registerNewUser(@RequestBody LoginRequest request) {
         return loginService.registerNewUser(request);
     }
 
-//    @PostMapping("/login")
-//    @Operation(summary = "Sisselogimine")
-//    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-//        return loginService.checkUserExists(loginRequest);
-//    }
+    @PostMapping("/login")
+    @Operation(summary = "Sisselogimine")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        return loginService.checkUserExists(loginRequest);
+    }
 }

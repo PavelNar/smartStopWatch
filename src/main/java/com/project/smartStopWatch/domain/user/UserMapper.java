@@ -1,7 +1,8 @@
 package com.project.smartStopWatch.domain.user;
 
 import com.project.smartStopWatch.app.login.LoginRequest;
-import com.project.smartStopWatch.app.user.UserRequest;
+import com.project.smartStopWatch.app.login.LoginResponse;
+import com.project.smartStopWatch.app.user.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -10,11 +11,8 @@ import org.mapstruct.ReportingPolicy;
 public interface UserMapper {
 
     @Mapping(source = "username", target = "userName")
-    User userRequestToUser(UserRequest request);
+    User loginRequestToUser(LoginRequest request);
 
-    @Mapping(source = "username", target = "userName")
-    User loginRequestToUser(LoginRequest loginRequest);
-
-//    @Mapping(source = "id", target = "userId")
-//    LoginResponse userToLoginResponse(User user);
+    @Mapping(source = "id", target = "userId")
+    LoginResponse userToLoginResponse(User user);
 }
