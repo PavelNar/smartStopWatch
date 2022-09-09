@@ -31,8 +31,6 @@ public class LoginService {
     public LoginResponse registerNewUser(LoginRequest request) {
         return userService.registerNewUser(request);
         // TODO: 08.09.2022 kasutades roleService otsid ülesse andmebaasist rolli (role) kasutades selleks roleRepositoryt
-        // TODO: 08.09.2022 lood uue objekti klassist UserRole ja paned sinna külge useri ja role
-        // TODO: 08.09.2022 kasutades userRoleService ja sealt edasi userRoleRepository salvestad andmebaasi userrole
         // TODO: 08.09.2022 tagastad userresponce objekti mille sisse lisad userId
     }
     public LoginResponse checkUserExists(LoginRequest loginRequest) {
