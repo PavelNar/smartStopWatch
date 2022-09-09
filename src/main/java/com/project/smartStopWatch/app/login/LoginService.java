@@ -26,6 +26,7 @@ public class LoginService {
     public LoginResponse registerNewUser(LoginRequest request) {
         return userService.registerNewUser(request);
     }
+
     public LoginResponse checkUserExists(LoginRequest loginRequest) {
         User user = userMapper.loginRequestToUser(loginRequest);
         User userExists = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());

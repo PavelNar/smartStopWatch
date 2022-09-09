@@ -7,12 +7,13 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-09 12:07:44.961
+-- Last modification date: 2022-09-09 12:58:05.786
 
 -- tables
 -- Table: athlete
 CREATE TABLE athlete (
     id serial  NOT NULL,
+    user_id int  NOT NULL,
     name varchar(255)  NOT NULL,
     CONSTRAINT athlete_pk PRIMARY KEY (id)
 );
@@ -103,6 +104,14 @@ ALTER TABLE athlete_event ADD CONSTRAINT athlete_event_athlete
 ALTER TABLE athlete_event ADD CONSTRAINT athlete_event_event
     FOREIGN KEY (event_id)
     REFERENCES event (id)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: athlete_user (table: athlete)
+ALTER TABLE athlete ADD CONSTRAINT athlete_user
+    FOREIGN KEY (user_id)
+    REFERENCES "user" (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
