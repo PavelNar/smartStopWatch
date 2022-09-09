@@ -2,7 +2,6 @@ package com.project.smartStopWatch.domain.user;
 
 import com.project.smartStopWatch.app.login.LoginRequest;
 import com.project.smartStopWatch.app.login.LoginResponse;
-import com.project.smartStopWatch.app.user.UserResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
