@@ -3,6 +3,7 @@ package com.project.smartStopWatch.domain.event;
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
 import com.project.smartStopWatch.domain.Event;
+import com.project.smartStopWatch.domain.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,7 +20,8 @@ public class EventService {
     public EventResponse createGlobalSettings(EventRequest request) {
         Event event = eventMapper.eventRequestToEvent(request);
         // TODO: 12.09.2022 usserRepos otsid useri kasutades uerID
-//        event.setUser();
+//        User user = userRepository.findByUserId(userId).get()
+//        event.setUser(user);
 
 
         eventRepository.save(event);
