@@ -2,7 +2,9 @@ package com.project.smartStopWatch.app.event;
 
 import com.project.smartStopWatch.app.athlete.AthleteEventDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,10 @@ public class EventController {
         result.getHeatRows().add(createHeatRows(3));
         return result;
     }
+
+    @PostMapping("/global/settings")
+    @Operation(summary = "Fill global settings")
+
 
     private HeatRow createHeatRows(int heat) {
         HeatRow heatRow = new HeatRow();

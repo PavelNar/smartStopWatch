@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public class ValidationService {
 
-    public static final String USERNAME_EXISTS = "Userneme already in use";
-    public static final String INCORRECT_LOGIN_INPUT = "Usernam or password is incorrect";
+    public static final String USERNAME_EXISTS = "Username already in use";
+    public static final String INCORRECT_LOGIN_INPUT = "Username or password is incorrect.";
     public static final String ATHLETE_EXISTS = "Athlete does not exist";
 
     public static final String INSUFFICIENT_FUNDS = "Kontol pole piisavalt vahendeid tehingu sooritamiseks";
@@ -21,7 +21,7 @@ public class ValidationService {
 
     public static void validateUserExists(Optional<User> user) {
         if (user.isEmpty()) {
-            throw new DataNotFoundException(INCORRECT_LOGIN_INPUT, INCORRECT_LOGIN_INPUT);
+            throw new BusinessException(INCORRECT_LOGIN_INPUT, INCORRECT_LOGIN_INPUT + " Try again.");
         }
     }
     public static void validateUsernameExists(Optional<User> user) {

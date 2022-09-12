@@ -7,7 +7,7 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-12 08:09:00.538
+-- Last modification date: 2022-09-12 12:52:18.016
 
 -- tables
 -- Table: athlete
@@ -24,7 +24,7 @@ CREATE TABLE athlete_event (
     athlete_id int  NOT NULL,
     event_id int  NOT NULL,
     start_time timestamp  NOT NULL,
-    finish_time timestamp  NOT NULL,
+    finish_time timestamp  NULL,
     heat_number int  NOT NULL,
     lane_number int  NOT NULL,
     event_length int  NOT NULL,
@@ -39,11 +39,11 @@ CREATE TABLE event (
     user_id int  NOT NULL,
     stroke_id int  NOT NULL,
     date_time timestamp  NOT NULL,
-    event_length int  NOT NULL,
+    event_length int  NULL,
     split_length_id int  NOT NULL,
     number_of_athletes int  NULL,
-    number_of_heats int  NOT NULL,
-    number_of_lanes int  NOT NULL,
+    number_of_heats int  NULL,
+    number_of_lanes int  NULL,
     heat_interval_seconds int  NULL,
     CONSTRAINT event_pk PRIMARY KEY (id)
 );
@@ -79,7 +79,7 @@ CREATE TABLE split (
 CREATE TABLE split_length (
     id serial  NOT NULL,
     meters int  NOT NULL,
-    time_delay int  NOT NULL,
+    time_delay int  NULL,
     CONSTRAINT split_length_pk PRIMARY KEY (id)
 );
 
