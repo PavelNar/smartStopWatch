@@ -1,8 +1,8 @@
 package com.project.smartStopWatch.app.event;
 
 import com.project.smartStopWatch.app.athlete.AthleteEventDto;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.event.EventService;
+import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,18 +22,26 @@ public class EventController {
 
     @GetMapping("/id")
     public EventInfo getAthletesEventInfo(Integer eventId) {
-        // Meie mock andmed
+        // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
+        // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
+        // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
+        // et ta saaks siis päringule mingi vastuse.
+        EventInfo result = createMockData();
+
+        // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
+        if (eventId == 0) {
+            throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
+        }
+
+        return result;
+    }
+
+    private EventInfo createMockData() {
         EventInfo result = new EventInfo();
         result.getHeatRows().add(createHeatRows(1));
         result.getHeatRows().add(createHeatRows(2));
         result.getHeatRows().add(createHeatRows(3));
         return result;
-    }
-
-    @PostMapping("/global/settings")
-    @Operation(summary = "Fill global settings")
-    public EventResponse createGlobalSettings(EventRequest request) {
-        return eventService.createGlobalSettings(request);
     }
 
     private HeatRow createHeatRows(int heat) {
@@ -45,7 +53,6 @@ public class EventController {
         heatRow.setAthleteEvents(athleteEvents);
         return heatRow;
     }
-
 
     private AthleteEventDto createAthleteEvent(int number, int lane, int heat) {
         AthleteEventDto athleteEvent = new AthleteEventDto();
@@ -60,4 +67,12 @@ public class EventController {
         athleteEvent.setFinishTime(null);
         return athleteEvent;
     }
+
+    @PostMapping("/global/settings")
+    @Operation(summary = "Fill global settings")
+    public EventResponse createGlobalSettings(EventRequest request) {
+        return eventService.createGlobalSettings(request);
+    }
+
+
 }
