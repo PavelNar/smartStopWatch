@@ -1,15 +1,19 @@
 package com.project.smartStopWatch.validation;
 
 
+import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.user.User;
+import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import com.project.smartStopWatch.infrastructure.exception.DataNotFoundException;
 
 import java.util.Optional;
 
 public class ValidationService {
 
-    public static final String ACCOUNT_NOT_EXISTS = "Sellist kontot ei eksisteeri";
-    public static final String INCORRECT_LOGIN_INPUT = "Kasutajanimi või parool on vale";
+    public static final String USERNAME_EXISTS = "Userneme already in use";
+    public static final String INCORRECT_LOGIN_INPUT = "Usernam or password is incorrect";
+    public static final String ATHLETE_EXISTS = "Athlete does not exist";
+
     public static final String INSUFFICIENT_FUNDS = "Kontol pole piisavalt vahendeid tehingu sooritamiseks";
     public static final String MINIMUM_DEPOSIT_REQUIREMENT = "Miinumum deposiidi nõue";
     public static final Integer MINIMUM_DEPOSIT_AMOUNT = 5;
@@ -18,6 +22,17 @@ public class ValidationService {
     public static void validateUserExists(Optional<User> user) {
         if (user.isEmpty()) {
             throw new DataNotFoundException(INCORRECT_LOGIN_INPUT, INCORRECT_LOGIN_INPUT);
+        }
+    }
+    public static void validateUsernameExists(Optional<User> user) {
+        if (user.isPresent()) {
+            throw new BusinessException(USERNAME_EXISTS, USERNAME_EXISTS);
+        }
+    }
+
+    public static void validateAthleteExists(Optional<Athlete> athlete) {
+        if (athlete.isEmpty()) {
+            throw new BusinessException(ATHLETE_EXISTS, ATHLETE_EXISTS);
         }
     }
 //    public static void validatePasswordUserExists(List<UserRole> userRoles) {
@@ -32,11 +47,6 @@ public class ValidationService {
 //        }
 //    }
 //
-//    public static void validateAccountExists(Optional<Account> account, String accountNumber) {
-//        if (account.isEmpty()) {
-//            throw new DataNotFoundException(ACCOUNT_NOT_EXISTS, "Sellist kontot kontonubriga " + accountNumber + " ei leitud");
-//        }
-//    }
 //
 //    public static void validateEnoughBalance(Integer amount, Account account) {
 //        if (account.getBalance() - amount < 0) {
