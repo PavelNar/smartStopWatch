@@ -10,8 +10,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.project.smartStopWatch.domain.athlete.Athlete} entity
  */
 @Data
-public class AthleteResponce implements Serializable {
-    private final Integer id;
+public class AthleteInfo implements Serializable {
     private final Integer userId;
     @Size(max = 255)
     @NotNull

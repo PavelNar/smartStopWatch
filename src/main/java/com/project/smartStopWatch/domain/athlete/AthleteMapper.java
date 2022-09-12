@@ -1,7 +1,7 @@
 package com.project.smartStopWatch.domain.athlete;
 
 import com.project.smartStopWatch.app.athlete.AthleteRequest;
-import com.project.smartStopWatch.app.athlete.AthleteResponce;
+import com.project.smartStopWatch.app.athlete.AthleteInfo;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -14,12 +14,12 @@ public interface AthleteMapper {
     Athlete updateAthleteFromAthleteRequest(AthleteRequest athleteRequest, @MappingTarget Athlete athlete);
 
     @Mapping(source = "userId", target = "user.id")
-    Athlete AthleteResponseToAthlete(AthleteResponce athleteResponce);
+    Athlete AthleteResponseToAthlete(AthleteInfo athleteInfo);
 
     @Mapping(source = "user.id", target = "userId")
-    AthleteResponce athleteToAthleteResponse(Athlete athlete);
+    AthleteInfo athleteToAthleteResponse(Athlete athlete);
 
     @Mapping(source = "userId", target = "user.id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Athlete updateAthleteFromAthleteResponse(AthleteResponce athleteResponce, @MappingTarget Athlete athlete);
+    Athlete updateAthleteFromAthleteResponse(AthleteInfo athleteInfo, @MappingTarget Athlete athlete);
 }
