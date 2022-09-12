@@ -7,7 +7,7 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-09 12:58:05.786
+-- Last modification date: 2022-09-12 08:09:00.538
 
 -- tables
 -- Table: athlete
@@ -46,6 +46,15 @@ CREATE TABLE event (
     number_of_lanes int  NOT NULL,
     heat_interval_seconds int  NULL,
     CONSTRAINT event_pk PRIMARY KEY (id)
+);
+
+-- Table: heat
+CREATE TABLE heat (
+    id serial  NOT NULL,
+    event_id int  NOT NULL,
+    start timestamp  NOT NULL,
+    "end" timestamp  NULL,
+    CONSTRAINT heat_pk PRIMARY KEY (id)
 );
 
 -- Table: role
@@ -136,6 +145,14 @@ ALTER TABLE event ADD CONSTRAINT event_stroke
 ALTER TABLE event ADD CONSTRAINT event_user
     FOREIGN KEY (user_id)
     REFERENCES "user" (id)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: heat_event (table: heat)
+ALTER TABLE heat ADD CONSTRAINT heat_event
+    FOREIGN KEY (event_id)
+    REFERENCES event (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
