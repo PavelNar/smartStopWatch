@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 public class LoginController {
@@ -15,13 +16,13 @@ public class LoginController {
 
     @PostMapping("/register/user")
     @Operation(summary = "Uue kasutaja registreerimine")
-    public LoginResponse registerNewUser(@RequestBody LoginRequest request) {
+    public LoginResponse registerNewUser(@RequestBody @Valid UserDto request) {
         return loginService.registerNewUser(request);
     }
 
     @PostMapping("/login")
     @Operation(summary = "Sisselogimine")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-        return loginService.checkUserExists(loginRequest);
+    public LoginResponse login(@RequestBody @Valid UserDto userDto) {
+        return loginService.login(userDto);
     }
 }

@@ -4,10 +4,12 @@ import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserMapper;
 import com.project.smartStopWatch.domain.user.UserRepository;
 import com.project.smartStopWatch.domain.user.UserService;
+import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -23,13 +25,13 @@ public class LoginService {
 
 
     @Transactional
-    public LoginResponse registerNewUser(LoginRequest request) {
+    public LoginResponse registerNewUser(UserDto request) {
         return userService.registerNewUser(request);
     }
 
-    public LoginResponse checkUserExists(LoginRequest loginRequest) {
-        User user = userMapper.loginRequestToUser(loginRequest);
-        User userExists = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-        return userMapper.userToLoginResponse(userExists);
+    public LoginResponse login(UserDto userDto) {
+        Optional<User> user = userRepository.findByUserNameAndPassword(userDto.getUserName(), userDto.getPassword());
+        ValidationService.validateUserExists(user);
+        return userMapper.userToLoginResponse(user.get());
     }
 }

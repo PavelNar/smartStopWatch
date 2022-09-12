@@ -1,6 +1,6 @@
 package com.project.smartStopWatch.domain.user;
 
-import com.project.smartStopWatch.app.login.LoginRequest;
+import com.project.smartStopWatch.app.login.UserDto;
 import com.project.smartStopWatch.app.login.LoginResponse;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ public class UserService {
     @Resource
     private UserRepository userRepository;
 
-    public LoginResponse registerNewUser(LoginRequest request) {
-        User user = userMapper.loginRequestToUser(request);
+    public LoginResponse registerNewUser(UserDto request) {
+        User user = userMapper.userDtoToUser(request);
         userRepository.save(user);
         return userMapper.userToLoginResponse(user);
     }

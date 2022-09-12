@@ -3,8 +3,6 @@
   <component name="JpaPluginProjectSettings">
     <option name="entityNameTemplate" />
     <option name="isLombokGetterAndSetter" value="true" />
-    <option name="isLombokAllArgsConstructor" value="true" />
-    <option name="isLombokNoArgsConstructor" value="true" />
     <option name="scaffoldingLanguage" />
   </component>
 </project>
