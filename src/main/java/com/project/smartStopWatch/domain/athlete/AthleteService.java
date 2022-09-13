@@ -35,4 +35,8 @@ public class AthleteService {
         ValidationService.validateAthleteExists(name);
         return athleteMapper.athleteToAthleteResponse(name.get());
     }
+
+    public void deleteAthlete(AthleteRequest request) {
+        // TODO: 13.09.2022 Muuta  
+    }
 }
