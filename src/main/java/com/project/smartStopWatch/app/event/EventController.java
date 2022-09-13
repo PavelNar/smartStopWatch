@@ -27,12 +27,10 @@ public class EventController {
         // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
         // et ta saaks siis päringule mingi vastuse.
         EventInfo result = createMockData();
-
         // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
         if (eventId == 0) {
             throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
         }
-
         return result;
     }
 

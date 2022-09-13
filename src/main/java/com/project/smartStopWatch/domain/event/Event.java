@@ -1,5 +1,7 @@
-package com.project.smartStopWatch.domain;
+package com.project.smartStopWatch.domain.event;
 
+import com.project.smartStopWatch.domain.split.SplitLength;
+import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,10 +2,11 @@ package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
-import com.project.smartStopWatch.domain.Event;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+import java.time.Instant;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = Instant.class)
 public interface EventMapper {
     @Mapping(source = "strokeId", target = "stroke.id")
     @Mapping(source = "splitLengthId", target = "splitLength.id")

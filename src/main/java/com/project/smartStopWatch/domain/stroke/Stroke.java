@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.domain;
+package com.project.smartStopWatch.domain.stroke;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

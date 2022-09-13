@@ -24,4 +24,8 @@ public class UserService {
         userRepository.save(user);
         return userMapper.userToLoginResponse(user);
     }
+
+    public User findUserByUserId(Integer userId) {
+        return userRepository.findUserByUserId(userId);
+    }
 }
