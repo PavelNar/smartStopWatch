@@ -14,5 +14,5 @@ public class AthleteInfo implements Serializable {
     private final Integer userId;
     @Size(max = 255)
     @NotNull
-    private final String name;
+    private final Integer athleteId;
 }

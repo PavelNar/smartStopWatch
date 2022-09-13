@@ -17,6 +17,7 @@ public interface AthleteMapper {
     Athlete AthleteResponseToAthlete(AthleteInfo athleteInfo);
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "id", target = "athleteId")
     AthleteInfo athleteToAthleteResponse(Athlete athlete);
 
     @Mapping(source = "userId", target = "user.id")

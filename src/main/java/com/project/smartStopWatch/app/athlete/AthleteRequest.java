@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Data
 public class AthleteRequest implements Serializable {
+    private final Integer userId;
     @Size(max = 255)
     @NotNull
     private final String name;
