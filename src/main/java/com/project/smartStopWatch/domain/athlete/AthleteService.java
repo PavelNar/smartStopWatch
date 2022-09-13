@@ -2,7 +2,6 @@ package com.project.smartStopWatch.domain.athlete;
 
 import com.project.smartStopWatch.app.athlete.AthleteRequest;
 import com.project.smartStopWatch.app.athlete.AthleteInfo;
-import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;

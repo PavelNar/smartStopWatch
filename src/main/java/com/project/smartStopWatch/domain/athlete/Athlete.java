@@ -28,4 +28,8 @@ public class Athlete {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Column(name = "satus", nullable = false)
+    private Boolean satus = false;
+
 }

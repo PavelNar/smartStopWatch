@@ -1,10 +1,7 @@
 package com.project.smartStopWatch.validation;
 
 
-import com.project.smartStopWatch.domain.athlete.Athlete;
-import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
-import com.project.smartStopWatch.infrastructure.exception.DataNotFoundException;
 
 import java.util.Optional;
 

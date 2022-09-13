@@ -1,18 +1,15 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
-import com.project.smartStopWatch.domain.event.Event;
 import com.project.smartStopWatch.domain.athlete.Athlete;
-import lombok.AllArgsConstructor;
+import com.project.smartStopWatch.domain.event.Event;
+import com.project.smartStopWatch.domain.stroke.Stroke;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -34,11 +31,15 @@ public class AthleteEvent {
     private Event event;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "stroke_id", nullable = false)
+    private Stroke stroke;
+
+    @NotNull
     @Column(name = "start_time", nullable = false)
     private Instant startTime;
 
-    @NotNull
-    @Column(name = "finish_time", nullable = false)
+    @Column(name = "finish_time")
     private Instant finishTime;
 
     @NotNull
@@ -60,5 +61,9 @@ public class AthleteEvent {
     @NotNull
     @Column(name = "split_counter", nullable = false)
     private Integer splitCounter;
+
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private Boolean status = false;
 
 }

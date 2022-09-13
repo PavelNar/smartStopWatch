@@ -1,6 +1,5 @@
 package com.project.smartStopWatch.app.login;
 
-import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserMapper;
 import com.project.smartStopWatch.domain.user.UserRepository;
 import com.project.smartStopWatch.domain.user.UserService;

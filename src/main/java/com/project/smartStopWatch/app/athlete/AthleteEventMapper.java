@@ -1,6 +1,5 @@
 package com.project.smartStopWatch.app.athlete;
 
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

@@ -6,7 +6,6 @@ import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
 import com.project.smartStopWatch.domain.stroke.StrokeRepository;
-import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 

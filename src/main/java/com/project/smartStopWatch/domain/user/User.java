@@ -1,17 +1,18 @@
 package com.project.smartStopWatch.domain.user;
 
 import com.project.smartStopWatch.domain.user.role.Role;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "\"user\"")
-public class User implements Serializable {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -31,4 +32,9 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
+
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private Boolean status = false;
+
 }
