@@ -5,9 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * A DTO for the {@link com.project.smartStopWatch.domain.Event} entity
- */
+
 @Data
 public class EventRequest implements Serializable {
     private final Integer userId;
