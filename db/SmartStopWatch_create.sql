@@ -1,5 +1,13 @@
+-- Kustutab public schema (mis põhimõtteliselt kustutab kõik tabelid)
+DROP SCHEMA public CASCADE;
+-- Loob uue public schema vajalikud õigused
+CREATE SCHEMA public
+-- taastab vajalikud andmebaasi õigused
+    GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-13 12:50:56.501
+-- Last modification date: 2022-09-13 13:03:16.752
 
 -- tables
 -- Table: athlete
@@ -7,7 +15,7 @@ CREATE TABLE athlete (
     id serial  NOT NULL,
     user_id int  NOT NULL,
     name varchar(255)  NOT NULL,
-    satus boolean  NOT NULL,
+    is_active boolean  NOT NULL,
     CONSTRAINT athlete_pk PRIMARY KEY (id)
 );
 
@@ -24,7 +32,7 @@ CREATE TABLE athlete_event (
     event_length int  NOT NULL,
     split_length int  NOT NULL,
     split_counter int  NOT NULL,
-    status boolean  NOT NULL,
+    is_active boolean  NOT NULL,
     CONSTRAINT athlete_event_pk PRIMARY KEY (id)
 );
 
@@ -91,7 +99,7 @@ CREATE TABLE "user" (
     role_id int  NOT NULL,
     user_name varchar(255)  NOT NULL,
     password varchar(255)  NOT NULL,
-    status boolean  NOT NULL,
+    is_active boolean  NOT NULL,
     CONSTRAINT user_name_ak UNIQUE (user_name) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT user_pk PRIMARY KEY (id)
 );

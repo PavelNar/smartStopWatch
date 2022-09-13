@@ -6,6 +6,8 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AthleteMapper {
+
+    @Mapping(constant = "true", target = "isActive")
     Athlete athleteRequestToAthlete(AthleteRequest athleteRequest);
 
     AthleteRequest athleteToAthleteRequest(Athlete athlete);
@@ -23,4 +25,8 @@ public interface AthleteMapper {
     @Mapping(source = "userId", target = "user.id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Athlete updateAthleteFromAthleteResponse(AthleteInfo athleteInfo, @MappingTarget Athlete athlete);
+
+    @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "athleteId", target = "id")
+    Athlete athleteInfoToAthlete(AthleteInfo info);
 }

@@ -2,6 +2,7 @@ package com.project.smartStopWatch.domain.athlete;
 
 import com.project.smartStopWatch.app.athlete.AthleteRequest;
 import com.project.smartStopWatch.app.athlete.AthleteInfo;
+import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,10 @@ public class AthleteService {
         return athleteMapper.athleteToAthleteResponse(name.get());
     }
 
-    public void deleteAthlete(AthleteRequest request) {
-        // TODO: 13.09.2022 Muuta  
+    public void deleteAthlete(AthleteInfo info) {
+        // TODO: 13.09.2022  teha lopuni
+        Athlete athlete = athleteMapper.athleteInfoToAthlete(info);
+        athlete.setIsActive(false);
+        athleteRepository.save(athlete);
     }
 }

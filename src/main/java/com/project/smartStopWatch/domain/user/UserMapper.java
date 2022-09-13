@@ -10,6 +10,7 @@ import org.mapstruct.ReportingPolicy;
 public interface UserMapper {
 
     @Mapping(constant = "2", target = "role.id")
+    @Mapping(constant = "true", target = "isActive")
     User userDtoToUser(UserDto request);
 
     @Mapping(source = "id", target = "userId")

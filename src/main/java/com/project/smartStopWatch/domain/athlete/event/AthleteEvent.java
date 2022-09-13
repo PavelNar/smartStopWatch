@@ -63,7 +63,7 @@ public class AthleteEvent {
     private Integer splitCounter;
 
     @NotNull
-    @Column(name = "status", nullable = false)
-    private Boolean status = false;
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = false;
 
 }

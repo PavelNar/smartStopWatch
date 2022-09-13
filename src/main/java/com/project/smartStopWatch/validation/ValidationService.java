@@ -1,6 +1,8 @@
 package com.project.smartStopWatch.validation;
 
 
+import com.project.smartStopWatch.domain.athlete.Athlete;
+import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 
 import java.util.Optional;

@@ -1,5 +1,7 @@
 package com.project.smartStopWatch.domain.split;
 
+import com.project.smartStopWatch.domain.athlete.Athlete;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
