@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class StrokeDto {
-    private Integer strokeId;
-    private String stokeName;
+    private Integer id;
+    private String type;
 
 
 }

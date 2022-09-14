@@ -2,13 +2,11 @@ package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
-import com.project.smartStopWatch.app.event.EventRequest;
-import com.project.smartStopWatch.app.event.EventResponse;
-import com.project.smartStopWatch.app.event.GlobalSettingsDropdownDto;
-import com.project.smartStopWatch.app.event.SplitDto;
+import com.project.smartStopWatch.app.event.*;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
+import com.project.smartStopWatch.domain.split.Split;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
@@ -18,6 +16,7 @@ import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class EventService {
@@ -62,7 +61,15 @@ public class EventService {
 
     }
 
-    public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
 
+    public List<StrokeDto> findAllStrokes() {
+        List<Stroke> strokes = strokeRepository.findAll();
+        return eventMapper.strokeListToStrokeDtoList(strokes);
     }
+
+    public List<SplitDto> findAllSplits() {
+        List<SplitLength> splits = splitLengthRepository.findAll();
+        return eventMapper.splitlengthListToSplitDtoList(splits);
+    }
+
 }
