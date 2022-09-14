@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.app.athlete;
+package com.project.smartStopWatch.app.athleteevent;
 
 import lombok.Data;
 

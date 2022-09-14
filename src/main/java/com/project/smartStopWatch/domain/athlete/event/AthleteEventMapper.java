@@ -1,5 +1,6 @@
-package com.project.smartStopWatch.app.athlete;
+package com.project.smartStopWatch.domain.athlete.event;
 
+import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import org.mapstruct.*;
 

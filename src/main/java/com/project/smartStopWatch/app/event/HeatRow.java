@@ -1,6 +1,6 @@
 package com.project.smartStopWatch.app.event;
 
-import com.project.smartStopWatch.app.athlete.AthleteEventDto;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import lombok.Data;
 
 import java.time.Instant;

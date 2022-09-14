@@ -1,6 +1,6 @@
 package com.project.smartStopWatch.app.event;
 
-import com.project.smartStopWatch.app.athlete.AthleteEventDto;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -71,6 +71,8 @@ public class EventController {
     public EventResponse createGlobalSettings(EventRequest request) {
         return eventService.createGlobalSettings(request);
     }
+
+
 
 
 }
