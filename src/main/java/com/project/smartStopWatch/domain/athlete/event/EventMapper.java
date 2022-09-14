@@ -14,7 +14,7 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = Instant.class)
 public interface EventMapper {
-    @Mapping(source = "strokeId", target = "stroke.id")
+    @Mapping(ignore = true, target = "stroke")
     @Mapping(source = "splitLengthId", target = "splitLength.id")
     @Mapping(expression = "java(Instant.now())", target = "dateTime")
     Event eventRequestToEvent(EventRequest eventRequest);
