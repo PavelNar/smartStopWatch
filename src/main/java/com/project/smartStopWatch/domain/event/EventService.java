@@ -1,7 +1,12 @@
 package com.project.smartStopWatch.domain.event;
 
+import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
@@ -30,6 +35,12 @@ public class EventService {
     @Resource
     private SplitLengthRepository splitLengthRepository;
 
+    @Resource
+    private AthleteEventMapper athleteEventMapper;
+
+    @Resource
+    private AthleteEventRepository athleteEventRepository;
+
     public EventResponse createGlobalSettings(EventRequest request) {
         Event event = eventMapper.eventRequestToEvent(request);
         User user = userService.findUserByUserId(request.getUserId());
@@ -40,5 +51,12 @@ public class EventService {
         event.setSplitLength(splitLength);
         eventRepository.save(event);
         return eventMapper.eventToEventResponse(event);
+    }
+
+    public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
+        AthleteEvent athleteEvent = athleteEventMapper.athleteEventRequestToAthleteEvent(request);
+        athleteEventRepository.save(athleteEvent);
+        return athleteEventMapper.athleteEventToAthleteEventResponse(athleteEvent);
+
     }
 }

@@ -1,6 +1,8 @@
 package com.project.smartStopWatch.app.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -72,7 +74,16 @@ public class EventController {
         return eventService.createGlobalSettings(request);
     }
 
+    @PostMapping("/create/new/event")
+    @Operation(summary = "add new event")
+    public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
+        return eventService.createAthleteEvent(request);
+    }
 
-
+    @GetMapping("/global/settings")
+    @Operation(summary = "Get split and stroke dropdown info")
+    public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
+        return new GlobalSettingsDropdownDto();
+    }
 
 }
