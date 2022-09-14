@@ -1,11 +1,9 @@
-package com.project.smartStopWatch.domain.event;
+package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.*;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
+import com.project.smartStopWatch.domain.athlete.event.*;
 import com.project.smartStopWatch.domain.split.Split;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
@@ -25,7 +23,7 @@ public class EventService {
     private EventRepository eventRepository;
 
     @Resource
-    private EventMapper eventMapper;
+    private com.project.smartStopWatch.domain.event.EventMapper eventMapper;
 
     @Resource
     private UserService userService;

@@ -3,7 +3,7 @@ package com.project.smartStopWatch.app.event;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
-import com.project.smartStopWatch.domain.event.EventService;
+import com.project.smartStopWatch.domain.athlete.event.EventService;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;

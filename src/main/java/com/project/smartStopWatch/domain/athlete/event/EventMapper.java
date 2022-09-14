@@ -4,6 +4,7 @@ import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
 import com.project.smartStopWatch.app.event.SplitDto;
 import com.project.smartStopWatch.app.event.StrokeDto;
+import com.project.smartStopWatch.domain.athlete.event.Event;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import org.mapstruct.*;
