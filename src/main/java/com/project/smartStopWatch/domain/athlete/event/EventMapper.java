@@ -2,9 +2,15 @@ package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
+import com.project.smartStopWatch.app.event.SplitDto;
+import com.project.smartStopWatch.app.event.StrokeDto;
+import com.project.smartStopWatch.domain.athlete.event.Event;
+import com.project.smartStopWatch.domain.split.SplitLength;
+import com.project.smartStopWatch.domain.stroke.Stroke;
 import org.mapstruct.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = Instant.class)
 public interface EventMapper {
@@ -26,4 +32,8 @@ public interface EventMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Event updateEventFromEventResponse(EventResponse eventResponse, @MappingTarget Event event);
+
+    List<StrokeDto> strokeListToStrokeDtoList(List<Stroke> strokes);
+
+    List<SplitDto> splitlengthListToSplitDtoList(List<SplitLength> splits);
 }

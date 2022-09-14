@@ -3,7 +3,7 @@ package com.project.smartStopWatch.app.event;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
-import com.project.smartStopWatch.domain.event.EventService;
+import com.project.smartStopWatch.domain.athlete.event.EventService;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -77,11 +77,16 @@ public class EventController {
         return eventService.createAthleteEvent(request);
     }
 
-    @GetMapping("/global/settings")
-    @Operation(summary = "Get split and stroke dropdown info")
-    public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
-        return eventService.getGlobalSettingsDropdownInfo();
-//        return new GlobalSettingsDropdownDto();
+    @GetMapping("/global/strokes")
+    @Operation(summary = "Get stroke dropdown info")
+    public List<StrokeDto> findAllStrokes() {
+        return eventService.findAllStrokes();
     }
+    @GetMapping("/global/splits")
+    @Operation(summary = "Get splits dropdown info")
+    public List<SplitDto> findAllSplits() {
+        return eventService.findAllSplits();
+    }
+
 
 }

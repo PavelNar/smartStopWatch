@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class SplitDto {
-    private Integer splitId;
-    private String splitName;
+    private Integer id;
+    private String meters;
+
 
 }
