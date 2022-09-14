@@ -27,7 +27,7 @@ public class AthleteController {
     }
 
     @DeleteMapping("/delete/athlete")
-    @Operation(summary = "Delete athlete with statistics from database")
+    @Operation(summary = "Delete athlete from database")
     public void deleteAthlete(AthleteInfo info) {
         athleteService.deleteAthlete(info);
     }
