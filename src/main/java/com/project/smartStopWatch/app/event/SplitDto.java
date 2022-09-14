@@ -7,4 +7,5 @@ public class SplitDto {
     private Integer splitId;
     private String splitName;
 
+
 }
