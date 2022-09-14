@@ -6,10 +6,7 @@ import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -70,20 +67,21 @@ public class EventController {
 
     @PostMapping("/global/settings")
     @Operation(summary = "Fill global settings")
-    public EventResponse createGlobalSettings(EventRequest request) {
+    public EventResponse createGlobalSettings(@RequestBody EventRequest request) {
         return eventService.createGlobalSettings(request);
     }
 
     @PostMapping("/create/new/event")
     @Operation(summary = "add new event")
-    public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
+    public AthleteEventResponse createAthleteEvent(@RequestBody AthleteEventRequest request) {
         return eventService.createAthleteEvent(request);
     }
 
     @GetMapping("/global/settings")
     @Operation(summary = "Get split and stroke dropdown info")
     public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
-        return new GlobalSettingsDropdownDto();
+        return eventService.getGlobalSettingsDropdownInfo();
+//        return new GlobalSettingsDropdownDto();
     }
 
 }

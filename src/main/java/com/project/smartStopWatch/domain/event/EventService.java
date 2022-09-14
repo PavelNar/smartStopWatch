@@ -4,6 +4,8 @@ import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
+import com.project.smartStopWatch.app.event.GlobalSettingsDropdownDto;
+import com.project.smartStopWatch.app.event.SplitDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
@@ -58,5 +60,9 @@ public class EventService {
         athleteEventRepository.save(athleteEvent);
         return athleteEventMapper.athleteEventToAthleteEventResponse(athleteEvent);
 
+    }
+
+    public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
+        eventRepository.findAll();
     }
 }
