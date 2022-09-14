@@ -63,6 +63,6 @@ public class EventService {
     }
 
     public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
-        eventRepository.findAll();
+       return null;
     }
 }
