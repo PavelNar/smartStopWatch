@@ -1,14 +1,10 @@
-package com.project.smartStopWatch.domain.event;
+package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
 import com.project.smartStopWatch.app.event.GlobalSettingsDropdownDto;
-import com.project.smartStopWatch.app.event.SplitDto;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
@@ -18,6 +14,7 @@ import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class EventService {
@@ -63,6 +60,8 @@ public class EventService {
     }
 
     public GlobalSettingsDropdownDto getGlobalSettingsDropdownInfo() {
-
+        List<SplitLength> all = splitLengthRepository.findAll();
+        List<Stroke> all1 = strokeRepository.findAll();
+        return eventMapper.globalSettingsDropDownToGlobalSettingsDropDownDto(all, all1);
     }
 }

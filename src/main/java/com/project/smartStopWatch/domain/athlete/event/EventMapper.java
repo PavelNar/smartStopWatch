@@ -1,10 +1,14 @@
-package com.project.smartStopWatch.domain.event;
+package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
+import com.project.smartStopWatch.app.event.GlobalSettingsDropdownDto;
+import com.project.smartStopWatch.domain.split.SplitLength;
+import com.project.smartStopWatch.domain.stroke.Stroke;
 import org.mapstruct.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = Instant.class)
 public interface EventMapper {
@@ -26,4 +30,7 @@ public interface EventMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Event updateEventFromEventResponse(EventResponse eventResponse, @MappingTarget Event event);
+
+
+    GlobalSettingsDropdownDto globalSettingsDropDownToGlobalSettingsDropDownDto(List<SplitLength> all, List<Stroke> all1);
 }
