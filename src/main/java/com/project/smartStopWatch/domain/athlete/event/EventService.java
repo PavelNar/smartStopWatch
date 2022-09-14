@@ -68,4 +68,14 @@ public class EventService {
         return eventMapper.splitLengthListToSplitDtoList(splits);
     }
 
+    public GlobalSettingsDropdownDto getDropdownMenu() {
+        GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
+        List<SplitDto> splitList = findAllSplits();
+        List<StrokeDto> strokeList = findAllStrokes();
+        menu.setSplitDtos(splitList);
+        menu.setStrokeDtos(strokeList);
+//        menu.setSplitDtos(findAllSplits());
+//        menu.setStrokeDtos(findAllStrokes());
+        return menu;
+    }
 }
