@@ -13,8 +13,9 @@ import java.time.Instant;
 @Data
 public class AthleteEventDto implements Serializable {
 
-    @NotNull
     private Integer athleteId;
+    @NotNull
+    private Integer athleteEventId;
     @Size(max = 255)
     @NotNull
     private String athleteName;
@@ -28,6 +29,8 @@ public class AthleteEventDto implements Serializable {
     private Integer laneNumber;
     @NotNull
     private Integer eventLength;
+    @NotNull
+    private Integer strokeId;
     @NotNull
     private Integer splitLength;
     @NotNull

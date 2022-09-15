@@ -7,5 +7,5 @@ import java.io.Serializable;
 
 @Data
 public class EventResponse implements Serializable {
-    private final Integer id;
+    private final Integer eventId;
 }

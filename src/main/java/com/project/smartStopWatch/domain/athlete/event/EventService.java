@@ -63,19 +63,19 @@ public class EventService {
         return eventMapper.strokeListToStrokeDtoList(strokes);
     }
 
-    public List<SplitDto> findAllSplits() {
+    public List<SplitLengthDto> findAllSplits() {
         List<SplitLength> splits = splitLengthRepository.findAll();
         return eventMapper.splitLengthListToSplitDtoList(splits);
     }
 
     public GlobalSettingsDropdownDto getDropdownMenu() {
         GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
-        List<SplitDto> splitList = findAllSplits();
-        List<StrokeDto> strokeList = findAllStrokes();
-        menu.setSplitDtos(splitList);
-        menu.setStrokeDtos(strokeList);
-//        menu.setSplitDtos(findAllSplits());
-//        menu.setStrokeDtos(findAllStrokes());
+//        List<SplitLengthDto> splitList = findAllSplits();
+//        List<StrokeDto> strokeList = findAllStrokes();
+//        menu.setSplitLengthDtos(splitList);
+//        menu.setStrokeDtos(strokeList);
+        menu.setSplitLengthDtos(findAllSplits());
+        menu.setStrokeDtos(findAllStrokes());
         return menu;
     }
 }

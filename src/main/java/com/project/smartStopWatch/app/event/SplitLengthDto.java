@@ -3,7 +3,7 @@ package com.project.smartStopWatch.app.event;
 import lombok.Data;
 
 @Data
-public class SplitDto {
+public class SplitLengthDto {
     private Integer id;
     private String meters;
 
