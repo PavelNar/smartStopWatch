@@ -3,8 +3,6 @@ package com.project.smartStopWatch.domain.athlete.event;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.*;
-import com.project.smartStopWatch.domain.athlete.event.*;
-import com.project.smartStopWatch.domain.split.Split;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
@@ -23,7 +21,7 @@ public class EventService {
     private EventRepository eventRepository;
 
     @Resource
-    private com.project.smartStopWatch.domain.event.EventMapper eventMapper;
+    private EventMapper eventMapper;
 
     @Resource
     private UserService userService;
@@ -65,9 +63,19 @@ public class EventService {
         return eventMapper.strokeListToStrokeDtoList(strokes);
     }
 
-    public List<SplitDto> findAllSplits() {
+    public List<SplitLengthDto> findAllSplits() {
         List<SplitLength> splits = splitLengthRepository.findAll();
-        return eventMapper.splitlengthListToSplitDtoList(splits);
+        return eventMapper.splitLengthListToSplitDtoList(splits);
     }
 
+    public GlobalSettingsDropdownDto getDropdownMenu() {
+        GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
+//        List<SplitLengthDto> splitList = findAllSplits();
+//        List<StrokeDto> strokeList = findAllStrokes();
+//        menu.setSplitLengthDtos(splitList);
+//        menu.setStrokeDtos(strokeList);
+        menu.setSplitLengthDtos(findAllSplits());
+        menu.setStrokeDtos(findAllStrokes());
+        return menu;
+    }
 }

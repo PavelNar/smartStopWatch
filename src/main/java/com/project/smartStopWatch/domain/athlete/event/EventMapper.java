@@ -1,10 +1,9 @@
-package com.project.smartStopWatch.domain.event;
+package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.event.EventRequest;
 import com.project.smartStopWatch.app.event.EventResponse;
-import com.project.smartStopWatch.app.event.SplitDto;
+import com.project.smartStopWatch.app.event.SplitLengthDto;
 import com.project.smartStopWatch.app.event.StrokeDto;
-import com.project.smartStopWatch.domain.athlete.event.Event;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import org.mapstruct.*;
@@ -35,5 +34,5 @@ public interface EventMapper {
 
     List<StrokeDto> strokeListToStrokeDtoList(List<Stroke> strokes);
 
-    List<SplitDto> splitlengthListToSplitDtoList(List<SplitLength> splits);
+    List<SplitLengthDto> splitLengthListToSplitDtoList(List<SplitLength> splits);
 }

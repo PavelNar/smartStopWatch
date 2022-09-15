@@ -87,7 +87,7 @@ public class EventController {
     }
     @GetMapping("/global/splits")
     @Operation(summary = "Get splits dropdown info")
-    public List<SplitDto> findAllSplits() {
+    public List<SplitLengthDto> findAllSplits() {
         return eventService.findAllSplits();
     }
 
@@ -98,4 +98,9 @@ public class EventController {
 //        eventService.startHeat(timestamp, eventId, heatNumber);
     }
 
+    @GetMapping("/global/settings")
+    @Operation(summary = "Get splits ad strokes dropdown info")
+    public GlobalSettingsDropdownDto getDropdownMenu() {
+        return eventService.getDropdownMenu();
+    }
 }

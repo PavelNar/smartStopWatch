@@ -36,10 +36,9 @@ public class AthleteService {
         return athleteMapper.athleteToAthleteResponse(name.get());
     }
 
-    public void deleteAthlete(AthleteInfo info) {
-        // TODO: 13.09.2022  teha lopuni
-        Athlete athlete = athleteMapper.athleteInfoToAthlete(info);
-        athlete.setIsActive(false);
-        athleteRepository.save(athlete);
+    public void deleteAthlete(Integer request) {
+        Athlete referenceById = athleteRepository.findById(request).get();
+        referenceById.setIsActive(false);
+        athleteRepository.save(referenceById);
     }
 }
