@@ -26,9 +26,9 @@ public class AthleteController {
         return athleteService.findAthlete(request);
     }
 
-    @DeleteMapping("/delete/athlete")
-    @Operation(summary = "Delete athlete with statistics from database")
-    public void deleteAthlete(AthleteInfo info) {
-        athleteService.deleteAthlete(info);
+    @DeleteMapping("/delete")
+    @Operation(summary = "Delete athlete from database")
+    public void deleteAthlete(Integer id) {
+        athleteService.deleteAthlete(id);
     }
 }

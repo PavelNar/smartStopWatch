@@ -1,5 +1,4 @@
 package com.project.smartStopWatch.domain.athlete;
-
 import com.project.smartStopWatch.app.athlete.AthleteRequest;
 import com.project.smartStopWatch.app.athlete.AthleteInfo;
 import org.mapstruct.*;
@@ -9,6 +8,9 @@ public interface AthleteMapper {
 
     @Mapping(constant = "true", target = "isActive")
     Athlete athleteRequestToAthlete(AthleteRequest athleteRequest);
+
+    @Mapping(constant = "false", target = "isActive")
+    Athlete athleteRequestDeleteToAthlete(AthleteRequest athleteRequest);
 
     AthleteRequest athleteToAthleteRequest(Athlete athlete);
 
@@ -29,4 +31,5 @@ public interface AthleteMapper {
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "athleteId", target = "id")
     Athlete athleteInfoToAthlete(AthleteInfo info);
+
 }

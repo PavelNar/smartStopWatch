@@ -89,4 +89,9 @@ public class EventController {
     }
 
 
+    @GetMapping("/global/settings")
+    @Operation(summary = "Get splits ad strokes dropdown info")
+    public GlobalSettingsDropdownDto getDropdownMenu() {
+        return eventService.getDropdownMenu();
+    }
 }
