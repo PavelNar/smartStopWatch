@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/id")
+    @Operation(summary = "Toob info koju et moodustada event vaade (nupud jne)")
     public EventInfo getAthletesEventInfo(Integer eventId) {
         // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
         // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
@@ -53,9 +55,10 @@ public class EventController {
 
     private AthleteEventDto createAthleteEvent(int number, int lane, int heat) {
         AthleteEventDto athleteEvent = new AthleteEventDto();
-        athleteEvent.setAthleteId(number * heat);
+//        athleteEvent.setAthleteId(number * heat);
+        athleteEvent.setAthleteEventId(number * heat);
         athleteEvent.setEventLength(200);
-        athleteEvent.setAthleteName("name " + number * heat);
+        athleteEvent.setAthleteName("name");
         athleteEvent.setLaneNumber(lane);
         athleteEvent.setHeatNumber(heat);
         athleteEvent.setSplitCounter(0);
@@ -88,6 +91,12 @@ public class EventController {
         return eventService.findAllSplits();
     }
 
+    @PostMapping
+    @Operation(summary = "ühe heati start")
+    private void startHeat(Integer eventId, Integer heatNumber) {
+        Instant timestamp = Instant.now();
+//        eventService.startHeat(timestamp, eventId, heatNumber);
+    }
 
     @GetMapping("/global/settings")
     @Operation(summary = "Get splits ad strokes dropdown info")
