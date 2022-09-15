@@ -19,23 +19,22 @@ public class AthleteEvent {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "athlete_id", nullable = false)
-    private Athlete athlete;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "athlete_id")
+    private Athlete athlete;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "stroke_id", nullable = false)
     private Stroke stroke;
 
-    @NotNull
-    @Column(name = "start_time", nullable = false)
+    @Column(name = "start_time")
     private Instant startTime;
 
     @Column(name = "finish_time")
@@ -64,5 +63,6 @@ public class AthleteEvent {
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
+
 
 }

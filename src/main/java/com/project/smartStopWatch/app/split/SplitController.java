@@ -14,7 +14,7 @@ public class SplitController {
     @Resource
     private SplitService splitService;
 
-    @PostMapping("/result")
-    @Operation(summary = "Save one athlete split result")
-
+//    @PostMapping("/result")
+//    @Operation(summary = "Save one athlete split result")
+//
 }
