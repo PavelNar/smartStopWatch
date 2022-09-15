@@ -7,5 +7,6 @@ import java.util.List;
 
 @Data
 public class EventInfo {
+    private Integer numberOfLanes;
     private List<HeatRow> heatRows = new ArrayList<>();
 }

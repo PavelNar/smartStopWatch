@@ -29,7 +29,7 @@ CREATE TABLE athlete_event (
                                finish_time timestamp  NULL,
                                heat_number int  NOT NULL,
                                lane_number int  NOT NULL,
-                               event_length int  NOT NULL,
+                               event_length int  NULL,
                                split_length int  NOT NULL,
                                split_counter int  NOT NULL,
                                is_active boolean  NOT NULL,

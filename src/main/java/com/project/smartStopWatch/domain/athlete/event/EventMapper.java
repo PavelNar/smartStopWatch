@@ -27,6 +27,7 @@ public interface EventMapper {
 
     Event eventResponseToEvent(EventResponse eventResponse);
 
+    @Mapping(source = "id", target = "eventId")
     EventResponse eventToEventResponse(Event event);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
