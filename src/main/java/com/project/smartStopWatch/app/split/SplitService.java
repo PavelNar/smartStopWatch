@@ -8,8 +8,6 @@ import javax.annotation.Resource;
 @Service
 public class SplitService {
 
-    @Resource
-    private SplitController splitController;
 
     @Resource
     private SplitRepository splitRepository;
