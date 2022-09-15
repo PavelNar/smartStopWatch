@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class GlobalSettingsDropdownDto {
 
-    private List<SplitDto> splitDtos;
+    private List<SplitLengthDto> splitLengthDtos;
     private List<StrokeDto> strokeDtos;
 
 }

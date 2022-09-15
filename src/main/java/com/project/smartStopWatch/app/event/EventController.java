@@ -84,7 +84,7 @@ public class EventController {
     }
     @GetMapping("/global/splits")
     @Operation(summary = "Get splits dropdown info")
-    public List<SplitDto> findAllSplits() {
+    public List<SplitLengthDto> findAllSplits() {
         return eventService.findAllSplits();
     }
 
