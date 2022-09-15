@@ -76,7 +76,7 @@ public class EventService {
                 athleteEvent.setHeatNumber(heatNumber);
                 athleteEvent.setIsActive(true);
                 athleteEvent.setSplitCounter(0);
-                athleteEvent.setSplitCounter(request.getEventLength()/ request.getSplitLengthId());
+//                athleteEvent.setSplitCounter(request.getEventLength()/ request.getSplitLengthId());
             }
         }
         athleteEventService.saveAllAthleteEvents(athleteEvents);
