@@ -29,8 +29,8 @@ public class AthleteController {
 
     @DeleteMapping("/delete")
     @Operation(summary = "Delete athlete with statistics from database")
-    public void deleteAthlete(AthleteInfo info) {
-        athleteService.deleteAthlete(info);
+    public void deleteAthlete(Integer athleteId) {
+        athleteService.deleteAthlete(athleteId);
     }
 
     @PatchMapping("/name")
