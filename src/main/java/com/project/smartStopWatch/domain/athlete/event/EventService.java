@@ -7,11 +7,13 @@ import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
 import com.project.smartStopWatch.domain.stroke.StrokeRepository;
+import com.project.smartStopWatch.domain.stroke.StrokeService;
 import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +40,19 @@ public class EventService {
     @Resource
     private AthleteEventRepository athleteEventRepository;
 
+    @Resource
+    private StrokeService strokeService;
+
+    @Resource
+    private AthleteEventService athleteEventService;
+
+
+    public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
+        AthleteEvent athleteEvent = athleteEventMapper.athleteEventRequestToAthleteEvent(request);
+        athleteEventRepository.save(athleteEvent);
+        return athleteEventMapper.athleteEventToAthleteEventResponse(athleteEvent);
+
+    }
     public EventResponse createGlobalSettings(EventRequest request) {
         Event event = eventMapper.eventRequestToEvent(request);
         User user = userService.findUserByUserId(request.getUserId());
@@ -47,14 +62,42 @@ public class EventService {
         SplitLength splitLength = splitLengthRepository.findSplitLengthBySplitLengthId(request.getSplitLengthId());
         event.setSplitLength(splitLength);
         eventRepository.save(event);
+        // TODO: sportlasi 10
+        // TODO: lane 3
+        // TODO: heat 4
+        List<AthleteEvent> athleteEvents = new ArrayList<>();
+        for (int laneNumber = 1; laneNumber < 3+1; laneNumber++) {
+            for (int heatNumber = 1; heatNumber < 4+1; heatNumber++) {
+                AthleteEvent athleteEvent = new AthleteEvent();
+                athleteEvent.setEvent(event);
+                athleteEvent.setEventLength(request.getEventLength());
+                athleteEvent.setStroke(getStrokeById(request));
+                athleteEvent.setLaneNumber(laneNumber);
+                athleteEvent.setHeatNumber(heatNumber);
+                athleteEvent.setIsActive(true);
+                athleteEvent.setSplitCounter(0);
+                athleteEvent.setSplitCounter(request.getEventLength()/ request.getSplitLengthId());
+            }
+        }
+        athleteEventService.saveAllAthleteEvents(athleteEvents);
         return eventMapper.eventToEventResponse(event);
     }
 
-    public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
-        AthleteEvent athleteEvent = athleteEventMapper.athleteEventRequestToAthleteEvent(request);
-        athleteEventRepository.save(athleteEvent);
-        return athleteEventMapper.athleteEventToAthleteEventResponse(athleteEvent);
+//    private Integer splitLengthValue(EventRequest request) {
+//        Integer id = request.getSplitLengthId();
+//        Integer value;
+//        if (id == 1) {
+//            value = 25;
+//        } else if (id == 2) {
+//            value = 50;
+//        } else {
+//            value = 100;
+//        }
+//        return value;
+//    }
 
+    private Stroke getStrokeById(EventRequest request) {
+        return strokeService.findById(request.getStrokeId());
     }
 
 

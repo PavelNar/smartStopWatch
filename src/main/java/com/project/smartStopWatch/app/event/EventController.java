@@ -55,7 +55,7 @@ public class EventController {
 
     private AthleteEventDto createAthleteEvent(int number, int lane, int heat) {
         AthleteEventDto athleteEvent = new AthleteEventDto();
-//        athleteEvent.setAthleteId(number * heat);
+        athleteEvent.setAthleteId(number * heat);
         athleteEvent.setAthleteEventId(number * heat);
         athleteEvent.setEventLength(200);
         athleteEvent.setAthleteName("name");
@@ -69,13 +69,13 @@ public class EventController {
     }
 
     @PostMapping("/global/settings")
-    @Operation(summary = "Fill global settings")
+    @Operation(summary = "Create global event")
     public EventResponse createGlobalSettings(@RequestBody EventRequest request) {
         return eventService.createGlobalSettings(request);
     }
 
     @PostMapping("/create/new/event")
-    @Operation(summary = "add new event")
+    @Operation(summary = "Create athlete events")
     public AthleteEventResponse createAthleteEvent(@RequestBody AthleteEventRequest request) {
         return eventService.createAthleteEvent(request);
     }
