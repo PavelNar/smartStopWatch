@@ -8,8 +8,8 @@ import java.util.List;
 @Data
 public class HeatRow {
     private Integer heatNumber;
-    private Boolean hasStarted = false;
-    private String heatStatus = "Start";
+    private Boolean hasStarted;
+    private String heatStatus;
     private Instant heatStartTimeStamp;
     private List<AthleteEventDto> athleteEvents;
 }

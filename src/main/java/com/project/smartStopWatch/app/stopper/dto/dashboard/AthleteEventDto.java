@@ -2,35 +2,21 @@ package com.project.smartStopWatch.app.stopper.dto.dashboard;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 public class AthleteEventDto implements Serializable {
     private Integer athleteId;
-    @NotNull
     private Integer athleteEventId;
-    @Size(max = 255)
-    @NotNull
+    private Integer athleteEventLength;
     private String athleteName;
-    @NotNull
-    private Instant startTime;
-    @NotNull
-    private Instant finishTime;
-    @NotNull
-    private Integer heatNumber;
-    @NotNull
-    private Integer laneNumber;
-    @NotNull
-    private Integer eventLength;
-    @NotNull
     private Integer strokeId;
-    @NotNull
     private String strokeType;
-    @NotNull
-    private Integer splitLength;
-    @NotNull
-    private Integer splitCounter;
+    private Boolean hasStarted;
+    private Instant startTime;
+    private Instant lastSplitTime;
+    private Integer lastSplitLength;
+    private Boolean hasFinished;
+    private Instant finishTime;
 }
