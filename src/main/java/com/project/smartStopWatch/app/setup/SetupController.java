@@ -49,5 +49,11 @@ public class SetupController {
         return setupService.findAllSplits();
     }
 
+    @GetMapping("/all-athlete")
+    @Operation(summary = "Get all active trainer athletes dropdown info")
+    public List<AthleteInfo> findActiveAthletesByUserId(Integer userId) {
+        return setupService.findActiveAthletesByUserId(userId);
+    }
+
 }
 

@@ -61,4 +61,7 @@ public class SetupService {
         return splitLengthService.findAllSplits();
     }
 
+    public List<AthleteInfo> findActiveAthletesByUserId(Integer userId) {
+        return athleteService.findActiveAthletesByUserId(userId);
+    }
 }

@@ -7,4 +7,5 @@ import java.io.Serializable;
 @Data
 public class AthleteInfo implements Serializable {
     private final Integer athleteId;
+    private final String athleteName;
 }

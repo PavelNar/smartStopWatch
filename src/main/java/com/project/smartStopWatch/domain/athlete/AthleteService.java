@@ -1,12 +1,14 @@
 package com.project.smartStopWatch.domain.athlete;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
+import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
 import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,4 +56,8 @@ public class AthleteService {
         return athleteRepository.findById(athleteId).get();
     }
 
+    public List<AthleteInfo> findActiveAthletesByUserId(Integer userId) {
+        List<Athlete> athletes = athleteRepository.findActiveAthletesByUserId(userId, true);
+        return athleteMapper.athletesToAthleteInfos(athletes);
+    }
 }
