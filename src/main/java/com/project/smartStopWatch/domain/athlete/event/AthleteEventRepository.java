@@ -11,7 +11,7 @@ public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Inte
     Optional<AthleteEvent> findByHeatNumberAndLaneNumber(Integer heatNumber, Integer laneNumber);
 
     @Query("select a from AthleteEvent a where a.event.id = ?1 and a.heatNumber = ?2")
-    List<AthleteEvent> findByEventIdAndHeatNumber(Integer id, Integer heatNumber);
+    List<AthleteEvent> findByEventIdAndHeatNumber(Integer eventId, Integer heatNumber);
 
 
 }

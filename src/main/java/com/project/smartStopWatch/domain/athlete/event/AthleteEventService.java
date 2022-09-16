@@ -25,32 +25,33 @@ public class AthleteEventService {
     @Resource
     private StrokeService strokeService;
 
+    @Resource
+    private AthleteEventMapper athleteEventMapper;
+
 
     public void saveAllAthleteEvents(AthleteEvent athleteEvent) {
         athleteEventRepository.save(athleteEvent);
     }
 
     public void updateAthleteEventSettings(AthleteEventSettingsRequest request) {
-        Optional<AthleteEvent> athleteEvent = athleteEventRepository.findByHeatNumberAndLaneNumber(request.getHeatNumber(), request.getLaneNumber());
-        athleteEvent.get().setEventLength(request.getEventLength());
+        AthleteEvent athleteEvent = athleteEventRepository.findById(request.getAthleteEventId()).get();
+        athleteEvent.setEventLength(request.getEventLength());
 
-        Integer splitLength = athleteEvent.get().getEvent().getSplitLength().getMeters();
-        athleteEvent.get().setSplitCounter(request.getEventLength() / splitLength);
-
-        Athlete athlete = athleteService.findByName(request.getAthleteName());
-        athleteEvent.get().setAthlete(athlete);
+        Athlete athlete = athleteService.findById(request.getAthleteId());
+        athleteEvent.setAthlete(athlete);
 
         Stroke stroke = strokeService.findById(request.getStrokeId());
-        athleteEvent.get().setStroke(stroke);
+        athleteEvent.setStroke(stroke);
 
-        athleteEventRepository.save(athleteEvent.get());
-
+        athleteEventRepository.save(athleteEvent);
     }
 
     public void startHeat(Instant timestamp, AthleteEventStartRequest startRequest) {
-        List<AthleteEvent> oneHeat = athleteEventRepository.findByEventIdAndHeatNumber(startRequest.getHeatNumber(), startRequest.getEventId());
-        oneHeat.
-//        oneHeat.get(startRequest.getHeatNumber()).setStartTime(timestamp);
-        athleteEventRepository.saveAll(oneHeat);
+        List<AthleteEvent> athleteEvents = athleteEventRepository.findByEventIdAndHeatNumber(startRequest.getEventId(), startRequest.getHeatNumber());
+
+        for (AthleteEvent athleteEvent : athleteEvents) {
+            athleteEvent.setStartTime(timestamp);
+        }
+        athleteEventRepository.saveAll(athleteEvents);
     }
 }

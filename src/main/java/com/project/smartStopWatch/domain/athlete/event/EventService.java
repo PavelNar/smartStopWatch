@@ -4,6 +4,8 @@ import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventStartRequest;
 import com.project.smartStopWatch.app.event.*;
+import com.project.smartStopWatch.domain.athlete.Athlete;
+import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
 import com.project.smartStopWatch.domain.split.SplitService;
@@ -48,9 +50,20 @@ public class EventService {
     @Resource
     private AthleteEventService athleteEventService;
 
+    @Resource
+    private AthleteService athleteService;
+
+
+
 
     public AthleteEventResponse createAthleteEvent(AthleteEventRequest request) {
         AthleteEvent athleteEvent = athleteEventMapper.athleteEventRequestToAthleteEvent(request);
+        Event event = eventRepository.findById(request.getEventId()).get();
+        Stroke stroke = strokeService.findById(request.getStrokeId());
+        Athlete athlete = athleteService.findById(request.getAthleteId());
+        athleteEvent.setAthlete(athlete);
+        athleteEvent.setEvent(event);
+        athleteEvent.setStroke(stroke);
         athleteEventRepository.save(athleteEvent);
         return athleteEventMapper.athleteEventToAthleteEventResponse(athleteEvent);
 

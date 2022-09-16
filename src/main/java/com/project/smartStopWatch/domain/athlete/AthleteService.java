@@ -47,4 +47,8 @@ public class AthleteService {
         ValidationService.validateAthleteExists(athlete);
         return athlete.get();
     }
+
+    public Athlete findById(Integer athleteId) {
+        return athleteRepository.findById(athleteId).get();
+    }
 }

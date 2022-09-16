@@ -17,9 +17,7 @@ public interface AthleteEventMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     AthleteEvent updateAthleteEventFromAthleteEventDto(AthleteEventDto athleteEventDto, @MappingTarget AthleteEvent athleteEvent);
 
-    @Mapping(source = "athleteId", target = "athlete.id")
-    @Mapping(source = "eventId", target = "event.id")
-    @Mapping(source = "strokeId", target = "stroke.id")
+
     AthleteEvent athleteEventRequestToAthleteEvent(AthleteEventRequest athleteEventRequest);
 
     @InheritInverseConfiguration(name = "athleteEventRequestToAthleteEvent")
@@ -33,28 +31,5 @@ public interface AthleteEventMapper {
 
     AthleteEventResponse athleteEventToAthleteEventResponse(AthleteEvent athleteEvent);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    AthleteEvent updateAthleteEventFromAthleteEventResponse(AthleteEventResponse athleteEventResponse, @MappingTarget AthleteEvent athleteEvent);
 
-    @Mapping(source = "eventLength", target = "event.eventLength")
-    @Mapping(source = "athleteName", target = "athlete.name")
-    @Mapping(source = "strokeId", target = "stroke.id")
-    AthleteEvent athleteEventDto1ToAthleteEvent(AthleteEventSettingsRequest athleteEventSettingsRequest);
-
-    @InheritInverseConfiguration(name = "athleteEventDto1ToAthleteEvent")
-    AthleteEventSettingsRequest athleteEventToAthleteEventDto1(AthleteEvent athleteEvent);
-
-    @InheritConfiguration(name = "athleteEventDto1ToAthleteEvent")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    AthleteEvent updateAthleteEventFromAthleteEventDto1(AthleteEventSettingsRequest athleteEventSettingsRequest, @MappingTarget AthleteEvent athleteEvent);
-
-    @Mapping(source = "eventId", target = "event.id")
-    AthleteEvent athleteEventStartRequestToAthleteEvent(AthleteEventStartRequest athleteEventStartRequest);
-
-    @Mapping(source = "event.id", target = "eventId")
-    AthleteEventStartRequest athleteEventToAthleteEventStartRequest(AthleteEvent athleteEvent);
-
-    @Mapping(source = "eventId", target = "event.id")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    AthleteEvent updateAthleteEventFromAthleteEventStartRequest(AthleteEventStartRequest athleteEventStartRequest, @MappingTarget AthleteEvent athleteEvent);
 }
