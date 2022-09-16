@@ -32,8 +32,4 @@ public interface EventMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Event updateEventFromEventResponse(EventResponse eventResponse, @MappingTarget Event event);
-
-    List<StrokeDto> strokeListToStrokeDtoList(List<Stroke> strokes);
-
-    List<SplitLengthDto> splitLengthListToSplitDtoList(List<SplitLength> splits);
 }

@@ -1,8 +1,11 @@
 package com.project.smartStopWatch.domain.split;
 
+import com.project.smartStopWatch.app.event.SplitLengthDto;
 import com.project.smartStopWatch.app.split.SplitRequest;
 import com.project.smartStopWatch.app.split.SplitResponse;
 import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface SplitMapper {
@@ -23,4 +26,6 @@ public interface SplitMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Split updateSplitFromSplitResponse(SplitResponse splitResponse, @MappingTarget Split split);
+
+    List<SplitLengthDto> splitLengthListToSplitDtoList(List<SplitLength> splits);
 }
