@@ -91,16 +91,12 @@ public class EventController {
         return eventService.findAllSplits();
     }
 
-    @PostMapping
-    @Operation(summary = "ühe heati start")
-    private void startHeat(Integer eventId, Integer heatNumber) {
+    @PostMapping("/start")
+    @Operation(summary = "Heat start")
+    private void startHeat(AthleteEventStartRequest startRequest) {
         Instant timestamp = Instant.now();
-//        eventService.startHeat(timestamp, eventId, heatNumber);
+        eventService.startHeat(timestamp, startRequest);
     }
 
-//    @GetMapping("/global/settings")
-//    @Operation(summary = "Get splits ad strokes dropdown info")
-//    public GlobalSettingsDropdownDto getDropdownMenu() {
-//        return eventService.getDropdownMenu();
-//    }
+
 }

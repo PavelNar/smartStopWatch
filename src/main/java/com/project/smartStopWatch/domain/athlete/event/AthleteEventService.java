@@ -1,6 +1,7 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventSettingsRequest;
+import com.project.smartStopWatch.app.event.AthleteEventStartRequest;
 import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.stroke.Stroke;
@@ -8,6 +9,8 @@ import com.project.smartStopWatch.domain.stroke.StrokeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,5 +45,9 @@ public class AthleteEventService {
 
         athleteEventRepository.save(athleteEvent.get());
 
+    }
+
+    public void startHeat(Instant timestamp, AthleteEventStartRequest startRequest) {
+        List<AthleteEvent> byHeatNumber = athleteEventRepository.findByHeatNumber(startRequest.getHeatNumber());
     }
 }

@@ -14,6 +14,7 @@ import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -27,7 +28,6 @@ public class EventService {
 
     @Resource
     private UserService userService;
-
 
     @Resource
     private SplitLengthRepository splitLengthRepository;
@@ -70,7 +70,6 @@ public class EventService {
         return eventMapper.eventToEventResponse(event);
     }
 
-
     private void saveAthleteEvents(EventRequest request, Event event) {
         for (int laneNumber = 1; laneNumber < event.getNumberOfLanes()+1; laneNumber++) {
             for (int heatNumber = 1; heatNumber < event.getNumberOfHeats()+1; heatNumber++) {
@@ -102,14 +101,9 @@ public class EventService {
         return splitService.findAllSplits();
     }
 
-//    public GlobalSettingsDropdownDto getDropdownMenu() {
-//        GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
-//        List<SplitLengthDto> splitList = findAllSplits();
-//        List<StrokeDto> strokeList = findAllStrokes();
-//        menu.setSplitLengthDtos(splitList);
-//        menu.setStrokeDtos(strokeList);
-//        menu.setSplitLengthDtos(findAllSplits());
-//        menu.setStrokeDtos(findAllStrokes());
-//        return menu;
-//    }
+    public void startHeat(Instant timestamp, AthleteEventStartRequest startRequest) {
+        athleteEventService.startHeat(timestamp, startRequest);
+    }
+
+
 }
