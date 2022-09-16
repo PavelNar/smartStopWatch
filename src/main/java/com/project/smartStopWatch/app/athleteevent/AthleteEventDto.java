@@ -29,6 +29,8 @@ public class AthleteEventDto implements Serializable {
     @NotNull
     private Integer strokeId;
     @NotNull
+    private String strokeType;
+    @NotNull
     private Integer splitLength;
     @NotNull
     private Integer splitCounter;

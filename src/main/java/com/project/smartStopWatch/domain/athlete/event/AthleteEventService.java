@@ -1,7 +1,7 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventSettingsRequest;
-import com.project.smartStopWatch.app.event.AthleteEventStartRequest;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventStartRequest;
 import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.stroke.Stroke;
@@ -48,6 +48,9 @@ public class AthleteEventService {
     }
 
     public void startHeat(Instant timestamp, AthleteEventStartRequest startRequest) {
-        List<AthleteEvent> byHeatNumber = athleteEventRepository.findByHeatNumber(startRequest.getHeatNumber());
+        List<AthleteEvent> oneHeat = athleteEventRepository.findByEventIdAndHeatNumber(startRequest.getHeatNumber(), startRequest.getEventId());
+        oneHeat.
+//        oneHeat.get(startRequest.getHeatNumber()).setStartTime(timestamp);
+        athleteEventRepository.saveAll(oneHeat);
     }
 }

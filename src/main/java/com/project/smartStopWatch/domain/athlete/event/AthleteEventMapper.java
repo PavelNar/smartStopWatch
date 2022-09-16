@@ -1,10 +1,6 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
-import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventSettingsRequest;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
-import com.project.smartStopWatch.app.event.AthleteEventStartRequest;
+import com.project.smartStopWatch.app.athleteevent.*;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -52,10 +48,13 @@ public interface AthleteEventMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     AthleteEvent updateAthleteEventFromAthleteEventDto1(AthleteEventSettingsRequest athleteEventSettingsRequest, @MappingTarget AthleteEvent athleteEvent);
 
+    @Mapping(source = "eventId", target = "event.id")
     AthleteEvent athleteEventStartRequestToAthleteEvent(AthleteEventStartRequest athleteEventStartRequest);
 
+    @Mapping(source = "event.id", target = "eventId")
     AthleteEventStartRequest athleteEventToAthleteEventStartRequest(AthleteEvent athleteEvent);
 
+    @Mapping(source = "eventId", target = "event.id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     AthleteEvent updateAthleteEventFromAthleteEventStartRequest(AthleteEventStartRequest athleteEventStartRequest, @MappingTarget AthleteEvent athleteEvent);
 }

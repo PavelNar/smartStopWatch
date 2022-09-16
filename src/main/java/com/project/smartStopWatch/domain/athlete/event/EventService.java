@@ -2,6 +2,7 @@ package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventStartRequest;
 import com.project.smartStopWatch.app.event.*;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;

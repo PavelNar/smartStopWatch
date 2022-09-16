@@ -10,10 +10,8 @@ public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Inte
     @Query("select a from AthleteEvent a where a.heatNumber = ?1 and a.laneNumber = ?2")
     Optional<AthleteEvent> findByHeatNumberAndLaneNumber(Integer heatNumber, Integer laneNumber);
 
-    @Query("select a from AthleteEvent a where a.heatNumber = ?1")
-    List<AthleteEvent> findByHeatNumber(Integer heatNumber);
-
-
+    @Query("select a from AthleteEvent a where a.event.id = ?1 and a.heatNumber = ?2")
+    List<AthleteEvent> findByEventIdAndHeatNumber(Integer id, Integer heatNumber);
 
 
 }
