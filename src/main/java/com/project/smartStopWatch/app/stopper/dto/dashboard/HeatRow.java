@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.app.event.dto;
+package com.project.smartStopWatch.app.stopper.dto.dashboard;
 
 import lombok.Data;
 

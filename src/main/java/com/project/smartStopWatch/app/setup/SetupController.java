@@ -2,10 +2,10 @@ package com.project.smartStopWatch.app.setup;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.app.setup.dto.event.AthleteEventUpdateRequest;
-import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
-import com.project.smartStopWatch.app.setup.dto.split.StrokeDto;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsResponse;
+import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
+import com.project.smartStopWatch.app.setup.dto.split.StrokeDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,9 +1,6 @@
-package com.project.smartStopWatch.app.event;
+package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
-import com.project.smartStopWatch.domain.athlete.event.Event;
-import com.project.smartStopWatch.domain.athlete.event.EventMapper;
-import com.project.smartStopWatch.domain.athlete.event.EventRepository;
 import com.project.smartStopWatch.domain.split.length.SplitLength;
 import com.project.smartStopWatch.domain.split.length.SplitLengthService;
 import com.project.smartStopWatch.domain.stroke.Stroke;

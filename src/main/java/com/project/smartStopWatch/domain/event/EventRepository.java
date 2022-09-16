@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.domain.athlete.event;
+package com.project.smartStopWatch.domain.event;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

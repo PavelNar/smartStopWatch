@@ -1,10 +1,10 @@
-package com.project.smartStopWatch.domain.athlete.athleteevent;
+package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.setup.dto.event.AthleteEventUpdateRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
 import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
-import com.project.smartStopWatch.domain.athlete.event.Event;
+import com.project.smartStopWatch.domain.event.Event;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.stroke.StrokeService;
 import org.springframework.stereotype.Service;

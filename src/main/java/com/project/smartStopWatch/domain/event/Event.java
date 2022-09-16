@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.domain.athlete.event;
+package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.domain.split.length.SplitLength;
 import com.project.smartStopWatch.domain.stroke.Stroke;

@@ -1,16 +1,16 @@
 package com.project.smartStopWatch.app.setup;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
-import com.project.smartStopWatch.app.event.EventService;
+import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.app.setup.dto.event.AthleteEventUpdateRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsResponse;
 import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
 import com.project.smartStopWatch.app.setup.dto.split.StrokeDto;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
-import com.project.smartStopWatch.domain.athlete.athleteevent.AthleteEventService;
-import com.project.smartStopWatch.domain.athlete.event.Event;
-import com.project.smartStopWatch.domain.athlete.event.EventMapper;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
+import com.project.smartStopWatch.domain.event.Event;
+import com.project.smartStopWatch.domain.event.EventMapper;
 import com.project.smartStopWatch.domain.split.length.SplitLengthService;
 import com.project.smartStopWatch.domain.stroke.StrokeService;
 import org.springframework.stereotype.Service;

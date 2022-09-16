@@ -1,4 +1,4 @@
-package com.project.smartStopWatch.domain.athlete.event;
+package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsResponse;
