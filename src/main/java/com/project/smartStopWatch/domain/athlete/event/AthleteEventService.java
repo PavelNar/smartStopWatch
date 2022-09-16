@@ -12,7 +12,7 @@ public class AthleteEventService {
     private AthleteEventRepository athleteEventRepository;
 
 
-    public void saveAllAthleteEvents(List<AthleteEvent> athleteEvents) {
-        athleteEventRepository.saveAll(athleteEvents);
+    public void saveAllAthleteEvents(AthleteEvent athleteEvent) {
+        athleteEventRepository.save(athleteEvent);
     }
 }
