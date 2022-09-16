@@ -1,5 +1,7 @@
-package com.project.smartStopWatch.app.event;
+package com.project.smartStopWatch.app.event.dropdown;
 
+import com.project.smartStopWatch.app.event.SplitLengthDto;
+import com.project.smartStopWatch.app.event.StrokeDto;
 import lombok.Data;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.project.smartStopWatch.app.split;
 
-import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.project.smartStopWatch.domain.split.SplitService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -98,9 +98,9 @@ public class EventController {
 //        eventService.startHeat(timestamp, eventId, heatNumber);
     }
 
-    @GetMapping("/global/settings")
-    @Operation(summary = "Get splits ad strokes dropdown info")
-    public GlobalSettingsDropdownDto getDropdownMenu() {
-        return eventService.getDropdownMenu();
-    }
+//    @GetMapping("/global/settings")
+//    @Operation(summary = "Get splits ad strokes dropdown info")
+//    public GlobalSettingsDropdownDto getDropdownMenu() {
+//        return eventService.getDropdownMenu();
+//    }
 }

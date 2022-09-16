@@ -5,6 +5,7 @@ import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import com.project.smartStopWatch.app.event.*;
 import com.project.smartStopWatch.domain.split.SplitLength;
 import com.project.smartStopWatch.domain.split.SplitLengthRepository;
+import com.project.smartStopWatch.domain.split.SplitService;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.stroke.StrokeRepository;
 import com.project.smartStopWatch.domain.stroke.StrokeService;
@@ -27,8 +28,6 @@ public class EventService {
     @Resource
     private UserService userService;
 
-    @Resource
-    private StrokeRepository strokeRepository;
 
     @Resource
     private SplitLengthRepository splitLengthRepository;
@@ -41,6 +40,9 @@ public class EventService {
 
     @Resource
     private StrokeService strokeService;
+
+    @Resource
+    private SplitService splitService;
 
     @Resource
     private AthleteEventService athleteEventService;
@@ -56,7 +58,8 @@ public class EventService {
         Event event = eventMapper.eventRequestToEvent(request);
         User user = userService.findUserByUserId(request.getUserId());
         event.setUser(user);
-        Stroke stroke = strokeRepository.findStrokeByStrokeId(request.getStrokeId());
+
+        Stroke stroke = strokeService.findStrokeByStrokeId(request.getStrokeId());
         event.setStroke(stroke);
         SplitLength splitLength = splitLengthRepository.findSplitLengthBySplitLengthId(request.getSplitLengthId());
         event.setSplitLength(splitLength);
@@ -92,23 +95,21 @@ public class EventService {
 
 
     public List<StrokeDto> findAllStrokes() {
-        List<Stroke> strokes = strokeRepository.findAll();
-        return eventMapper.strokeListToStrokeDtoList(strokes);
+       return strokeService.findAllStrokes();
     }
 
     public List<SplitLengthDto> findAllSplits() {
-        List<SplitLength> splits = splitLengthRepository.findAll();
-        return eventMapper.splitLengthListToSplitDtoList(splits);
+        return splitService.findAllSplits();
     }
 
-    public GlobalSettingsDropdownDto getDropdownMenu() {
-        GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
+//    public GlobalSettingsDropdownDto getDropdownMenu() {
+//        GlobalSettingsDropdownDto menu = new GlobalSettingsDropdownDto();
 //        List<SplitLengthDto> splitList = findAllSplits();
 //        List<StrokeDto> strokeList = findAllStrokes();
 //        menu.setSplitLengthDtos(splitList);
 //        menu.setStrokeDtos(strokeList);
-        menu.setSplitLengthDtos(findAllSplits());
-        menu.setStrokeDtos(findAllStrokes());
-        return menu;
-    }
+//        menu.setSplitLengthDtos(findAllSplits());
+//        menu.setStrokeDtos(findAllStrokes());
+//        return menu;
+//    }
 }
