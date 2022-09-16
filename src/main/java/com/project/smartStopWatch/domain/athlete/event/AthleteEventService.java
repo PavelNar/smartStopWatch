@@ -15,4 +15,8 @@ public class AthleteEventService {
     public void saveAllAthleteEvents(AthleteEvent athleteEvent) {
         athleteEventRepository.save(athleteEvent);
     }
+
+    public void updateAthleteEventSettings(String name, Integer eventLength, Integer strokeId) {
+        athleteEventRepository.
+    }
 }

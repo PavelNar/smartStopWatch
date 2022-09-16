@@ -1,6 +1,5 @@
 package com.project.smartStopWatch.app.athlete;
 
-import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +32,4 @@ public class AthleteController {
         athleteService.deleteAthlete(athleteId);
     }
 
-    @PatchMapping("/name")
-    @Operation(summary = "Update athlete settings from edit button")
-    public void updateAthleteSettings(@RequestBody AthleteEventDto athleteDto) {
-        //
-    }
 }
