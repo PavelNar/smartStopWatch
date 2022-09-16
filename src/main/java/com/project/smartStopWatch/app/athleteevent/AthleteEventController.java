@@ -15,7 +15,7 @@ public class AthleteEventController {
 
     @PatchMapping("/settings")
     @Operation(summary = "Update athlete event settings from edit button")
-    public void updateAthleteEventSettings(@RequestParam String name, Integer eventLength, Integer strokeId) {
-        athleteEventService.updateAthleteEventSettings(name, eventLength, strokeId);
+    public void updateAthleteEventSettings(@RequestBody AthleteEventDto1 request) {
+        athleteEventService.updateAthleteEventSettings(request);
     }
 }
