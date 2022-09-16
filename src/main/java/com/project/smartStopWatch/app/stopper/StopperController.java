@@ -22,4 +22,12 @@ public class StopperController {
         Instant timestamp = Instant.now();
         stopperService.startHeat(timestamp, startRequest);
     }
+
+    @PostMapping("/split")
+    @Operation(summary = "TODO: Stopper split click event")
+    private void splitClick(Integer athleteEventId) {
+        Instant timestamp = Instant.now();
+        stopperService.splitClick(timestamp, athleteEventId);
+    }
+
 }

@@ -20,4 +20,7 @@ public class StopperService {
         athleteEventService.updateAthleteEventsWithTimeStamp(timestamp, athleteEvents);
     }
 
+    public void splitClick(Instant timestamp, Integer athleteEventId) {
+
+    }
 }
