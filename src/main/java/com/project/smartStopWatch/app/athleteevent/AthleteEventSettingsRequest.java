@@ -6,11 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-/**
- * A DTO for the {@link com.project.smartStopWatch.domain.athlete.event.AthleteEvent} entity
- */
 @Data
-public class AthleteEventDto1 implements Serializable {
+public class AthleteEventSettingsRequest implements Serializable {
 
     private final Integer eventId;
     @NotNull

@@ -1,7 +1,7 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventDto1;
+import com.project.smartStopWatch.app.athleteevent.AthleteEventSettingsRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
 import org.mapstruct.*;
@@ -42,12 +42,12 @@ public interface AthleteEventMapper {
     @Mapping(source = "eventLength", target = "event.eventLength")
     @Mapping(source = "athleteName", target = "athlete.name")
     @Mapping(source = "strokeId", target = "stroke.id")
-    AthleteEvent athleteEventDto1ToAthleteEvent(AthleteEventDto1 athleteEventDto1);
+    AthleteEvent athleteEventDto1ToAthleteEvent(AthleteEventSettingsRequest athleteEventSettingsRequest);
 
     @InheritInverseConfiguration(name = "athleteEventDto1ToAthleteEvent")
-    AthleteEventDto1 athleteEventToAthleteEventDto1(AthleteEvent athleteEvent);
+    AthleteEventSettingsRequest athleteEventToAthleteEventDto1(AthleteEvent athleteEvent);
 
     @InheritConfiguration(name = "athleteEventDto1ToAthleteEvent")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    AthleteEvent updateAthleteEventFromAthleteEventDto1(AthleteEventDto1 athleteEventDto1, @MappingTarget AthleteEvent athleteEvent);
+    AthleteEvent updateAthleteEventFromAthleteEventDto1(AthleteEventSettingsRequest athleteEventSettingsRequest, @MappingTarget AthleteEvent athleteEvent);
 }

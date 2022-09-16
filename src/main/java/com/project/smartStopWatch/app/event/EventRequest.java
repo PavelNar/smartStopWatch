@@ -15,7 +15,7 @@ public class EventRequest implements Serializable {
     private final Integer splitLengthId;
     private final Integer numberOfAthletes;
     @NotNull
-    private final Integer numberOfHeats;
-    @NotNull
     private final Integer numberOfLanes;
+    @NotNull
+    private final Integer numberOfHeats;
 }
