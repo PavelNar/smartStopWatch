@@ -17,6 +17,6 @@ public class AthleteEventService {
     }
 
     public void updateAthleteEventSettings(String name, Integer eventLength, Integer strokeId) {
-        athleteEventRepository.
+        athleteEventRepository.;
     }
 }
