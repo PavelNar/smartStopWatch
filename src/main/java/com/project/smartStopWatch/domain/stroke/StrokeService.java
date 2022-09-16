@@ -11,9 +11,9 @@ public class StrokeService {
 
     @Resource
     private StrokeRepository strokeRepository;
-
     @Resource
     private StrokeMapper strokeMapper;
+
 
     public Stroke findById(Integer strokeId) {
         return strokeRepository.findById(strokeId).get();
