@@ -1,18 +1,17 @@
 package com.project.smartStopWatch.domain.user;
 
 import com.project.smartStopWatch.domain.user.role.Role;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "\"user\"")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

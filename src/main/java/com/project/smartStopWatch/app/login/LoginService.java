@@ -1,5 +1,7 @@
 package com.project.smartStopWatch.app.login;
 
+import com.project.smartStopWatch.app.login.dto.LoginRequest;
+import com.project.smartStopWatch.app.login.dto.LoginResponse;
 import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserMapper;
 import com.project.smartStopWatch.domain.user.UserRepository;
@@ -25,13 +27,14 @@ public class LoginService {
 
 
     @Transactional
-    public LoginResponse registerNewUser(UserDto request) {
+    public LoginResponse registerNewUser(LoginRequest request) {
         return userService.registerNewUser(request);
     }
 
-    public LoginResponse login(UserDto userDto) {
-        Optional<User> user = userRepository.findByUserNameAndPassword(userDto.getUserName(), userDto.getPassword());
+    public LoginResponse login(LoginRequest loginRequest) {
+        Optional<User> user = userRepository.findByUserNameAndPassword(loginRequest.getUserName(), loginRequest.getPassword());
         ValidationService.validateUserExists(user);
         return userMapper.userToLoginResponse(user.get());
     }
+
 }

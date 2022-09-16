@@ -1,23 +1,18 @@
 package com.project.smartStopWatch.domain.split;
 
 import com.project.smartStopWatch.domain.athlete.Athlete;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.project.smartStopWatch.domain.athlete.athleteevent.AthleteEvent;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "split")
 public class Split {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

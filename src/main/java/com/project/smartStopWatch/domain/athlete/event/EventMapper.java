@@ -1,35 +1,22 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
-import com.project.smartStopWatch.app.event.EventRequest;
-import com.project.smartStopWatch.app.event.EventResponse;
-import com.project.smartStopWatch.app.event.SplitLengthDto;
-import com.project.smartStopWatch.app.event.StrokeDto;
-import com.project.smartStopWatch.domain.split.SplitLength;
-import com.project.smartStopWatch.domain.stroke.Stroke;
-import org.mapstruct.*;
+import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
+import com.project.smartStopWatch.app.setup.dto.event.EventSettingsResponse;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.time.Instant;
-import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = Instant.class)
 public interface EventMapper {
+
     @Mapping(ignore = true, target = "stroke")
     @Mapping(source = "splitLengthId", target = "splitLength.id")
     @Mapping(expression = "java(Instant.now())", target = "dateTime")
-    Event eventRequestToEvent(EventRequest eventRequest);
-
-    @InheritInverseConfiguration(name = "eventRequestToEvent")
-    EventRequest eventToEventRequest(Event event);
-
-    @InheritConfiguration(name = "eventRequestToEvent")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Event updateEventFromEventRequest(EventRequest eventRequest, @MappingTarget Event event);
-
-    Event eventResponseToEvent(EventResponse eventResponse);
+    Event eventSettingsRequestToEvent(EventSettingsRequest eventSettingsRequest);
 
     @Mapping(source = "id", target = "eventId")
-    EventResponse eventToEventResponse(Event event);
+    EventSettingsResponse eventToEventResponse(Event event);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Event updateEventFromEventResponse(EventResponse eventResponse, @MappingTarget Event event);
 }

@@ -1,24 +1,19 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
-import com.project.smartStopWatch.domain.split.SplitLength;
+import com.project.smartStopWatch.domain.split.length.SplitLength;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "event")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

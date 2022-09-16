@@ -1,16 +1,15 @@
 package com.project.smartStopWatch.app.event;
 
-import com.project.smartStopWatch.app.athleteevent.AthleteEventDto;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventRequest;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventResponse;
-import com.project.smartStopWatch.app.athleteevent.AthleteEventStartRequest;
-import com.project.smartStopWatch.domain.athlete.event.EventService;
+import com.project.smartStopWatch.app.event.dto.AthleteEventDto;
+import com.project.smartStopWatch.app.event.dto.EventInfo;
+import com.project.smartStopWatch.app.event.dto.HeatRow;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class EventController {
 
     private AthleteEventDto createAthleteEvent(int number, int lane, int heat) {
         AthleteEventDto athleteEvent = new AthleteEventDto();
-//        athleteEvent.setAthleteId(number * heat);
+        athleteEvent.setAthleteId(number * heat);
         athleteEvent.setAthleteEventId(number * heat);
         athleteEvent.setEventLength(200);
         athleteEvent.setAthleteName("name");
@@ -72,36 +71,5 @@ public class EventController {
         athleteEvent.setFinishTime(null);
         return athleteEvent;
     }
-
-    @PostMapping("/global/settings")
-    @Operation(summary = "Create global event")
-    public EventResponse createGlobalSettings(@RequestBody EventRequest request) {
-        return eventService.createGlobalSettings(request);
-    }
-
-    @PostMapping("/create/new/event")
-    @Operation(summary = "Create athlete events")
-    public AthleteEventResponse createAthleteEvent(@RequestBody AthleteEventRequest request) {
-        return eventService.createAthleteEvent(request);
-    }
-
-    @GetMapping("/global/strokes")
-    @Operation(summary = "Get stroke dropdown info")
-    public List<StrokeDto> findAllStrokes() {
-        return eventService.findAllStrokes();
-    }
-    @GetMapping("/global/splits")
-    @Operation(summary = "Get splits dropdown info")
-    public List<SplitLengthDto> findAllSplits() {
-        return eventService.findAllSplits();
-    }
-
-    @PostMapping("/start")
-    @Operation(summary = "Heat start")
-    private void startHeat(AthleteEventStartRequest startRequest) {
-        Instant timestamp = Instant.now();
-        eventService.startHeat(timestamp, startRequest);
-    }
-
 
 }

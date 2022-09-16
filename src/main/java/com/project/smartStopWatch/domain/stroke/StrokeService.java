@@ -1,6 +1,6 @@
 package com.project.smartStopWatch.domain.stroke;
 
-import com.project.smartStopWatch.app.event.StrokeDto;
+import com.project.smartStopWatch.app.setup.dto.split.StrokeDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +24,8 @@ public class StrokeService {
     }
 
     public List<StrokeDto> findAllStrokes() {
-        List <Stroke> strokes = strokeRepository.findAll();
+        List<Stroke> strokes = strokeRepository.findAll();
         return strokeMapper.strokeListToStrokeDtoList(strokes);
     }
+
 }

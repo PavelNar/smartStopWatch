@@ -1,7 +1,6 @@
 package com.project.smartStopWatch.domain.athlete;
 
-import com.project.smartStopWatch.app.athlete.AthleteRequest;
-import com.project.smartStopWatch.app.athlete.AthleteInfo;
+import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import com.project.smartStopWatch.validation.ValidationService;
@@ -14,26 +13,29 @@ import java.util.Optional;
 public class AthleteService {
 
     @Resource
+    private UserService userService;
+
+    @Resource
     private AthleteMapper athleteMapper;
 
     @Resource
     private AthleteRepository athleteRepository;
 
-    @Resource
-    private UserService userService;
+    public AthleteInfo addAthlete(String name, Integer userId) {
+        boolean athleteExists = athleteRepository.existsByNameAndIsActive(name, true);
+        ValidationService.validateAthleteName(athleteExists, name);
 
-    public AthleteInfo addAthlete(AthleteRequest request) {
-        Athlete athlete = athleteMapper.athleteRequestToAthlete(request);
-        User user = userService.findUserByUserId(request.getUserId());
+        Athlete athlete = new Athlete();
+        User user = userService.findUserByUserId(userId);
         athlete.setUser(user);
         athleteRepository.save(athlete);
         return athleteMapper.athleteToAthleteResponse(athlete);
     }
 
-    public AthleteInfo findAthlete(AthleteRequest request) {
-        Optional<Athlete> name = athleteRepository.findByName(request.getName());
-        ValidationService.validateAthleteExists(name);
-        return athleteMapper.athleteToAthleteResponse(name.get());
+    public AthleteInfo findAthlete(String name) {
+        Optional<Athlete> athlete = athleteRepository.findByName(name);
+        ValidationService.validateAthleteName(athlete);
+        return athleteMapper.athleteToAthleteResponse(athlete.get());
     }
 
     public void deleteAthlete(Integer request) {
@@ -44,11 +46,12 @@ public class AthleteService {
 
     public Athlete findByName(String athleteName) {
         Optional<Athlete> athlete = athleteRepository.findByName(athleteName);
-        ValidationService.validateAthleteExists(athlete);
+        ValidationService.validateAthleteName(athlete);
         return athlete.get();
     }
 
     public Athlete findById(Integer athleteId) {
         return athleteRepository.findById(athleteId).get();
     }
+
 }
