@@ -1,6 +1,8 @@
 package com.project.smartStopWatch.domain.athlete.event;
 
+import com.project.smartStopWatch.app.athlete.AthleteRequest;
 import com.project.smartStopWatch.app.athleteevent.AthleteEventDto1;
+import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,14 @@ public class AthleteEventService {
     public void updateAthleteEventSettings(AthleteEventDto1 request) {
         Optional<AthleteEvent> athleteEvent = athleteEventRepository.findByHeatNumberAndLaneNumber(request.getHeatNumber(), request.getLaneNumber());
         athleteEvent.get().setEventLength(request.getEventLength());
+
+        Athlete athlete = athleteService.findByName(request.getAthleteName());
+        athleteEvent.get().setAthlete(athlete);
+
+
+
+
+        athleteService.findAthlete(athleteRequest)
 
 
 

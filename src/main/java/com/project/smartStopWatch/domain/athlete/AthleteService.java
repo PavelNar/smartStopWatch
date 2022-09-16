@@ -41,4 +41,10 @@ public class AthleteService {
         referenceById.setIsActive(false);
         athleteRepository.save(referenceById);
     }
+
+    public Athlete findByName(String athleteName) {
+        Optional<Athlete> athlete = athleteRepository.findByName(athleteName);
+        ValidationService.validateAthleteExists(athlete);
+        return athlete.get();
+    }
 }
