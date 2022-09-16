@@ -66,8 +66,8 @@ public class EventService {
         // TODO: lane 3
         // TODO: heat 4
         List<AthleteEvent> athleteEvents = new ArrayList<>();
-        for (int laneNumber = 1; laneNumber < 3+1; laneNumber++) {
-            for (int heatNumber = 1; heatNumber < 4+1; heatNumber++) {
+        for (int laneNumber = 1; laneNumber < event.getNumberOfLanes()+1; laneNumber++) {
+            for (int heatNumber = 1; heatNumber < event.getNumberOfHeats()+1; heatNumber++) {
                 AthleteEvent athleteEvent = new AthleteEvent();
                 athleteEvent.setEvent(event);
                 athleteEvent.setEventLength(request.getEventLength());
