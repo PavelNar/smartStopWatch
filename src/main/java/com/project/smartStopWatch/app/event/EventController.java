@@ -37,6 +37,7 @@ public class EventController {
 
     private EventInfo createMockData() {
         EventInfo result = new EventInfo();
+        result.setNumberOfLanes(3);
         result.getHeatRows().add(createHeatRows(1));
         result.getHeatRows().add(createHeatRows(2));
         result.getHeatRows().add(createHeatRows(3));
@@ -45,6 +46,7 @@ public class EventController {
 
     private HeatRow createHeatRows(int heat) {
         HeatRow heatRow = new HeatRow();
+        heatRow.setHeatNumber(heat);
         List<AthleteEventDto> athleteEvents = new ArrayList<>();
         athleteEvents.add(createAthleteEvent(1, 1, heat));
         athleteEvents.add(createAthleteEvent(2, 1, heat));
