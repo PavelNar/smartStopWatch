@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 @Data
 public class AthleteEventDto1 implements Serializable {
+
+    private final Integer eventId;
     @NotNull
     private final Integer eventLength;
     @Size(max = 255)

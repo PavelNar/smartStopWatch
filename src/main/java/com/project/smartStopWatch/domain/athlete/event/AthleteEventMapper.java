@@ -39,7 +39,7 @@ public interface AthleteEventMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     AthleteEvent updateAthleteEventFromAthleteEventResponse(AthleteEventResponse athleteEventResponse, @MappingTarget AthleteEvent athleteEvent);
 
-    @Mapping(source = "getEventLength", target = "event.eventLength")
+    @Mapping(source = "eventLength", target = "event.eventLength")
     @Mapping(source = "athleteName", target = "athlete.name")
     @Mapping(source = "strokeId", target = "stroke.id")
     AthleteEvent athleteEventDto1ToAthleteEvent(AthleteEventDto1 athleteEventDto1);
