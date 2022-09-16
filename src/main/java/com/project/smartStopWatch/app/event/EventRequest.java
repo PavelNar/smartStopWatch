@@ -18,5 +18,4 @@ public class EventRequest implements Serializable {
     private final Integer numberOfHeats;
     @NotNull
     private final Integer numberOfLanes;
-    private final Integer heatIntervalSeconds;
 }

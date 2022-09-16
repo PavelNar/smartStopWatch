@@ -58,7 +58,4 @@ public class Event {
     @Column(name = "number_of_lanes", nullable = false)
     private Integer numberOfLanes;
 
-    @Column(name = "heat_interval_seconds")
-    private Integer heatIntervalSeconds;
-
 }

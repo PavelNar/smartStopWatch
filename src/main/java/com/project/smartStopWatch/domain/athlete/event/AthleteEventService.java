@@ -24,19 +24,19 @@ public class AthleteEventService {
         athleteEventRepository.save(athleteEvent);
     }
 
-    public void updateAthleteEventSettings(AthleteEventDto1 request) {
-        Optional<AthleteEvent> athleteEvent = athleteEventRepository.findByHeatNumberAndLaneNumber(request.getHeatNumber(), request.getLaneNumber());
-        athleteEvent.get().setEventLength(request.getEventLength());
-
-        Athlete athlete = athleteService.findByName(request.getAthleteName());
-        athleteEvent.get().setAthlete(athlete);
-
-
-
-
-        athleteService.findAthlete(athleteRequest)
-
-
-
-    }
+//    public void updateAthleteEventSettings(AthleteEventDto1 request) {
+//        Optional<AthleteEvent> athleteEvent = athleteEventRepository.findByHeatNumberAndLaneNumber(request.getHeatNumber(), request.getLaneNumber());
+//        athleteEvent.get().setEventLength(request.getEventLength());
+//
+//        Athlete athlete = athleteService.findByName(request.getAthleteName());
+//        athleteEvent.get().setAthlete(athlete);
+//
+//
+//
+//
+//        athleteService.findAthlete(athleteRequest)
+//
+//
+//
+//    }
 }

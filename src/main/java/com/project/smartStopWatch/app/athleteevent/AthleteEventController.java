@@ -13,9 +13,9 @@ public class AthleteEventController {
     @Resource
     private AthleteEventService athleteEventService;
 
-    @PatchMapping("/settings")
-    @Operation(summary = "Update athlete event settings from edit button")
-    public void updateAthleteEventSettings(@RequestBody AthleteEventDto1 request) {
-        athleteEventService.updateAthleteEventSettings(request);
-    }
+//    @PatchMapping("/settings")
+//    @Operation(summary = "Update athlete event settings from edit button")
+//    public void updateAthleteEventSettings(@RequestBody AthleteEventDto1 request) {
+//        athleteEventService.updateAthleteEventSettings(request);
+//    }
 }
