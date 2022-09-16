@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +27,8 @@ public class AthleteEventService {
     private AthleteEventRepository athleteEventRepository;
 
     public void createAndAddAthleteEvents(Event event, EventSettingsRequest request) {
+        List<AthleteEvent> athleteEvents = new ArrayList<>();
+        int athleteCounter = 0;
         for (int laneNumber = 1; laneNumber < event.getNumberOfLanes() + 1; laneNumber++) {
             for (int heatNumber = 1; heatNumber < event.getNumberOfHeats() + 1; heatNumber++) {
                 AthleteEvent athleteEvent = new AthleteEvent();
@@ -37,7 +40,12 @@ public class AthleteEventService {
                 athleteEvent.setIsActive(true);
                 athleteEvent.setSplitCounter(request.getEventLength() / event.getSplitLength().getMeters());
                 athleteEvent.setSplitLength(event.getSplitLength().getMeters());
-                athleteEventRepository.save(athleteEvent);
+                athleteEvents.add(athleteEvent);
+                athleteCounter++;
+                if (athleteCounter == request.getNumberOfAthletes()) {
+                    athleteEventRepository.saveAll(athleteEvents);
+                    return;
+                }
             }
         }
     }
