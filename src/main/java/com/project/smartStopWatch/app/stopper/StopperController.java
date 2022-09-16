@@ -38,7 +38,7 @@ public class StopperController {
     }
 
     @GetMapping("/dashboard")
-    @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaif mock andmed)")
+    @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaid mock andmed)")
     public StopperDashboard getStopperDashboard(Integer eventId) {
         // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
         // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
