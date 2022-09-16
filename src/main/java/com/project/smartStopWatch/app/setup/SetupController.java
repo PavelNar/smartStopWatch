@@ -26,7 +26,7 @@ public class SetupController {
     }
 
     @PatchMapping("/athlete-event")
-    @Operation(summary = "Update athlete details from edit button (choose; athlete, stroke style and length")
+    @Operation(summary = "Update athlete details from edit button (choose: athlete, stroke style and length")
     public void updateAthleteEvent(@RequestBody AthleteEventUpdateRequest request) {
         setupService.updateAthleteEvent(request);
     }
