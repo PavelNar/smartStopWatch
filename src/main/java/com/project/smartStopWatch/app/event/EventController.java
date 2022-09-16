@@ -38,6 +38,7 @@ public class EventController {
 
     private EventInfo createMockData() {
         EventInfo result = new EventInfo();
+        result.setNumberOfLanes(3);
         result.getHeatRows().add(createHeatRows(1));
         result.getHeatRows().add(createHeatRows(2));
         result.getHeatRows().add(createHeatRows(3));
@@ -46,6 +47,7 @@ public class EventController {
 
     private HeatRow createHeatRows(int heat) {
         HeatRow heatRow = new HeatRow();
+        heatRow.setHeatNumber(heat);
         List<AthleteEventDto> athleteEvents = new ArrayList<>();
         athleteEvents.add(createAthleteEvent(1, 1, heat));
         athleteEvents.add(createAthleteEvent(2, 1, heat));
@@ -56,12 +58,14 @@ public class EventController {
 
     private AthleteEventDto createAthleteEvent(int number, int lane, int heat) {
         AthleteEventDto athleteEvent = new AthleteEventDto();
-        athleteEvent.setAthleteId(number * heat);
+//        athleteEvent.setAthleteId(number * heat);
         athleteEvent.setAthleteEventId(number * heat);
         athleteEvent.setEventLength(200);
         athleteEvent.setAthleteName("name");
         athleteEvent.setLaneNumber(lane);
         athleteEvent.setHeatNumber(heat);
+        athleteEvent.setStrokeId(1);
+        athleteEvent.setStrokeType("Freestyle");
         athleteEvent.setSplitCounter(0);
         athleteEvent.setSplitLength(50);
         athleteEvent.setStartTime(null);

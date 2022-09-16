@@ -15,6 +15,7 @@ public class AthleteEventSettingsRequest implements Serializable {
     @Size(max = 255)
     @NotNull
     private final String athleteName;
+    private final Integer athleteId;
     private final Integer strokeId;
     @NotNull
     private final Integer heatNumber;
