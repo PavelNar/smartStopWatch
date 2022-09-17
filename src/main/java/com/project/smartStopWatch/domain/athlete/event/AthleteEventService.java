@@ -58,6 +58,7 @@ public class AthleteEventService {
         athleteEvent.setAthlete(athlete);
         athleteEvent.setStroke(stroke);
         athleteEvent.setEventLength(request.getEventLength());
+        athleteEvent.setSplitCounter(request.getEventLength() / athleteEvent.getEvent().getSplitLength().getMeters());
         athleteEventRepository.save(athleteEvent);
     }
 
