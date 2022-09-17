@@ -51,9 +51,9 @@ public class StopperController {
         if (eventId == 0) {
             throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
         } else if (eventId == 1) {
-            result = createMockDataStarted();
-        } else {
             result = createMockDataNotStarted();
+        } else {
+            result = createMockDataStarted();
         }
         // TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
         //  return stopperService.getStopperDashboard(eventId);
