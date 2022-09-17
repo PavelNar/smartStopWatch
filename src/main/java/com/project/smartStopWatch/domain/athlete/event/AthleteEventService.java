@@ -29,8 +29,8 @@ public class AthleteEventService {
     public void createAndAddAthleteEvents(Event event, EventSettingsRequest request) {
         List<AthleteEvent> athleteEvents = new ArrayList<>();
         int athleteCounter = 0;
-        for (int laneNumber = 1; laneNumber < event.getNumberOfLanes() + 1; laneNumber++) {
-            for (int heatNumber = 1; heatNumber < event.getNumberOfHeats() + 1; heatNumber++) {
+        for (int heatNumber = 1; heatNumber <= event.getNumberOfHeats(); heatNumber++) {
+            for (int laneNumber = 1; laneNumber <= event.getNumberOfLanes(); laneNumber++) {
                 AthleteEvent athleteEvent = new AthleteEvent();
                 athleteEvent.setEvent(event);
                 athleteEvent.setEventLength(request.getEventLength());
