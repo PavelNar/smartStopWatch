@@ -41,6 +41,7 @@ public class StopperController {
     @GetMapping("/dashboard")
     @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaid mock andmed)")
     public StopperDashboard getStopperDashboard(Integer eventId) {
+        long l = Instant.now().toEpochMilli();
         // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
         // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
         // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
@@ -54,7 +55,6 @@ public class StopperController {
         } else {
             result = createMockDataNotStarted();
         }
-
         // TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
         //  return stopperService.getStopperDashboard(eventId);
         return result;
@@ -64,8 +64,12 @@ public class StopperController {
     private StopperDashboard createMockDataStarted() {
         StopperDashboard result = new StopperDashboard();
         result.setNumberOfLanes(3);
-        result.getHeatRows().add(createHeatRowOne());
-        result.getHeatRows().add(createHeatRowNotStarted(2));
+        Instant startTime = Instant.now().minus(2, ChronoUnit.MINUTES);
+        long heat1StartTimeMilliseconds = startTime.toEpochMilli();
+        long heat2StartTimeMilliseconds = startTime.plus(5, ChronoUnit.SECONDS).toEpochMilli();
+
+        result.getHeatRows().add(createHeatRowStarted(heat1StartTimeMilliseconds, 1,0));
+        result.getHeatRows().add(createHeatRowStarted(heat2StartTimeMilliseconds, 2,5));
         result.getHeatRows().add(createHeatRowNotStarted(3));
         return result;
     }
@@ -78,20 +82,20 @@ public class StopperController {
         return result;
     }
 
-    private HeatRow createHeatRowOne() {
+    private HeatRow createHeatRowStarted(long heatStartTimeMilliseconds, int heat, int delaySeconds) {
         Instant startTime = Instant.now().minus(4, ChronoUnit.MINUTES);
         HeatRow heatRow = new HeatRow();
-        heatRow.setHeatNumber(1);
-        heatRow.setHeatStatus("Stop");
+        heatRow.setHeatNumber(heat);
+        heatRow.setHeatButtonStatus("Stop");
         heatRow.setHasStarted(true);
-        heatRow.setHeatStartTimeStamp(startTime);
+        heatRow.setHeatStartTimeMilliseconds(heatStartTimeMilliseconds);
         List<AthleteEventDto> athleteEvents = new ArrayList<>();
-        Instant plus1Minute = startTime.plus(1, ChronoUnit.MINUTES);
-        Instant plus2Minutes = startTime.plus(2, ChronoUnit.MINUTES);
-        Instant plus3Minutes = startTime.plus(3, ChronoUnit.MINUTES);
-        athleteEvents.add(createAthleteEvent(1, 1, 100, true, startTime, plus1Minute, 100, true, startTime));
-        athleteEvents.add(createAthleteEvent(2, 1, 200, true, startTime, plus2Minutes, 150, false, null));
-        athleteEvents.add(createAthleteEvent(3, 1, 500, true, startTime, plus3Minutes, 200, false, null));
+        Instant plus1Minute = startTime.plus(1, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
+        Instant plus2Minutes = startTime.plus(2, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);;
+        Instant plus3Minutes = startTime.plus(3, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);;
+        athleteEvents.add(createAthleteEvent(1, heat, 100, true, startTime, plus1Minute, 100, true, startTime));
+        athleteEvents.add(createAthleteEvent(2, heat, 200, true, startTime, plus2Minutes, 150, false, null));
+        athleteEvents.add(createAthleteEvent(3, heat, 500, true, startTime, plus3Minutes, 200, false, null));
         heatRow.setAthleteEvents(athleteEvents);
         return heatRow;
     }
@@ -99,7 +103,7 @@ public class StopperController {
     private HeatRow createHeatRowNotStarted(int heat) {
         HeatRow heatRow = new HeatRow();
         heatRow.setHeatNumber(heat);
-        heatRow.setHeatStatus("Start");
+        heatRow.setHeatButtonStatus("Start");
         heatRow.setHasStarted(false);
         List<AthleteEventDto> athleteEvents = new ArrayList<>();
         athleteEvents.add(createAthleteEvent(1 * heat, heat, 200, false, null, null, 0, false, null));
