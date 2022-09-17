@@ -59,6 +59,9 @@ public class AthleteEvent {
     @Column(name = "split_counter", nullable = false)
     private Integer splitCounter;
 
+    @Column(name = "split_count_required", nullable = false)
+    private Integer splitCountRequired;
+
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;

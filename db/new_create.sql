@@ -31,6 +31,7 @@ CREATE TABLE athlete_event (
     event_length int  NULL,
     split_length int  NOT NULL,
     split_counter int  NOT NULL,
+    split_count_required int  NOT NULL,
     is_active boolean  NOT NULL,
     CONSTRAINT athlete_event_pk PRIMARY KEY (id)
 );

@@ -38,7 +38,8 @@ public class AthleteEventService {
                 athleteEvent.setLaneNumber(laneNumber);
                 athleteEvent.setHeatNumber(heatNumber);
                 athleteEvent.setIsActive(true);
-                athleteEvent.setSplitCounter(request.getEventLength() / event.getSplitLength().getMeters());
+                athleteEvent.setSplitCounter(0);
+                athleteEvent.setSplitCountRequired(request.getEventLength() / event.getSplitLength().getMeters());
                 athleteEvent.setSplitLength(event.getSplitLength().getMeters());
                 athleteEvents.add(athleteEvent);
                 athleteCounter++;
@@ -58,7 +59,8 @@ public class AthleteEventService {
         athleteEvent.setAthlete(athlete);
         athleteEvent.setStroke(stroke);
         athleteEvent.setEventLength(request.getEventLength());
-        athleteEvent.setSplitCounter(request.getEventLength() / athleteEvent.getEvent().getSplitLength().getMeters());
+        athleteEvent.setSplitCounter(0);
+        athleteEvent.setSplitCountRequired(request.getEventLength() / athleteEvent.getEvent().getSplitLength().getMeters());
         athleteEventRepository.save(athleteEvent);
     }
 
