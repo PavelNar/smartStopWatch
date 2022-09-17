@@ -7,6 +7,7 @@ import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.event.Event;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import com.project.smartStopWatch.domain.stroke.StrokeService;
+import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -64,8 +65,8 @@ public class AthleteEventService {
         athleteEventRepository.save(athleteEvent);
     }
 
-    public List<AthleteEvent> findAthleteEventsByEventIdAndHeatNumber(Integer eventId, Integer heatNumber) {
-        return athleteEventRepository.findByEventIdAndHeatNumber(eventId, heatNumber);
+    public List<AthleteEvent> findActiveAthleteEventsBy(Integer eventId, Integer heatNumber) {
+        return athleteEventRepository.findEventsBy(true, eventId, heatNumber);
     }
 
     public void updateAthleteEventsWithTimeStamp(Instant timestamp, List<AthleteEvent> athleteEvents) {
@@ -73,6 +74,18 @@ public class AthleteEventService {
             athleteEvent.setStartTime(timestamp);
         }
         athleteEventRepository.saveAll(athleteEvents);
+    }
+
+    public AthleteEvent updateAthleteEventSplitCounter(Integer athleteEventId) {
+        AthleteEvent athleteEvent = athleteEventRepository.findById(athleteEventId).get();
+        ValidationService.validateAllowedSplitUpdate(athleteEvent);
+        athleteEvent.setSplitCounter(athleteEvent.getSplitCounter() + 1);
+        athleteEventRepository.save(athleteEvent);
+        return athleteEvent;
+    }
+
+    public void updateAthleteEventFinishTime(Instant timestamp, AthleteEvent athleteEvent) {
+        athleteEvent.setFinishTime(timestamp);
     }
 
     private Stroke getStrokeById(EventSettingsRequest request) {

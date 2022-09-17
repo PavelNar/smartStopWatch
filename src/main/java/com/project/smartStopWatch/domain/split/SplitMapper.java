@@ -1,15 +1,16 @@
 package com.project.smartStopWatch.domain.split;
 
-import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
-import com.project.smartStopWatch.domain.split.length.SplitLength;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-
-import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface SplitMapper {
 
-    List<SplitLengthDto> splitLengthListToSplitDtoList(List<SplitLength> splits);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(constant = "true", target = "isActive")
+    @Mapping(target = "athleteEvent")
+    Split athleteEventToSplit(AthleteEvent athleteEvent);
 
 }

@@ -33,9 +33,9 @@ public class StopperController {
 
     @PostMapping("/split")
     @Operation(summary = "TODO: Stopper split click event (Rain vaatab seda)")
-    private void splitClick(Integer athleteEventId) {
+    private void processSplitClick(Integer athleteEventId) {
         Instant timestamp = Instant.now();
-        stopperService.splitClick(timestamp, athleteEventId);
+        stopperService.processSplitClick(timestamp, athleteEventId);
     }
 
     @GetMapping("/dashboard")
@@ -68,11 +68,12 @@ public class StopperController {
         long heat1StartTimeMilliseconds = startTime.toEpochMilli();
         long heat2StartTimeMilliseconds = startTime.plus(5, ChronoUnit.SECONDS).toEpochMilli();
 
-        result.getHeatRows().add(createHeatRowStarted(heat1StartTimeMilliseconds, 1,0));
-        result.getHeatRows().add(createHeatRowStarted(heat2StartTimeMilliseconds, 2,5));
+        result.getHeatRows().add(createHeatRowStarted(heat1StartTimeMilliseconds, 1, 0));
+        result.getHeatRows().add(createHeatRowStarted(heat2StartTimeMilliseconds, 2, 5));
         result.getHeatRows().add(createHeatRowNotStarted(3));
         return result;
     }
+
     private StopperDashboard createMockDataNotStarted() {
         StopperDashboard result = new StopperDashboard();
         result.setNumberOfLanes(3);
@@ -91,8 +92,10 @@ public class StopperController {
         heatRow.setHeatStartTimeMilliseconds(heatStartTimeMilliseconds);
         List<AthleteEventDto> athleteEvents = new ArrayList<>();
         Instant plus1Minute = startTime.plus(1, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
-        Instant plus2Minutes = startTime.plus(2, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);;
-        Instant plus3Minutes = startTime.plus(3, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);;
+        Instant plus2Minutes = startTime.plus(2, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
+        ;
+        Instant plus3Minutes = startTime.plus(3, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
+        ;
         athleteEvents.add(createAthleteEvent(1, heat, 100, true, startTime, plus1Minute, 100, true, startTime));
         athleteEvents.add(createAthleteEvent(2, heat, 200, true, startTime, plus2Minutes, 150, false, null));
         athleteEvents.add(createAthleteEvent(3, heat, 500, true, startTime, plus3Minutes, 200, false, null));
@@ -112,7 +115,6 @@ public class StopperController {
         heatRow.setAthleteEvents(athleteEvents);
         return heatRow;
     }
-
 
 
     private AthleteEventDto createAthleteEvent(int number, int heat, int athleteEventLength, boolean hasStarted, Instant startTime, Instant lastSplitTime, int lastSplitLength, boolean hasFinished, Instant finishTime) {
