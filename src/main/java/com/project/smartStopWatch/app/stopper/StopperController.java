@@ -36,7 +36,7 @@ public class StopperController {
     }
 
 
-    @PatchMapping("/split")
+    @PatchMapping("/undo")
     @Operation(summary = "Stopper UNDO click event")
     private void processUndoClick(Integer athleteEventId) {
         stopperService.processUndoClick(athleteEventId);
