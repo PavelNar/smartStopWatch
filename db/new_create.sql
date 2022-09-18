@@ -21,17 +21,17 @@ CREATE TABLE athlete (
 -- Table: athlete_event
 CREATE TABLE athlete_event (
     id serial  NOT NULL,
-    athlete_id int  NULL,
-    event_id int  NOT NULL,
-    stroke_id int  NOT NULL,
     start_time timestamp  NULL,
     finish_time timestamp  NULL,
-    heat_number int  NOT NULL,
-    lane_number int  NOT NULL,
-    event_length int  NULL,
-    split_length int  NOT NULL,
     split_counter int  NOT NULL,
     split_count_required int  NOT NULL,
+    event_length int  NULL,
+    athlete_id int  NULL,
+    heat_number int  NOT NULL,
+    lane_number int  NOT NULL,
+    event_id int  NOT NULL,
+    stroke_id int  NOT NULL,
+    split_length int  NOT NULL,
     is_active boolean  NOT NULL,
     CONSTRAINT athlete_event_pk PRIMARY KEY (id)
 );
@@ -71,9 +71,9 @@ CREATE TABLE split (
     id serial  NOT NULL,
     start timestamp  NOT NULL,
     "end" timestamp  NULL,
+    is_active boolean  NOT NULL DEFAULT true,
     athlete_id int  NOT NULL,
     athlete_event_id int  NOT NULL,
-    is_active boolean  NOT NULL DEFAULT true,
     CONSTRAINT split_pk PRIMARY KEY (id)
 );
 
