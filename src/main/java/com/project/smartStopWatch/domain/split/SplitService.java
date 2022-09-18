@@ -40,14 +40,15 @@ public class SplitService {
     public void undoPreviousSplitProcess(AthleteEvent athleteEvent) {
         if (isInFinishedStatus(athleteEvent)) {
             athleteEventService.clearFinishedTimeStamp(athleteEvent);
+        } else {
+            deactivateCurrentLastSplit(athleteEvent);
         }
-        deactivateCurrentLastSplit(athleteEvent);
         clearNextLastActiveSplitEndTime(athleteEvent);
         athleteEventService.decreaseAthleteEventSplitCounter(athleteEvent);
     }
 
     private static boolean isInFinishedStatus(AthleteEvent athleteEvent) {
-        return athleteEvent.getSplitCounter() == athleteEvent.getSplitCounter();
+        return athleteEvent.getSplitCounter().equals(athleteEvent.getSplitCountRequired()) ;
     }
 
     private static boolean isLastSplit(AthleteEvent athleteEvent) {
