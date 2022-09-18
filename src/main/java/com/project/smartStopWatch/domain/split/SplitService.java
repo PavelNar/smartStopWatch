@@ -14,6 +14,7 @@ public class SplitService {
 
     @Resource
     private AthleteEventService athleteEventService;
+
     @Resource
     private SplitRepository splitRepository;
 
@@ -36,14 +37,25 @@ public class SplitService {
         }
     }
 
+    public void undoPreviousSplitProcess(AthleteEvent athleteEvent) {
+        if (isInFinishedStatus(athleteEvent)) {
+            athleteEventService.clearFinishedTimeStamp(athleteEvent);
+        }
+        deactivateCurrentLastSplit(athleteEvent);
+        clearNextLastActiveSplitEndTime(athleteEvent);
+        athleteEventService.decreaseAthleteEventSplitCounter(athleteEvent);
+    }
+
+    private static boolean isInFinishedStatus(AthleteEvent athleteEvent) {
+        return athleteEvent.getSplitCounter() == athleteEvent.getSplitCounter();
+    }
 
     private static boolean isLastSplit(AthleteEvent athleteEvent) {
         return athleteEvent.getSplitCounter().equals(athleteEvent.getSplitCountRequired());
     }
 
     private void updateLastSplit(Instant timestamp, AthleteEvent athleteEvent) {
-        List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
-        Split lastSplit = splits.get(splits.size() - 1);
+        Split lastSplit = getLastSplit(athleteEvent);
         updateSplitEndTime(timestamp, lastSplit);
     }
 
@@ -66,10 +78,25 @@ public class SplitService {
 
 
     private void updateLastSplitAndAddNewSplit(Instant timestamp, AthleteEvent athleteEvent) {
-        List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
-        Split lastSplit = splits.get(splits.size() - 1);
+        Split lastSplit = getLastSplit(athleteEvent);
         updateSplitEndTime(timestamp, lastSplit);
         addNewSplit(timestamp, athleteEvent);
     }
 
+    private void deactivateCurrentLastSplit(AthleteEvent athleteEvent) {
+        Split lastSplit = getLastSplit(athleteEvent);
+        lastSplit.setIsActive(false);
+        splitRepository.save(lastSplit);
+    }
+
+    private void clearNextLastActiveSplitEndTime(AthleteEvent athleteEvent) {
+        Split lastSplit = getLastSplit(athleteEvent);
+        lastSplit.setEnd(null);
+        splitRepository.save(lastSplit);
+    }
+
+    private Split getLastSplit(AthleteEvent athleteEvent) {
+        List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
+        return splits.get(splits.size() - 1);
+    }
 }

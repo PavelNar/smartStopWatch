@@ -18,7 +18,8 @@ public class ValidationService {
     public static final String ATHLETE_NAME_TOO_LONG = "Athlete name is too long";
     public static final String HEAT_START_NOT_ALLOWED = "Heat start now allowed";
     public static final String NEW_SPLIT_NOT_ALLOWED = "New split is not allowed";
-    public static final String SPLIT_UPDATE_NOT_ALLOWED = "Split update is not allowed";
+    public static final String SPLIT_PROCESSING_NOT_ALLOWED = "Split click process is not allowed";
+    private static final String SPLIT_UNDO_NOT_ALLOWED = "Split undo process is not allowed";
 
     public static void validateUserExists(Optional<User> user) {
         if (user.isEmpty()) {
@@ -68,10 +69,15 @@ public class ValidationService {
         }
     }
 
-    public static void validateAllowedSplitUpdate(AthleteEvent athleteEvent) {
-        if (athleteEvent.getSplitCounter() > athleteEvent.getSplitCountRequired()) {
-            throw new BusinessException(SPLIT_UPDATE_NOT_ALLOWED, "All Splits are completed. New split is not allowed.");
+    public static void validateSplitClickAllowed(AthleteEvent athleteEvent) {
+        if (athleteEvent.getSplitCounter() + 1 > athleteEvent.getSplitCountRequired()) {
+            throw new BusinessException(SPLIT_PROCESSING_NOT_ALLOWED, "All Splits are completed. New splits are not allowed.");
         }
     }
 
+    public static void validateUndoClickAllowed(AthleteEvent athleteEvent) {
+        if (athleteEvent.getSplitCounter() - 1 < 0) {
+            throw new BusinessException(SPLIT_UNDO_NOT_ALLOWED, "There are no more splits to remove. Undo split is not allowed.");
+        }
+    }
 }

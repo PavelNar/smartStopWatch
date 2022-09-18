@@ -6,10 +6,7 @@ import com.project.smartStopWatch.app.stopper.dto.dashboard.StopperDashboard;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStartRequest;
 import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.Instant;
@@ -32,10 +29,17 @@ public class StopperController {
     }
 
     @PostMapping("/split")
-    @Operation(summary = "TODO: Stopper split click event (Rain vaatab seda)")
+    @Operation(summary = "Stopper SPLIT click event")
     private void processSplitClick(Integer athleteEventId) {
         Instant timestamp = Instant.now();
         stopperService.processSplitClick(timestamp, athleteEventId);
+    }
+
+
+    @PatchMapping("/split")
+    @Operation(summary = "Stopper UNDO click event")
+    private void processUndoClick(Integer athleteEventId) {
+        stopperService.processUndoClick(athleteEventId);
     }
 
     @GetMapping("/dashboard")

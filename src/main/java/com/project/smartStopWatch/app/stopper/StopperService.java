@@ -32,8 +32,17 @@ public class StopperService {
 
     @Transactional
     public void processSplitClick(Instant timestamp, Integer athleteEventId) {
-        AthleteEvent athleteEvent = athleteEventService.updateAthleteEventSplitCounter(athleteEventId);
+        AthleteEvent athleteEvent = athleteEventService.findAthleteEventBy(athleteEventId);
+        ValidationService.validateSplitClickAllowed(athleteEvent);
+        athleteEventService.increaseAthleteEventSplitCounter(athleteEvent);
         splitService.processSplits(timestamp, athleteEvent);
+    }
+
+    @Transactional
+    public void processUndoClick(Integer athleteEventId) {
+        AthleteEvent athleteEvent = athleteEventService.findAthleteEventBy(athleteEventId);
+        ValidationService.validateUndoClickAllowed(athleteEvent);
+        splitService.undoPreviousSplitProcess(athleteEvent);
     }
 
     // TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
