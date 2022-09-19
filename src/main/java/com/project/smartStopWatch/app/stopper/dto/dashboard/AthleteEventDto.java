@@ -20,4 +20,6 @@ public class AthleteEventDto implements Serializable {
     private Integer lastSplitLength;
     private Boolean hasFinished;
     private Instant finishTime;
+    private Integer laneNumber;
+    private Integer heatNumber;
 }

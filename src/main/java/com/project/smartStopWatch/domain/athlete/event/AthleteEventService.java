@@ -26,6 +26,7 @@ public class AthleteEventService {
     @Resource
     private AthleteEventRepository athleteEventRepository;
 
+
     public void createAndAddAthleteEvents(Event event, EventSettingsRequest request) {
         List<AthleteEvent> athleteEvents = new ArrayList<>();
         int athleteCounter = 0;
@@ -103,4 +104,7 @@ public class AthleteEventService {
         return strokeService.findById(request.getStrokeId());
     }
 
+    public List<AthleteEvent> findActiveAthleteEventsBy(Integer eventId) {
+        return athleteEventRepository.findAthleteEventsBy(true, eventId);
+    }
 }

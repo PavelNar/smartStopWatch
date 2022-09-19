@@ -45,46 +45,24 @@ public class StopperController {
     @GetMapping("/dashboard")
     @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaid mock andmed)")
     public StopperDashboard getStopperDashboard(Integer eventId) {
-        long l = Instant.now().toEpochMilli();
-        // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
-        // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
-        // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
-        // et ta saaks siis päringule mingi vastuse.
-        StopperDashboard result = new StopperDashboard();
-        // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
-        if (eventId == 0) {
-            throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
-        } else if (eventId == 1) {
-            result = createMockDataNotStarted();
-        } else {
-            result = createMockDataStarted();
-        }
+//        long l = Instant.now().toEpochMilli();
+//        // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
+//        // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
+//        // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
+//        // et ta saaks siis päringule mingi vastuse.
+//        StopperDashboard result = new StopperDashboard();
+//        // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
+//        if (eventId == 0) {
+//            throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
+//        } else if (eventId == 1) {
+//            result = createMockDataNotStarted();
+//        } else {
+//            result = createMockDataStarted();
+//        }
         // TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
         //  return stopperService.getStopperDashboard(eventId);
-        return result;
+        return stopperService.getStopperDashboard(eventId);
 
-    }
-
-    private StopperDashboard createMockDataStarted() {
-        StopperDashboard result = new StopperDashboard();
-        result.setNumberOfLanes(3);
-        Instant startTime = Instant.now().minus(2, ChronoUnit.MINUTES);
-        long heat1StartTimeMilliseconds = startTime.toEpochMilli();
-        long heat2StartTimeMilliseconds = startTime.plus(5, ChronoUnit.SECONDS).toEpochMilli();
-
-        result.getHeatRows().add(createHeatRowStarted(heat1StartTimeMilliseconds, 1, 0));
-        result.getHeatRows().add(createHeatRowStarted(heat2StartTimeMilliseconds, 2, 5));
-        result.getHeatRows().add(createHeatRowNotStarted(3));
-        return result;
-    }
-
-    private StopperDashboard createMockDataNotStarted() {
-        StopperDashboard result = new StopperDashboard();
-        result.setNumberOfLanes(3);
-        result.getHeatRows().add(createHeatRowNotStarted(1));
-        result.getHeatRows().add(createHeatRowNotStarted(2));
-        result.getHeatRows().add(createHeatRowNotStarted(3));
-        return result;
     }
 
     private HeatRow createHeatRowStarted(long heatStartTimeMilliseconds, int heat, int delaySeconds) {
@@ -138,5 +116,4 @@ public class StopperController {
         athleteEvent.setFinishTime(finishTime);
         return athleteEvent;
     }
-
 }

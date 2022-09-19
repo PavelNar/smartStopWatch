@@ -11,6 +11,7 @@ import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
 import com.project.smartStopWatch.domain.event.Event;
 import com.project.smartStopWatch.domain.event.EventMapper;
+import com.project.smartStopWatch.domain.event.heat.HeatService;
 import com.project.smartStopWatch.domain.split.length.SplitLengthService;
 import com.project.smartStopWatch.domain.stroke.StrokeService;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,14 @@ public class SetupService {
     @Resource
     private EventMapper eventMapper;
 
+    @Resource
+    private HeatService heatService;
+
+
     public EventSettingsResponse createEventFromSettings(EventSettingsRequest request) {
         Event event = eventService.createAndAddEvent(request);
         athleteEventService.createAndAddAthleteEvents(event, request);
+        heatService.createAndSaveHeats(event, request.getNumberOfHeats());
         return eventMapper.eventToEventResponse(event);
     }
 

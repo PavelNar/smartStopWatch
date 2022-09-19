@@ -54,8 +54,12 @@ CREATE TABLE event (
 CREATE TABLE heat (
     id serial  NOT NULL,
     event_id int  NOT NULL,
-    start timestamp  NOT NULL,
+    heat_number int  NOT NULL,
+    start timestamp  NULL,
     "end" timestamp  NULL,
+    has_started boolean  NOT NULL DEFAULT FALSE,
+    has_finished boolean  NOT NULL DEFAULT FALSE,
+    is_active boolean  NOT NULL DEFAULT TRUE,
     CONSTRAINT heat_pk PRIMARY KEY (id)
 );
 
