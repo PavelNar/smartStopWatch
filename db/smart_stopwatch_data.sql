@@ -1,5 +1,5 @@
 INSERT INTO public.role (id, role) VALUES (DEFAULT, 'admin');
-INSERT INTO public.role (id, role) VALUES (DEFAULT, 'customer');
+INSERT INTO public.role (id, role) VALUES (DEFAULT, 'coach');
 
 
 INSERT INTO public."user" (id, role_id, user_name, password, is_active) VALUES (DEFAULT, 2, 'pavel', '123', true);

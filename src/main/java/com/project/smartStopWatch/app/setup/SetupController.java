@@ -50,7 +50,7 @@ public class SetupController {
     }
 
     @GetMapping("/all-athlete")
-    @Operation(summary = "Get all active trainer athletes dropdown info")
+    @Operation(summary = "Get all active coach athletes dropdown info")
     public List<AthleteInfo> findActiveAthletesByUserId(Integer userId) {
         return setupService.findActiveAthletesByUserId(userId);
     }
