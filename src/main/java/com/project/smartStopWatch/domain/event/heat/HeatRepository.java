@@ -11,8 +11,4 @@ public interface HeatRepository extends JpaRepository<Heat, Integer> {
 
     @Query("select h from Heat h where h.isActive = ?1 and h.event.id = ?2")
     List<Heat> findHeatsBy(Boolean isActive, Integer eventId);
-
-
-
-
 }

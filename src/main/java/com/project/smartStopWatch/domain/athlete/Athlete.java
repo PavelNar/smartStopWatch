@@ -30,5 +30,4 @@ public class Athlete {
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
-
 }
