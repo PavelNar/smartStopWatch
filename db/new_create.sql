@@ -23,6 +23,7 @@ CREATE TABLE athlete_event (
     id serial  NOT NULL,
     start_time timestamp  NULL,
     finish_time timestamp  NULL,
+    last_split_time timestamp  NULL,
     split_counter int  NOT NULL,
     split_count_required int  NOT NULL,
     event_length int  NULL,

@@ -89,6 +89,7 @@ public class AthleteEventService {
 
     public void updateAthleteEventFinishTime(Instant timestamp, AthleteEvent athleteEvent) {
         athleteEvent.setFinishTime(timestamp);
+        athleteEventRepository.save(athleteEvent);
     }
 
     public AthleteEvent findAthleteEventBy(Integer athleteEventId) {
@@ -106,5 +107,10 @@ public class AthleteEventService {
 
     public List<AthleteEvent> findActiveAthleteEventsBy(Integer eventId) {
         return athleteEventRepository.findAthleteEventsBy(true, eventId);
+    }
+
+    public void updateAthleteEventLastSplitTime(Instant timestamp, AthleteEvent athleteEvent) {
+        athleteEvent.setLastSplitTime(timestamp);
+        athleteEventRepository.save(athleteEvent);
     }
 }

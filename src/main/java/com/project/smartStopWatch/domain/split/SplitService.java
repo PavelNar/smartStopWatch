@@ -2,6 +2,8 @@ package com.project.smartStopWatch.domain.split;
 
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
+import com.project.smartStopWatch.domain.event.heat.Heat;
+import com.project.smartStopWatch.domain.event.heat.HeatService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class SplitService {
 
     @Resource
     private AthleteEventService athleteEventService;
+
+    @Resource
+    private HeatService heatService;
 
     @Resource
     private SplitRepository splitRepository;
@@ -29,12 +34,19 @@ public class SplitService {
     }
 
     public void processSplits(Instant timestamp, AthleteEvent athleteEvent) {
+        Heat heat = heatService.findActiveHeat(athleteEvent.getEvent().getId());
         if (isLastSplit(athleteEvent)) {
             updateLastSplit(timestamp, athleteEvent);
             athleteEventService.updateAthleteEventFinishTime(timestamp, athleteEvent);
+            heatService.updateHeatEnd(timestamp, heat);
         } else {
             updateLastSplitAndAddNewSplit(timestamp, athleteEvent);
         }
+        athleteEventService.updateAthleteEventLastSplitTime(timestamp, athleteEvent);
+        // TODO:  find all AthleteEvents by active, eventId, heatNumber
+        // TODO: create counter = 0
+        // TODO: forloop all athleteEvents  if splitCounter and splitCountRequired are equal increase counter
+        // TODO: if counter equeals athleteEvents.size() then heat is finished update heat finished (end) information
     }
 
     public void undoPreviousSplitProcess(AthleteEvent athleteEvent) {
