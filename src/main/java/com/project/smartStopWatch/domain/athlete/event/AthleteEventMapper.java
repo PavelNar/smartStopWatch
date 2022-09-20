@@ -16,7 +16,7 @@ public interface AthleteEventMapper {
     @Mapping(source = "athlete.id", target = "athleteId")
     @Mapping(source = "id", target = "athleteEventId")
     @Mapping(source = "eventLength", target = "athleteEventLength")
-    @Mapping(constant = "name", target = "athleteName")
+    @Mapping(target = "athleteName", qualifiedByName = "athleteEventToName")
     @Mapping(source = "stroke.id", target = "strokeId")
     @Mapping(source = "stroke.type", target = "strokeType")
     @Mapping(source = "startTime", target = "hasStarted", qualifiedByName = "startTimeToHasStartedStatus")
@@ -42,6 +42,14 @@ public interface AthleteEventMapper {
         return athleteEvent.getSplitCounter() * athleteEvent.getSplitLength();
     }
 
+    @Named("athleteEventToName")
+    static String athleteEventToName(AthleteEvent athleteEvent) {
+        if (athleteEvent.getAthlete() == null) {
+            return "name";
+        } else {
+            return athleteEvent.getAthlete().getName();
+        }
+    }
 
 
 }
