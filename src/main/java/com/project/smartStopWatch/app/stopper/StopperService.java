@@ -7,6 +7,7 @@ import com.project.smartStopWatch.app.stopper.dto.heat.HeatStartRequest;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
+import com.project.smartStopWatch.domain.event.Event;
 import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
 import com.project.smartStopWatch.domain.event.heat.HeatMapper;
@@ -67,51 +68,38 @@ public class StopperService {
         splitService.undoPreviousSplitProcess(athleteEvent);
     }
 
-    // TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
     public StopperDashboard getStopperDashboard(Integer eventId) {
+        StopperDashboard stopperDashboard = new StopperDashboard();
+
         List<AthleteEvent> athleteEvents = athleteEventService.findActiveAthleteEventsBy(eventId);
         List<Heat> heats = heatService.findActiveHeats(eventId);
 
-        StopperDashboard stopperDashboard = createStopperDashboard(heats, athleteEvents);
-        HeatRow heatRow = new HeatRow();
-        return null;
+        List<HeatRow> heatRows = createStopperDashboard(heats, athleteEvents);
+        stopperDashboard.setHeatRows(heatRows);
+
+        Event event = eventService.getEventById(eventId);
+        stopperDashboard.setNumberOfLanes(event.getNumberOfLanes());
+        return stopperDashboard;
     }
 
-    private StopperDashboard createStopperDashboard(List<Heat> heats, List<AthleteEvent> athleteEvents) {
+    private List<HeatRow> createStopperDashboard(List<Heat> heats, List<AthleteEvent> athleteEvents) {
         List<HeatRow> heatRows = createHeatRows(heats);
         List<AthleteEventDto> athleteEventDtos = createAthleteEventDtos(athleteEvents);
-        // TODO: forTsukliga kaid labi koik athleteEventDtod
-        // TODO: selle fortsukli sees teine fortsukel, kaid forloobiga labi heatRows
-        // TODO: kui heatNumber klapib lisad athleteEventsile addiga athleteEventDto kulge
-
-        return null;
-    }
-
-    private List<AthleteEventDto> createAthleteEventDtos(List<AthleteEvent> athleteEvents) {
-        return athleteEventMapper.athleteEventsToAthleteEventDtos(athleteEvents);
+        for (HeatRow heatRow : heatRows) {
+            for (AthleteEventDto athleteEventDto : athleteEventDtos) {
+                if (heatRow.getHeatNumber() == athleteEventDto.getHeatNumber()) {
+                    athleteEventDtos.add(athleteEventDto);
+                }
+            }
+        }
+        return heatRows;
     }
 
     private List<HeatRow> createHeatRows(List<Heat> heats) {
         return heatMapper.heatsToHeatRows(heats);
     }
 
-    private AthleteEventDto createAthleteEvent(AthleteEvent athleteEvent) {
-        AthleteEventDto athleteEventDto = new AthleteEventDto();
-
-        athleteEventDto.setAthleteId(athleteEvent.getAthlete().getId());
-        athleteEventDto.setAthleteEventId(athleteEvent.getId());
-        athleteEventDto.setAthleteName(athleteEvent.getAthlete().getName());
-        athleteEventDto.setStrokeId(athleteEvent.getStroke().getId());
-        athleteEventDto.setStrokeType(athleteEvent.getStroke().getType());
-        athleteEventDto.setAthleteEventLength(athleteEvent.getEventLength());
-        athleteEventDto.setHasStarted(false);
-        athleteEventDto.setStartTime(null);
-        athleteEventDto.setLastSplitTime(null);
-        athleteEventDto.setLastSplitLength(null);
-        athleteEventDto.setHasFinished(false);
-        athleteEventDto.setFinishTime(null);
-        athleteEventDto.setHeatNumber(athleteEventDto.getHeatNumber());
-        athleteEventDto.setLaneNumber(athleteEventDto.getLaneNumber());
-        return athleteEventDto;
+    private List<AthleteEventDto> createAthleteEventDtos(List<AthleteEvent> athleteEvents) {
+        return athleteEventMapper.athleteEventsToAthleteEventDtos(athleteEvents);
     }
 }
