@@ -16,13 +16,13 @@ public interface AthleteEventMapper {
     @Mapping(source = "athlete.id", target = "athleteId")
     @Mapping(source = "id", target = "athleteEventId")
     @Mapping(source = "eventLength", target = "athleteEventLength")
-    @Mapping(target = "athleteName", qualifiedByName = "athleteEventToName")
+    @Mapping(expression = "java(athleteEventToName(athleteEvent))", target = "athleteName")
     @Mapping(source = "stroke.id", target = "strokeId")
     @Mapping(source = "stroke.type", target = "strokeType")
     @Mapping(source = "startTime", target = "hasStarted", qualifiedByName = "startTimeToHasStartedStatus")
     @Mapping(source = "finishTime", target = "hasFinished", qualifiedByName = "finishTimeToHasFinishedStatus")
     @Mapping(source = "splitCounter", target = "lastSplitCount")
-    @Mapping(target = "distanceCovered", qualifiedByName = "athleteEventToDistanceCovered")
+    @Mapping(expression = "java(athleteEventToDistanceCovered(athleteEvent))", target = "distanceCovered")
     AthleteEventDto athleteEventToAthleteEventDto(AthleteEvent athleteEvent);
 
     List<AthleteEventDto> athleteEventsToAthleteEventDtos(List<AthleteEvent> athleteEvents);
@@ -37,19 +37,18 @@ public interface AthleteEventMapper {
         return finishTime != null;
     }
 
-    @Named("athleteEventToDistanceCovered")
-    static Integer athleteEventToDistanceCovered(AthleteEvent athleteEvent) {
-        return athleteEvent.getSplitCounter() * athleteEvent.getSplitLength();
-    }
-
-    @Named("athleteEventToName")
-    static String athleteEventToName(AthleteEvent athleteEvent) {
+    default String athleteEventToName(AthleteEvent athleteEvent) {
         if (athleteEvent.getAthlete() == null) {
             return "name";
         } else {
             return athleteEvent.getAthlete().getName();
         }
     }
+
+    default Integer athleteEventToDistanceCovered(AthleteEvent athleteEvent) {
+        return athleteEvent.getSplitCounter() * athleteEvent.getSplitLength();
+    }
+
 
 
 }
