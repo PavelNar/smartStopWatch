@@ -115,11 +115,11 @@ public class StopperService {
         return athleteEventDto;
     }
 
-    private List<AthleteEventDto> CreateAthleteEvents(AthleteEventDto athleteEventDto) {
-        List<AthleteEventDto> athleteEventDtos = new ArrayList<>();
-        for (int i = 1; i < ; i++) {
-
-        }
-        return  athleteEventDtos;
-    }
+//    private List<AthleteEventDto> CreateAthleteEvents(AthleteEventDto athleteEventDto) {
+//        List<AthleteEventDto> athleteEventDtos = new ArrayList<>();
+//        for (int i = 1; i < ; i++) {
+//
+//        }
+//        return  athleteEventDtos;
+//    }
 }
