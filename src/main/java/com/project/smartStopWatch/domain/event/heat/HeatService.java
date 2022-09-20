@@ -40,4 +40,13 @@ public class HeatService {
     public List<Heat> findActiveHeats(Integer eventId) {
         return heatRepository.findHeatsBy(true, eventId);
     }
+
+    public void updateHeatEnd(Instant timestamp, Heat heat) {
+        heat.setEnd(timestamp);
+        heat.setHasFinished(true);
+    }
+
+    public Heat findActiveHeat(Integer eventId) {
+        return heatRepository.findHeatBy(true, eventId);
+    }
 }

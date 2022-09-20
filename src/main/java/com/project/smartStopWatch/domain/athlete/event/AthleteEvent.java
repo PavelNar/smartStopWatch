@@ -39,6 +39,9 @@ public class AthleteEvent {
     @Column(name = "finish_time")
     private Instant finishTime;
 
+    @Column(name = "last_split_time")
+    private Instant lastSplitTime;
+
     @NotNull
     @Column(name = "heat_number", nullable = false)
     private Integer heatNumber;
@@ -65,5 +68,6 @@ public class AthleteEvent {
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
+
 
 }

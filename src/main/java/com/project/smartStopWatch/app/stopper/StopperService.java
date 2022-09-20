@@ -114,12 +114,4 @@ public class StopperService {
         athleteEventDto.setLaneNumber(athleteEventDto.getLaneNumber());
         return athleteEventDto;
     }
-
-//    private List<AthleteEventDto> CreateAthleteEvents(AthleteEventDto athleteEventDto) {
-//        List<AthleteEventDto> athleteEventDtos = new ArrayList<>();
-//        for (int i = 1; i < ; i++) {
-//
-//        }
-//        return  athleteEventDtos;
-//    }
 }
