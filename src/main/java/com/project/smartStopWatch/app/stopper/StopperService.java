@@ -88,7 +88,7 @@ public class StopperService {
         for (HeatRow heatRow : heatRows) {
             for (AthleteEventDto athleteEventDto : athleteEventDtos) {
                 if (heatRow.getHeatNumber() == athleteEventDto.getHeatNumber()) {
-                    athleteEventDtos.add(athleteEventDto);
+                    heatRow.getAthleteEvents().add(athleteEventDto);
                 }
             }
         }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface HeatMapper {
 
     @Mapping(source = "hasStarted", target = "heatButtonStatus", qualifiedByName = "hasStartedToButtonStatus")
-    @Mapping(source = "start", target = "heatStartTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
+//    @Mapping(source = "start", target = "heatStartTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
     HeatRow heatToHeatRow(Heat heat);
 
 
@@ -24,9 +24,9 @@ public interface HeatMapper {
         return hasStarted ? "Stop" : "Start";
     }
 
-    @Named("timestampToMilliseconds")
-    static Long timestampToMilliseconds(Instant start) {
-        return start.toEpochMilli();
-    }
+//    @Named("timestampToMilliseconds")
+//    static Long timestampToMilliseconds(Instant start) {
+//        return start.toEpochMilli();
+//    }
 
 }
