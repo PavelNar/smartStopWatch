@@ -30,6 +30,7 @@ public class AthleteService {
         Athlete athlete = new Athlete();
         User user = userService.findUserByUserId(userId);
         athlete.setUser(user);
+        athlete.setName(name);
         athleteRepository.save(athlete);
         return athleteMapper.athleteToAthleteResponse(athlete);
     }
