@@ -37,12 +37,12 @@ public class StopperService {
     @Resource
     private SplitService splitService;
 
-
     @Resource
     private AthleteEventMapper athleteEventMapper;
 
     @Resource
     private HeatMapper heatMapper;
+
 
     @Transactional
     public void startHeat(Instant timestamp, HeatStartRequest startRequest) {

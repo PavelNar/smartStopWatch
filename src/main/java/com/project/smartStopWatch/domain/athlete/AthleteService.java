@@ -31,6 +31,7 @@ public class AthleteService {
         User user = userService.findUserByUserId(userId);
         athlete.setUser(user);
         athlete.setName(name);
+        athlete.setIsActive(true);
         athleteRepository.save(athlete);
         return athleteMapper.athleteToAthleteResponse(athlete);
     }
