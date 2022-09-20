@@ -45,12 +45,8 @@ public class StopperController {
     @GetMapping("/dashboard")
     @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaid mock andmed)")
     public StopperDashboard getStopperDashboard(Integer eventId) {
-        long l = Instant.now().toEpochMilli();
-        // Loome ajutiselt (ainult arenduse ajaks) tagastatava objekti
-        // Mõte selles, et see teenus hakkaks koheselt tagastama mingit vastust,
-        // eesmägiga, et frond-arendaja saaks koheselt asuda arendama nii,
-        // et ta saaks siis päringule mingi vastuse.
-        StopperDashboard result = new StopperDashboard();
+//        long l = Instant.now().toEpochMilli();
+//        StopperDashboard result = new StopperDashboard();
         // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
 //        if (eventId == 0) {
 //            throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
