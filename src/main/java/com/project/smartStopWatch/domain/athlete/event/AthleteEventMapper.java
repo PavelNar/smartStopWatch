@@ -13,10 +13,10 @@ import java.util.List;
 public interface AthleteEventMapper {
 
 
-    @Mapping(source = "id", target = "athleteId")
-    @Mapping(source = "event.id", target = "athleteEventId")
+    @Mapping(source = "athlete.id", target = "athleteId")
+    @Mapping(source = "id", target = "athleteEventId")
     @Mapping(source = "eventLength", target = "athleteEventLength")
-    @Mapping(source = "athlete.name", target = "athleteName")
+    @Mapping(constant = "name", target = "athleteName")
     @Mapping(source = "stroke.id", target = "strokeId")
     @Mapping(source = "stroke.type", target = "strokeType")
     @Mapping(source = "startTime", target = "hasStarted", qualifiedByName = "startTimeToHasStartedStatus")
