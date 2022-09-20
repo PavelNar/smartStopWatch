@@ -4,7 +4,6 @@ import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.StopperDashboard;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStartRequest;
-import com.project.smartStopWatch.infrastructure.exception.BusinessException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -106,7 +105,7 @@ public class StopperController {
         athleteEvent.setHasStarted(hasStarted);
         athleteEvent.setStartTime(startTime);
         athleteEvent.setLastSplitTime(lastSplitTime);
-        athleteEvent.setLastSplitLength(lastSplitLength);
+        athleteEvent.setDistanceCovered(lastSplitLength);
         athleteEvent.setHasFinished(hasFinished);
         athleteEvent.setFinishTime(finishTime);
         return athleteEvent;

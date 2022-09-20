@@ -21,10 +21,9 @@ public interface AthleteEventMapper {
     @Mapping(source = "stroke.type", target = "strokeType")
     @Mapping(source = "startTime", target = "hasStarted", qualifiedByName = "startTimeToHasStartedStatus")
     @Mapping(source = "finishTime", target = "hasFinished", qualifiedByName = "finishTimeToHasFinishedStatus")
-//    @Mapping(source = "", target = "lastSplitCount")
-//    @Mapping(source = "", target = "lastSplitTime")
-//    @Mapping(source = "", target = "lastSplitLength")
-    AthleteEventDto athleteEventToAthleteEventDto(AthleteEvent athleteEvents);
+    @Mapping(source = "splitCounter", target = "lastSplitCount")
+    @Mapping(target = "distanceCovered", qualifiedByName = "athleteEventToDistanceCovered")
+    AthleteEventDto athleteEventToAthleteEventDto(AthleteEvent athleteEvent);
 
     List<AthleteEventDto> athleteEventsToAthleteEventDtos(List<AthleteEvent> athleteEvents);
 
@@ -37,5 +36,12 @@ public interface AthleteEventMapper {
     static Boolean finishTimeToHasFinishedStatus(Instant finishTime) {
         return finishTime != null;
     }
+
+    @Named("athleteEventToDistanceCovered")
+    static Integer athleteEventToDistanceCovered(AthleteEvent athleteEvent) {
+        return athleteEvent.getSplitCounter() * athleteEvent.getSplitLength();
+    }
+
+
 
 }
