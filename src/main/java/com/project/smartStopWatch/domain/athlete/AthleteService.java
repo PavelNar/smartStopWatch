@@ -64,6 +64,6 @@ public class AthleteService {
     }
 
     public AthleteInfo findAthleteById(Integer athleteId) {
-        return athleteRepository.;
+        return athleteRepository.findById(athleteId).get();
     }
 }
