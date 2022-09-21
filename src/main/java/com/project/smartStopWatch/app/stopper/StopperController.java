@@ -34,7 +34,6 @@ public class StopperController {
         stopperService.processSplitClick(timestamp, athleteEventId);
     }
 
-
     @PatchMapping("/undo")
     @Operation(summary = "Stopper UNDO click event")
     private void processUndoClick(Integer athleteEventId) {
@@ -42,72 +41,10 @@ public class StopperController {
     }
 
     @GetMapping("/dashboard")
-    @Operation(summary = "TODO: Get stopper dashboard info (TOP PRIORITY - hetkel tagastab vaid mock andmed)")
+    @Operation(summary = "Get stopper dashboard info")
     public StopperDashboard getStopperDashboard(Integer eventId) {
-//        long l = Instant.now().toEpochMilli();
-//        StopperDashboard result = new StopperDashboard();
-        // loome mingi sisendist sõltuva kontrolli, millega saab errori visata
-//        if (eventId == 0) {
-//            throw new BusinessException("Mingi error bla bla bla", "Mingi detailne error bla bla");
-//        } else if (eventId == 1) {
-//            result = createMockDataNotStarted();
-//        } else {
-//            result = createMockDataStarted();
-//        }
-//         TODO: SEE ON TEIE KÕIGE TÄHTSAM TEENUS, MIS ON VAJA ASAP ära implementeerida
         return stopperService.getStopperDashboard(eventId);
 
     }
 
-    private HeatRow createHeatRowStarted(long heatStartTimeMilliseconds, int heat, int delaySeconds) {
-        Instant startTime = Instant.now().minus(4, ChronoUnit.MINUTES);
-        HeatRow heatRow = new HeatRow();
-        heatRow.setHeatNumber(heat);
-        heatRow.setHeatButtonStatus("Stop");
-        heatRow.setHasStarted(true);
-        heatRow.setHeatStartTimeMilliseconds(heatStartTimeMilliseconds);
-        List<AthleteEventDto> athleteEvents = new ArrayList<>();
-        Instant plus1Minute = startTime.plus(1, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
-        Instant plus2Minutes = startTime.plus(2, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
-        ;
-        Instant plus3Minutes = startTime.plus(3, ChronoUnit.MINUTES).plus(delaySeconds, ChronoUnit.SECONDS);
-        ;
-        athleteEvents.add(createAthleteEvent(1, heat, 100, true, startTime, plus1Minute, 100, true, startTime));
-        athleteEvents.add(createAthleteEvent(2, heat, 200, true, startTime, plus2Minutes, 150, false, null));
-        athleteEvents.add(createAthleteEvent(3, heat, 500, true, startTime, plus3Minutes, 200, false, null));
-        heatRow.setAthleteEvents(athleteEvents);
-        return heatRow;
-    }
-
-    private HeatRow createHeatRowNotStarted(int heat) {
-        HeatRow heatRow = new HeatRow();
-        heatRow.setHeatNumber(heat);
-        heatRow.setHeatButtonStatus("Start");
-        heatRow.setHasStarted(false);
-        List<AthleteEventDto> athleteEvents = new ArrayList<>();
-        athleteEvents.add(createAthleteEvent(1 * heat, heat, 200, false, null, null, 0, false, null));
-        athleteEvents.add(createAthleteEvent(2 * heat, heat, 200, false, null, null, 0, false, null));
-        athleteEvents.add(createAthleteEvent(3 * heat, heat, 200, false, null, null, 0, false, null));
-        heatRow.setAthleteEvents(athleteEvents);
-        return heatRow;
-    }
-
-
-    private AthleteEventDto createAthleteEvent(int number, int heat, int athleteEventLength, boolean hasStarted, Instant startTime, Instant lastSplitTime, int lastSplitLength, boolean hasFinished, Instant finishTime) {
-        Instant now = Instant.now();
-        AthleteEventDto athleteEvent = new AthleteEventDto();
-        athleteEvent.setAthleteId(number * heat);
-        athleteEvent.setAthleteEventId(number * heat);
-        athleteEvent.setAthleteName("name " + number);
-        athleteEvent.setStrokeId(1);
-        athleteEvent.setStrokeType("Freestyle");
-        athleteEvent.setAthleteEventLength(athleteEventLength);
-        athleteEvent.setHasStarted(hasStarted);
-        athleteEvent.setStartTime(startTime);
-        athleteEvent.setLastSplitTime(lastSplitTime);
-        athleteEvent.setDistanceCovered(lastSplitLength);
-        athleteEvent.setHasFinished(hasFinished);
-        athleteEvent.setFinishTime(finishTime);
-        return athleteEvent;
-    }
 }

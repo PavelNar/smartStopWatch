@@ -26,7 +26,7 @@ public class SetupController {
     }
 
     @PatchMapping("/athlete-event")
-    @Operation(summary = "Update athlete details from edit button (choose: athlete, stroke style and length")
+    @Operation(summary = "Update athlete details from edit button")
     public void updateAthleteEvent(@RequestBody AthleteEventUpdateRequest request) {
         setupService.updateAthleteEvent(request);
     }
@@ -50,7 +50,7 @@ public class SetupController {
     }
 
     @GetMapping("/all-athlete")
-    @Operation(summary = "Get all active coach athletes dropdown info")
+    @Operation(summary = "Get all active coach athletes")
     public List<AthleteInfo> findActiveAthletesByUserId(Integer userId) {
         return setupService.findActiveAthletesByUserId(userId);
     }

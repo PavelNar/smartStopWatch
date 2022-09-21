@@ -12,13 +12,6 @@ public class ReportService {
     @Resource
     private AthleteService athleteService;
 
-
-//  Hetkel on küsimus, et mis te selle teenusega soovite täpsemalt saavutada?
-//  Kus te soovite seda teenust oma veebilehel kasutada?
-//    public AthleteInfo findAthleteByName(String name) {
-//        return athleteService.findAthlete(name);
-//    }
-
     public void deleteAthlete(Integer athleteId) {
         athleteService.deleteAthlete(athleteId);
     }
