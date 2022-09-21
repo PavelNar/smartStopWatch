@@ -1,5 +1,6 @@
 package com.project.smartStopWatch.app.report;
 
+import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +23,7 @@ public class ReportService {
         athleteService.deleteAthlete(athleteId);
     }
 
+    public AthleteInfo findAthleteById(Integer athleteId) {
+        return athleteService.findAthleteById(athleteId);
+    }
 }

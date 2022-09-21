@@ -62,4 +62,8 @@ public class AthleteService {
         List<Athlete> athletes = athleteRepository.findActiveAthletesByUserId(userId, true);
         return athleteMapper.athletesToAthleteInfos(athletes);
     }
+
+    public AthleteInfo findAthleteById(Integer athleteId) {
+        return athleteRepository.;
+    }
 }

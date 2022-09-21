@@ -1,7 +1,9 @@
 package com.project.smartStopWatch.app.report;
 
+import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +17,11 @@ public class ReportController {
     private ReportService reportService;
 
 
-//  Hetkel on küsimus, et mis te selle teenusega soovite täpsemalt saavutada?
-//  Kus te soovite seda teenust oma veebilehel kasutada?
-//    @GetMapping("/athlete")
-//    @Operation(summary = "Find athlete by name")
-//    public AthleteInfo findAthleteByName(String name) {
-//        return reportService.findAthleteByName(name);
-//    }
+    @GetMapping("/athlete")
+    @Operation(summary = "Find athlete by athleteId")
+    public AthleteInfo findAthleteByName(Integer athleteId) {
+        return reportService.findAthleteById(athleteId);
+    }
 
     @DeleteMapping("/athlete")
     @Operation(summary = "Delete athlete with statistics from database")
