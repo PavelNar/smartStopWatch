@@ -11,4 +11,9 @@ public interface SplitRepository extends JpaRepository<Split, Integer> {
     @Query("select s from Split s where s.isActive = ?1 and s.athleteEvent = ?2 order by s.id")
     List<Split> findByIsActiveAthleteEvent(Boolean isActive, AthleteEvent athleteEvent);
 
+    @Query("select s from Split s where s.eventId = ?1 and s.heatNumber = ?2")
+    List<Split> findSplitsBY(Integer eventId, Integer heatNumber);
+
+
+
 }

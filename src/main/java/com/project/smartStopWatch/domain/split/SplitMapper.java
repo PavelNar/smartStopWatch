@@ -11,6 +11,8 @@ public interface SplitMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(constant = "true", target = "isActive")
     @Mapping(target = "athleteEvent")
+    @Mapping(source = "event.id", target = "eventId")
     Split athleteEventToSplit(AthleteEvent athleteEvent);
+
 
 }

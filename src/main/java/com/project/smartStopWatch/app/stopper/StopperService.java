@@ -13,6 +13,7 @@ import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
 import com.project.smartStopWatch.domain.event.heat.HeatMapper;
 import com.project.smartStopWatch.domain.event.heat.HeatService;
+import com.project.smartStopWatch.domain.split.Split;
 import com.project.smartStopWatch.domain.split.SplitService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
@@ -52,11 +53,15 @@ public class StopperService {
         splitService.createInitialSplits(timestamp, athleteEvents);
         heatService.startHeat(timestamp, startRequest.getEventId(), startRequest.getHeatNumber());
     }
+
     public void stopHeat(HeatStopRequest stopRequest) {
         List<AthleteEvent> athleteEvents = athleteEventService.findActiveAthleteEventsBy(stopRequest.getEventId(), stopRequest.getHeatNumber());
+        Heat heat = heatService.findHeatToStop(stopRequest);
+        List<Split> splits = splitService.findActiveSplitsBy(stopRequest);
         athleteEventService.clearAthleteEventsStartTime(athleteEvents);
         splitService.clearAthleteEventsLastSplitTimeAndSplitCounter(athleteEvents);
-        heatService.clearHeatStartTime(athleteEvents);
+        heatService.clearHeatStartTime(heat);
+        splitService.clearHeatAllSplits(splits);
     }
 
     @Transactional

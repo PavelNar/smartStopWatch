@@ -1,6 +1,8 @@
 package com.project.smartStopWatch.domain.split;
 
+import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
 import com.project.smartStopWatch.domain.event.heat.HeatService;
@@ -26,10 +28,12 @@ public class SplitService {
     @Resource
     private SplitMapper splitMapper;
 
+    @Resource
+    private AthleteEventRepository athleteEventRepository;
+
     public void createInitialSplits(Instant timestamp, List<AthleteEvent> athleteEvents) {
         for (AthleteEvent athleteEvent : athleteEvents) {
             addNewSplit(timestamp, athleteEvent);
-
         }
     }
 
@@ -85,6 +89,8 @@ public class SplitService {
 
     private void addSplitWithStartTime(Instant timestamp, Split split) {
         split.setStart(timestamp);
+        split.setEventId(split.getEventId());
+        split.setHeatNumber(split.getHeatNumber());
         splitRepository.save(split);
     }
 
@@ -116,5 +122,18 @@ public class SplitService {
             athleteEvent.setSplitCounter(0);
             athleteEvent.setLastSplitTime(null);
         }
+        athleteEventRepository.saveAll(athleteEvents);
+    }
+
+    public List<Split> findActiveSplitsBy(HeatStopRequest stopRequest) {
+        return splitRepository.findSplitsBY(stopRequest.getEventId(), stopRequest.getHeatNumber());
+    }
+
+    public void clearHeatAllSplits(List<Split> splits) {
+        for (Split split : splits) {
+            split.setEnd(null);
+            split.setIsActive(false);
+        }
+        splitRepository.saveAll(splits);
     }
 }
