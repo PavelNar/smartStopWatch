@@ -76,6 +76,13 @@ public class AthleteEventService {
         athleteEventRepository.saveAll(athleteEvents);
     }
 
+    public void clearAthleteEventsStartTime(List<AthleteEvent> athleteEvents) {
+        for (AthleteEvent athleteEvent : athleteEvents) {
+            athleteEvent.setStartTime(null);
+        }
+        athleteEventRepository.saveAll(athleteEvents);
+    }
+
     public AthleteEvent increaseAthleteEventSplitCounter(AthleteEvent athleteEvent) {
         athleteEvent.setSplitCounter(athleteEvent.getSplitCounter() + 1);
         athleteEventRepository.save(athleteEvent);

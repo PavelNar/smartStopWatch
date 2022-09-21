@@ -77,7 +77,6 @@ public class SplitService {
         splitRepository.save(split);
     }
 
-
     private void addNewSplit(Instant timestamp, AthleteEvent athleteEvent) {
         ValidationService.validateAllowedAddSplit(athleteEvent);
         Split split = splitMapper.athleteEventToSplit(athleteEvent);
@@ -88,7 +87,6 @@ public class SplitService {
         split.setStart(timestamp);
         splitRepository.save(split);
     }
-
 
     private void updateLastSplitAndAddNewSplit(Instant timestamp, AthleteEvent athleteEvent) {
         Split lastSplit = getLastSplit(athleteEvent);
@@ -111,5 +109,12 @@ public class SplitService {
     private Split getLastSplit(AthleteEvent athleteEvent) {
         List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
         return splits.get(splits.size() - 1);
+    }
+
+    public void clearAthleteEventsLastSplitTimeAndSplitCounter(List<AthleteEvent> athleteEvents) {
+        for (AthleteEvent athleteEvent : athleteEvents) {
+            athleteEvent.setSplitCounter(0);
+            athleteEvent.setLastSplitTime(null);
+        }
     }
 }
