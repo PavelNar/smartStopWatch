@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface HeatRepository extends JpaRepository<Heat, Integer> {
 
-
-    @Query("select h from Heat h where h.isActive = ?1 and h.event.id = ?2")
-    Heat findHeatBy(Boolean isActive, Integer eventId);
-
     @Query("select h from Heat h where h.isActive = ?1 and h.heatNumber = ?2")
     Heat findHeatByHeatNumber(Boolean isActive, Integer heatNumber);
 

@@ -117,11 +117,6 @@ public class AthleteEventService {
         return athleteEventRepository.findAthleteEventsBy(true, eventId);
     }
 
-    public void updateAthleteEventLastSplitTime(Instant timestamp, AthleteEvent athleteEvent) {
-        athleteEvent.setLastSplitTime(timestamp);
-        athleteEventRepository.save(athleteEvent);
-    }
-
     public void clearAthleteEvent(List<AthleteEvent> athleteEvents) {
         for (AthleteEvent athleteEvent : athleteEvents) {
             athleteEvent.setSplitCounter(0);

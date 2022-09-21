@@ -15,7 +15,4 @@ public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Inte
 
     @Query("select a from AthleteEvent a where a.isActive = ?1 and a.event.id = ?2 and a.heatNumber = ?3")
     List<AthleteEvent> findActiveAthleteEventsByx(Boolean isActive, Integer id, Integer heatNumber);
-
-
-
 }

@@ -38,6 +38,7 @@ public class SplitService {
         Heat heat = heatService.findActiveHeat(athleteEvent.getHeatNumber());
         if (isLastSplit(athleteEvent)) {
             athleteEventService.updateAthleteEventFinishTime(timestamp, athleteEvent);
+            getLastSplit(athleteEvent).setEnd(timestamp);
         } else {
             updateLastSplitAndAddNewSplit(timestamp, athleteEvent);
         }
@@ -49,20 +50,19 @@ public class SplitService {
             if (counter == athleteEvents.size())
                 heatService.updateHeatEnd(timestamp, heat);
         }
-        // TODO:  find all AthleteEvents by active, eventId, heatNumber
-        // TODO: create counter = 0
-        // TODO: forloop all athleteEvents  if splitCounter and splitCountRequired are equal increase counter
-        // TODO: if counter equeals athleteEvents.size() then heat is finished update heat finished (end) information
     }
 
     public void undoPreviousSplitProcess(AthleteEvent athleteEvent) {
         if (isInFinishedStatus(athleteEvent)) {
             athleteEventService.clearFinishedTimeStamp(athleteEvent);
+            heatService.removeHeatEndTime(athleteEvent);
         } else {
             deactivateCurrentLastSplit(athleteEvent);
         }
         clearNextLastActiveSplitEndTime(athleteEvent);
         athleteEventService.decreaseAthleteEventSplitCounter(athleteEvent);
+        Instant lastSplitStartTime = getBeforeLastSplit(athleteEvent).getEnd();
+        athleteEvent.setLastSplitTime(lastSplitStartTime);
     }
 
     private static boolean isInFinishedStatus(AthleteEvent athleteEvent) {
@@ -71,11 +71,6 @@ public class SplitService {
 
     private static boolean isLastSplit(AthleteEvent athleteEvent) {
         return athleteEvent.getSplitCounter().equals(athleteEvent.getSplitCountRequired());
-    }
-
-    private void updateLastSplit(Instant timestamp, AthleteEvent athleteEvent) {
-        Split lastSplit = getLastSplit(athleteEvent);
-        updateSplitEndTime(timestamp, lastSplit);
     }
 
     private void updateSplitEndTime(Instant timestamp, Split split) {
@@ -117,6 +112,11 @@ public class SplitService {
     private Split getLastSplit(AthleteEvent athleteEvent) {
         List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
         return splits.get(splits.size() - 1);
+    }
+
+    private Split getBeforeLastSplit(AthleteEvent athleteEvent) {
+        List<Split> splits = splitRepository.findByIsActiveAthleteEvent(true, athleteEvent);
+        return splits.get(splits.size() - 2);
     }
 
     public void clearAthleteEvent(List<AthleteEvent> athleteEvents) {

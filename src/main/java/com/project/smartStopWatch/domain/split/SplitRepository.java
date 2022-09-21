@@ -13,7 +13,4 @@ public interface SplitRepository extends JpaRepository<Split, Integer> {
 
     @Query("select s from Split s where s.eventId = ?1 and s.heatNumber = ?2")
     List<Split> findSplitsBy(Integer eventId, Integer heatNumber);
-
-
-
 }
