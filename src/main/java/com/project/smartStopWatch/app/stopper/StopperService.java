@@ -4,6 +4,7 @@ import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.StopperDashboard;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStartRequest;
+import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventMapper;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
@@ -12,6 +13,7 @@ import com.project.smartStopWatch.domain.event.EventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
 import com.project.smartStopWatch.domain.event.heat.HeatMapper;
 import com.project.smartStopWatch.domain.event.heat.HeatService;
+import com.project.smartStopWatch.domain.split.Split;
 import com.project.smartStopWatch.domain.split.SplitService;
 import com.project.smartStopWatch.validation.ValidationService;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,6 +52,16 @@ public class StopperService {
         athleteEventService.updateAthleteEventsWithTimeStamp(timestamp, athleteEvents);
         splitService.createInitialSplits(timestamp, athleteEvents);
         heatService.startHeat(timestamp, startRequest.getEventId(), startRequest.getHeatNumber());
+    }
+
+    public void stopHeat(HeatStopRequest stopRequest) {
+        List<AthleteEvent> athleteEvents = athleteEventService.findActiveAthleteEventsBy(stopRequest.getEventId(), stopRequest.getHeatNumber());
+        Heat heat = heatService.findHeatToStop(stopRequest);
+        List<Split> splits = splitService.findActiveSplitsBy(stopRequest);
+        athleteEventService.clearAthleteEventsStartTime(athleteEvents);
+        splitService.clearAthleteEventsLastSplitTimeAndSplitCounter(athleteEvents);
+        heatService.clearHeatStartTime(heat);
+        splitService.clearHeatAllSplits(splits);
     }
 
     @Transactional
@@ -102,4 +113,5 @@ public class StopperService {
     private List<AthleteEventDto> createAthleteEventDtos(List<AthleteEvent> athleteEvents) {
         return athleteEventMapper.athleteEventsToAthleteEventDtos(athleteEvents);
     }
+
 }

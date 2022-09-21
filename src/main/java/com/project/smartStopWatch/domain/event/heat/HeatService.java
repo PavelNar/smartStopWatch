@@ -1,5 +1,6 @@
 package com.project.smartStopWatch.domain.event.heat;
 
+import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import com.project.smartStopWatch.domain.event.Event;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +38,16 @@ public class HeatService {
         heat.setHasStarted(true);
     }
 
+    public void clearHeatStartTime(Heat heat) {
+        heat.setStart(null);
+        heat.setHasStarted(false);
+        heatRepository.save(heat);
+    }
+
     public List<Heat> findActiveHeats(Integer eventId) {
         return heatRepository.findHeatsBy(true, eventId);
     }
+
 
     public void updateHeatEnd(Instant timestamp, Heat heat) {
         heat.setEnd(timestamp);
@@ -48,5 +56,9 @@ public class HeatService {
 
     public Heat findActiveHeat(Integer eventId) {
         return heatRepository.findHeatBy(true, eventId);
+    }
+
+    public Heat findHeatToStop(HeatStopRequest stopRequest) {
+        return heatRepository.findByEventIdAndHeatNumber(stopRequest.getEventId(), stopRequest.getHeatNumber());
     }
 }

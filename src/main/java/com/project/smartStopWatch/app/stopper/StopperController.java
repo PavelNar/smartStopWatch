@@ -1,17 +1,13 @@
 package com.project.smartStopWatch.app.stopper;
 
-import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
-import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.StopperDashboard;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStartRequest;
+import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/stopper")
@@ -25,6 +21,12 @@ public class StopperController {
     private void startHeat(HeatStartRequest startRequest) {
         Instant timestamp = Instant.now();
         stopperService.startHeat(timestamp, startRequest);
+    }
+
+    @PatchMapping("/stop")
+    @Operation(summary = "Heat Stop")
+    private void stopHeat(HeatStopRequest stopRequest) {
+        stopperService.stopHeat(stopRequest);
     }
 
     @PostMapping("/split")
@@ -46,5 +48,4 @@ public class StopperController {
         return stopperService.getStopperDashboard(eventId);
 
     }
-
 }

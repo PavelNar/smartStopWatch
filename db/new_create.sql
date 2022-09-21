@@ -79,6 +79,8 @@ CREATE TABLE split (
     is_active boolean  NOT NULL DEFAULT true,
     athlete_id int  NOT NULL,
     athlete_event_id int  NOT NULL,
+    event_id int  NOT NULL,
+    heat_number int  NOT NULL,
     CONSTRAINT split_pk PRIMARY KEY (id)
 );
 
