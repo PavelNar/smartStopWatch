@@ -34,23 +34,11 @@ public class AthleteService {
         athleteRepository.save(athlete);
         return athleteMapper.athleteToAthleteInfo(athlete);
     }
-
-    public AthleteInfo findAthlete(String name) {
-        Optional<Athlete> athlete = athleteRepository.findByName(name);
-        ValidationService.validateAthleteName(athlete);
-        return athleteMapper.athleteToAthleteInfo(athlete.get());
-    }
-
+    
     public void deleteAthlete(Integer request) {
         Athlete referenceById = athleteRepository.findById(request).get();
         referenceById.setIsActive(false);
         athleteRepository.save(referenceById);
-    }
-
-    public Athlete findByName(String athleteName) {
-        Optional<Athlete> athlete = athleteRepository.findByName(athleteName);
-        ValidationService.validateAthleteName(athlete);
-        return athlete.get();
     }
 
     public Athlete findById(Integer athleteId) {
@@ -63,8 +51,9 @@ public class AthleteService {
     }
 
     public AthleteInfo findAthleteById(Integer athleteId) {
-        Athlete athlete = athleteRepository.findById(athleteId).get();
-        AthleteInfo athleteInfo = athleteMapper.athleteToAthleteInfo(athlete);
+        Optional<Athlete> athlete = athleteRepository.findById(athleteId);
+        ValidationService.validateAthleteName(athlete);
+        AthleteInfo athleteInfo = athleteMapper.athleteToAthleteInfo(athlete.get());
         return athleteInfo;
     }
 }

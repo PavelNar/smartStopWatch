@@ -19,7 +19,7 @@ public class ReportController {
 
     @GetMapping("/athlete")
     @Operation(summary = "Find athlete by athleteId")
-    public AthleteInfo findAthleteByName(Integer athleteId) {
+    public AthleteInfo findAthleteById(Integer athleteId) {
         return reportService.findAthleteById(athleteId);
     }
 
