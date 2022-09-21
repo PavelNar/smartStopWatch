@@ -12,7 +12,7 @@ import java.util.List;
 public interface HeatMapper {
 
     @Mapping(source = "hasStarted", target = "heatButtonStatus", qualifiedByName = "hasStartedToButtonStatus")
-//    @Mapping(source = "start", target = "heatStartTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
+    @Mapping(source = "event.id", target = "eventId")
     HeatRow heatToHeatRow(Heat heat);
 
 

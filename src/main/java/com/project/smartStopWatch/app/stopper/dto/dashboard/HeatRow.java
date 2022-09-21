@@ -9,6 +9,7 @@ import java.util.UUID;
 @Data
 public class HeatRow {
     private UUID uuid = UUID.randomUUID();
+    private Integer eventId;
     private Integer heatNumber;
     private Boolean hasStarted;
     private Boolean hasFinished;
