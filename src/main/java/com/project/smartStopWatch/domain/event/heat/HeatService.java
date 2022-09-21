@@ -52,10 +52,11 @@ public class HeatService {
     public void updateHeatEnd(Instant timestamp, Heat heat) {
         heat.setEnd(timestamp);
         heat.setHasFinished(true);
+        heatRepository.save(heat);
     }
 
     public Heat findActiveHeat(Integer eventId) {
-        return heatRepository.findHeatBy(true, eventId);
+        return heatRepository.findHeatByHeatNumber(true, eventId);
     }
 
     public Heat findHeatToStop(HeatStopRequest stopRequest) {

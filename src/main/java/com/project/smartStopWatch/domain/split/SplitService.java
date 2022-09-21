@@ -2,7 +2,6 @@ package com.project.smartStopWatch.domain.split;
 
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEventRepository;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
 import com.project.smartStopWatch.domain.event.heat.HeatService;
@@ -28,8 +27,6 @@ public class SplitService {
     @Resource
     private SplitMapper splitMapper;
 
-    @Resource
-    private AthleteEventRepository athleteEventRepository;
 
     public void createInitialSplits(Instant timestamp, List<AthleteEvent> athleteEvents) {
         for (AthleteEvent athleteEvent : athleteEvents) {
@@ -38,15 +35,20 @@ public class SplitService {
     }
 
     public void processSplits(Instant timestamp, AthleteEvent athleteEvent) {
-        Heat heat = heatService.findActiveHeat(athleteEvent.getEvent().getId());
+        Heat heat = heatService.findActiveHeat(athleteEvent.getHeatNumber());
         if (isLastSplit(athleteEvent)) {
-            updateLastSplit(timestamp, athleteEvent);
             athleteEventService.updateAthleteEventFinishTime(timestamp, athleteEvent);
-            heatService.updateHeatEnd(timestamp, heat);
         } else {
             updateLastSplitAndAddNewSplit(timestamp, athleteEvent);
         }
-        athleteEventService.updateAthleteEventLastSplitTime(timestamp, athleteEvent);
+        List<AthleteEvent> athleteEvents = athleteEventService.findActiveAthleteEvents(athleteEvent.getEvent().getId(), athleteEvent.getHeatNumber());
+        int counter = 0;
+        for (AthleteEvent athleteEvent1 : athleteEvents) {
+            if (athleteEvent1.getSplitCounter().equals(athleteEvent1.getSplitCountRequired()))
+                counter++;
+            if (counter == athleteEvents.size())
+                heatService.updateHeatEnd(timestamp, heat);
+        }
         // TODO:  find all AthleteEvents by active, eventId, heatNumber
         // TODO: create counter = 0
         // TODO: forloop all athleteEvents  if splitCounter and splitCountRequired are equal increase counter
@@ -117,16 +119,12 @@ public class SplitService {
         return splits.get(splits.size() - 1);
     }
 
-    public void clearAthleteEventsLastSplitTimeAndSplitCounter(List<AthleteEvent> athleteEvents) {
-        for (AthleteEvent athleteEvent : athleteEvents) {
-            athleteEvent.setSplitCounter(0);
-            athleteEvent.setLastSplitTime(null);
-        }
-        athleteEventRepository.saveAll(athleteEvents);
+    public void clearAthleteEvent(List<AthleteEvent> athleteEvents) {
+        athleteEventService.clearAthleteEvent(athleteEvents);
     }
 
     public List<Split> findActiveSplitsBy(HeatStopRequest stopRequest) {
-        return splitRepository.findSplitsBY(stopRequest.getEventId(), stopRequest.getHeatNumber());
+        return splitRepository.findSplitsBy(stopRequest.getEventId(), stopRequest.getHeatNumber());
     }
 
     public void clearHeatAllSplits(List<Split> splits) {
