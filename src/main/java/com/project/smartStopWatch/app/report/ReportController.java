@@ -18,9 +18,9 @@ public class ReportController {
 
 
     @GetMapping("/athlete")
-    @Operation(summary = "Find athlete by athlete name")
-    public AthleteInfo findAthleteByName(String athleteName) {
-        return reportService.findAthleteByName(athleteName);
+    @Operation(summary = "Find athlete by athlete name and userId")
+    public AthleteInfo findAthleteByName(Integer userId, String athleteName) {
+        return reportService.findAthleteByName(userId ,athleteName);
     }
 
     @DeleteMapping("/athlete")

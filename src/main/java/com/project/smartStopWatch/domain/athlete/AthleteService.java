@@ -50,8 +50,8 @@ public class AthleteService {
         return athleteMapper.athletesToAthleteInfos(athletes);
     }
 
-    public AthleteInfo findAthleteByName(String athleteName) {
-        Optional<Athlete> athlete = athleteRepository.findByName(athleteName);
+    public AthleteInfo findAthleteByName(Integer userId, String athleteName) {
+        Optional<Athlete> athlete = athleteRepository.findByNameAndUserId(userId, athleteName);
         ValidationService.validateAthleteName(athlete);
         AthleteInfo athleteInfo = athleteMapper.athleteToAthleteInfo(athlete.get());
         return athleteInfo;

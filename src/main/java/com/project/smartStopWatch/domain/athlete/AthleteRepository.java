@@ -17,4 +17,8 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
     @Query("select a from Athlete a where a.user.id = ?1 and a.isActive = ?2")
     List<Athlete> findActiveAthletesByUserId(Integer userId, Boolean isActive);
 
+    @Query("select a from Athlete a where a.user.id = ?1 and upper(a.name) = upper(?2)")
+    Optional<Athlete> findByNameAndUserId(Integer id, String name);
+
+
 }

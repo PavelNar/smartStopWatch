@@ -16,7 +16,8 @@ public class ReportService {
         athleteService.deleteAthlete(athleteId);
     }
 
-    public AthleteInfo findAthleteByName(String athleteName) {
-        return athleteService.findAthleteByName(athleteName);
+    public AthleteInfo findAthleteByName(Integer userId, String athleteName) {
+        return athleteService.findAthleteByName(userId ,athleteName);
     }
+
 }
