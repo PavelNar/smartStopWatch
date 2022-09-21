@@ -1,11 +1,9 @@
 package com.project.smartStopWatch.domain.event.heat;
 
 import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
-import com.project.smartStopWatch.app.stopper.dto.heat.HeatRow2;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import org.mapstruct.*;
 
-import java.time.Instant;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

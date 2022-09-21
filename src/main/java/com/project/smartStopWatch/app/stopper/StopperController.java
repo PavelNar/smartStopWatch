@@ -25,7 +25,7 @@ public class StopperController {
 
     @PatchMapping("/stop")
     @Operation(summary = "Heat Stop")
-    private void stopHeat(HeatStopRequest stopRequest) {
+    private void stopHeat(@RequestBody HeatStopRequest stopRequest) {
         stopperService.stopHeat(stopRequest);
     }
 
