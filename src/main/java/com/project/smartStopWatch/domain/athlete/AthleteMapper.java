@@ -10,9 +10,11 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AthleteMapper {
 
-    @Mapping(source = "id", target = "athleteId")
     @Mapping(source = "name", target = "athleteName")
-    AthleteInfo athleteToAthleteResponse(Athlete athlete);
+    @Mapping(source = "id", target = "athleteId")
+    AthleteInfo athleteToAthleteInfo(Athlete athlete);
+
 
     List<AthleteInfo> athletesToAthleteInfos(List<Athlete> athletes);
+
 }

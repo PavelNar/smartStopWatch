@@ -1,7 +1,6 @@
 package com.project.smartStopWatch.domain.athlete;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
-import com.project.smartStopWatch.app.setup.dto.split.SplitLengthDto;
 import com.project.smartStopWatch.domain.user.User;
 import com.project.smartStopWatch.domain.user.UserService;
 import com.project.smartStopWatch.validation.ValidationService;
@@ -33,13 +32,13 @@ public class AthleteService {
         athlete.setName(name);
         athlete.setIsActive(true);
         athleteRepository.save(athlete);
-        return athleteMapper.athleteToAthleteResponse(athlete);
+        return athleteMapper.athleteToAthleteInfo(athlete);
     }
 
     public AthleteInfo findAthlete(String name) {
         Optional<Athlete> athlete = athleteRepository.findByName(name);
         ValidationService.validateAthleteName(athlete);
-        return athleteMapper.athleteToAthleteResponse(athlete.get());
+        return athleteMapper.athleteToAthleteInfo(athlete.get());
     }
 
     public void deleteAthlete(Integer request) {
@@ -64,6 +63,8 @@ public class AthleteService {
     }
 
     public AthleteInfo findAthleteById(Integer athleteId) {
-        return athleteRepository.findById(athleteId).get();
+        Athlete athlete = athleteRepository.findById(athleteId).get();
+        AthleteInfo athleteInfo = athleteMapper.athleteToAthleteInfo(athlete);
+        return athleteInfo;
     }
 }
