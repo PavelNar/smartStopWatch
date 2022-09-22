@@ -61,8 +61,10 @@ public class SplitService {
         }
         clearNextLastActiveSplitEndTime(athleteEvent);
         athleteEventService.decreaseAthleteEventSplitCounter(athleteEvent);
-        Instant lastSplitStartTime = getBeforeLastSplit(athleteEvent).getEnd();
-        athleteEvent.setLastSplitTime(lastSplitStartTime);
+        if (athleteEvent.getSplitCounter() != 0) {
+            Instant lastSplitStartTime = getBeforeLastSplit(athleteEvent).getEnd();
+            athleteEvent.setLastSplitTime(lastSplitStartTime);
+        }
     }
 
     private static boolean isInFinishedStatus(AthleteEvent athleteEvent) {
