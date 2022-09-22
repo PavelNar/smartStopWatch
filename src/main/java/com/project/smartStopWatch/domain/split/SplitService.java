@@ -1,6 +1,7 @@
 package com.project.smartStopWatch.domain.split;
 
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
+import com.project.smartStopWatch.app.stopper.dto.split.SplitDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEventService;
 import com.project.smartStopWatch.domain.event.heat.Heat;
@@ -135,5 +136,10 @@ public class SplitService {
             split.setIsActive(false);
         }
         splitRepository.saveAll(splits);
+    }
+
+    public List<SplitDto> findAthleteSplits(Integer athleteEventId) {
+        List<Split> splits = splitRepository.findAllSplitsByAthleteEventId(true, athleteEventId);
+        return splitMapper.splitListToSplitDtoList(splits);
     }
 }

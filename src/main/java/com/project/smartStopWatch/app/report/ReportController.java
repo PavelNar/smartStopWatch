@@ -2,6 +2,7 @@ package com.project.smartStopWatch.app.report;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
+import com.project.smartStopWatch.app.stopper.dto.split.SplitDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,27 +35,15 @@ public class ReportController {
         reportService.deleteAthlete(athleteId);
     }
 
-    @GetMapping("/athlete/stroke")
-    @Operation(summary = "Find all strokes athlete has participated in")
-    public List<Stroke> findAthleteStrokes(Integer athleteId) {
-        return reportService.findAthleteStrokes(athleteId);
-    }
-
     @GetMapping("/athlete/stroke/event")
     @Operation(summary = "Find all event lengths of chosen stroke athlete has participated in")
     public List<AthleteEventDto> findAthleteEvents(Integer strokeId, Integer athleteId) {
         return reportService.findAthleteEvents(strokeId, athleteId);
     }
 
-    @GetMapping("/athlete/stroke/event/day")
-    @Operation(summary = "Find by day events of chosen stroke and length athlete has participated in")
-    public List<AthleteEvent> findAthleteEventsByDay(Instant day, Integer strokeId, Integer athleteId) {
-        return reportService.findAthleteEventsByDay(day, strokeId, athleteId);
-    }
-
-    @GetMapping("/athlete/stroke/event/day/time")
-    @Operation(summary = "Find by day and time events of chosen stroke and length athlete has participated in")
-    public List<AthleteEvent> findAthleteEventsByDayAndTime(Instant day, Instant time, Integer strokeId, Integer athleteId) {
-        return reportService.findAthleteEventsByDay(day, strokeId, athleteId);
+    @GetMapping("/athlete/event/splits")
+    @Operation(summary = "Find all splits for chosen event")
+    public List<SplitDto> findAthleteSplits(Integer athleteEventId) {
+        return reportService.findAthleteSplits(athleteEventId);
     }
 }
