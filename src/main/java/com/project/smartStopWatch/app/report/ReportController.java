@@ -1,6 +1,7 @@
 package com.project.smartStopWatch.app.report;
 
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
+import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.stroke.Stroke;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +42,7 @@ public class ReportController {
 
     @GetMapping("/athlete/stroke/event")
     @Operation(summary = "Find all event lengths of chosen stroke athlete has participated in")
-    public List<AthleteEvent> findAthleteEvents(Integer strokeId,Integer athleteId) {
+    public List<AthleteEventDto> findAthleteEvents(Integer strokeId, Integer athleteId) {
         return reportService.findAthleteEvents(strokeId, athleteId);
     }
 

@@ -56,4 +56,6 @@ public interface AthleteEventMapper {
     default Integer athleteEventToDistanceCovered(AthleteEvent athleteEvent) {
         return athleteEvent.getSplitCounter() * athleteEvent.getSplitLength();
     }
+
+    List<AthleteEventDto> athleteEventListToAthleteEventDtoList(List<AthleteEvent> athleteEvents);
 }

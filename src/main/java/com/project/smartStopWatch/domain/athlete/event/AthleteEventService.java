@@ -2,6 +2,7 @@ package com.project.smartStopWatch.domain.athlete.event;
 
 import com.project.smartStopWatch.app.setup.dto.event.AthleteEventUpdateRequest;
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
+import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.domain.athlete.Athlete;
 import com.project.smartStopWatch.domain.athlete.AthleteService;
 import com.project.smartStopWatch.domain.event.Event;
@@ -25,6 +26,9 @@ public class AthleteEventService {
 
     @Resource
     private AthleteEventRepository athleteEventRepository;
+
+    @Resource
+    private AthleteEventMapper athleteEventMapper;
 
     public void createAndAddAthleteEvents(Event event, EventSettingsRequest request) {
         List<AthleteEvent> athleteEvents = new ArrayList<>();
@@ -128,14 +132,8 @@ public class AthleteEventService {
         return athleteEventRepository.findActiveAthleteEventsByx(true, eventId, heatNumber);
     }
 
-    public List<Stroke> findAthleteStrokes(Integer athleteId) {
-        List<AthleteEvent> athleteEvents = athleteEventRepository.findAthleteEventsByAthleteId(true, athleteId);
-        athleteEventRepository.findFreestyle(athleteEvents.);
-
-        athleteEventRepository.findAthleteEventsByAthleteId(true, athleteId);
-        for (AthleteEvent athleteEvent : athleteEvents) {
-            athleteEvent.getStroke().getId();
-            strokes.
-        }
+    public List<AthleteEventDto> findAthleteEvents(Integer strokeId, Integer athleteId) {
+        List<AthleteEvent> athleteEvents = athleteEventRepository.findAthleteEventByAthleteIdAndStrokeId(true, athleteId, strokeId);
+        return athleteEventMapper.athleteEventListToAthleteEventDtoList(athleteEvents);
     }
 }
