@@ -16,12 +16,4 @@ public interface SplitMapper {
     Split athleteEventToSplit(AthleteEvent athleteEvent);
 
     List<SplitDto> splitListToSplitDtoList(List<Split> splits);
-
-
-    Split splitDtoToSplit(SplitDto splitDto);
-
-    SplitDto splitToSplitDto(Split split);
-
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Split updateSplitFromSplitDto(SplitDto splitDto, @MappingTarget Split split);
 }

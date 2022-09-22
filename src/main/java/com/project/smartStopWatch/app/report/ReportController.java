@@ -3,8 +3,6 @@ package com.project.smartStopWatch.app.report;
 import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.app.stopper.dto.split.SplitDto;
-import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
-import com.project.smartStopWatch.domain.stroke.Stroke;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.time.Instant;
 import java.util.List;
 
 @RestController
