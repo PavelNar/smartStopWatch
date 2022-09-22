@@ -25,6 +25,7 @@ public interface AthleteEventMapper {
     @Mapping(expression = "java(athleteEventToDistanceCovered(athleteEvent))", target = "distanceCovered")
     @Mapping(expression = "java(timestampToMilliseconds(athleteEvent.getStartTime()))", target = "startTimeMilliseconds")
     @Mapping(expression = "java(timestampToMilliseconds(athleteEvent.getFinishTime()))", target = "finishTimeMilliseconds")
+    @Mapping(expression = "java(timestampToMilliseconds(athleteEvent.getLastSplitTime()))", target = "distanceCoveredTimeMilliseconds")
     AthleteEventDto athleteEventToAthleteEventDto(AthleteEvent athleteEvent);
 
     List<AthleteEventDto> athleteEventsToAthleteEventDtos(List<AthleteEvent> athleteEvents);

@@ -15,8 +15,8 @@ public class AthleteEventDto implements Serializable {
     private String strokeType;
     private Boolean hasStarted;
     private Long startTimeMilliseconds;
-    private Long distanceCoveredTimeMilliseconds;
     private Long finishTimeMilliseconds;
+    private Long distanceCoveredTimeMilliseconds;
     private Integer lastSplitCount;
     private Integer distanceCovered;
     private Boolean hasFinished;
