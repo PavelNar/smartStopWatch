@@ -7,5 +7,4 @@ public interface StrokeRepository extends JpaRepository<Stroke, Integer> {
 
     @Query("select s from Stroke s where s.id = ?1")
     Stroke findStrokeByStrokeId(Integer strokeId);
-
 }

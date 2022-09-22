@@ -26,7 +26,6 @@ public class AthleteEventService {
     @Resource
     private AthleteEventRepository athleteEventRepository;
 
-
     public void createAndAddAthleteEvents(Event event, EventSettingsRequest request) {
         List<AthleteEvent> athleteEvents = new ArrayList<>();
         int athleteCounter = 0;
@@ -127,5 +126,16 @@ public class AthleteEventService {
 
     public List<AthleteEvent> findActiveAthleteEvents(Integer eventId, Integer heatNumber) {
         return athleteEventRepository.findActiveAthleteEventsByx(true, eventId, heatNumber);
+    }
+
+    public List<Stroke> findAthleteStrokes(Integer athleteId) {
+        List<AthleteEvent> athleteEvents = athleteEventRepository.findAthleteEventsByAthleteId(true, athleteId);
+        athleteEventRepository.findFreestyle(athleteEvents.);
+
+        athleteEventRepository.findAthleteEventsByAthleteId(true, athleteId);
+        for (AthleteEvent athleteEvent : athleteEvents) {
+            athleteEvent.getStroke().getId();
+            strokes.
+        }
     }
 }

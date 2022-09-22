@@ -1,9 +1,11 @@
 package com.project.smartStopWatch.domain.stroke;
 
 import com.project.smartStopWatch.app.setup.dto.split.StrokeDto;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,5 +29,4 @@ public class StrokeService {
         List<Stroke> strokes = strokeRepository.findAll();
         return strokeMapper.strokeListToStrokeDtoList(strokes);
     }
-
 }
