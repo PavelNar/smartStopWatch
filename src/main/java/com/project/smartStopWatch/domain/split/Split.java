@@ -43,16 +43,8 @@ public class Split {
     @Column(name = "event_id", nullable = false)
     private Integer eventId;
 
-
     @NotNull
     @Column(name = "heat_number", nullable = false)
     private Integer heatNumber;
 
-    public Integer getHeatNumber() {
-        return heatNumber;
-    }
-
-    public void setHeatNumber(Integer heatNumber) {
-        this.heatNumber = heatNumber;
-    }
 }

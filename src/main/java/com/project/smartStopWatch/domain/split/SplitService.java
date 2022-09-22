@@ -35,7 +35,7 @@ public class SplitService {
     }
 
     public void processSplits(Instant timestamp, AthleteEvent athleteEvent) {
-        Heat heat = heatService.findActiveHeat(athleteEvent.getHeatNumber());
+        Heat heat = heatService.findActiveHeat(athleteEvent.getEvent().getId(), athleteEvent.getHeatNumber());
         if (isLastSplit(athleteEvent)) {
             athleteEventService.updateAthleteEventFinishTime(timestamp, athleteEvent);
             getLastSplit(athleteEvent).setEnd(timestamp);
@@ -61,8 +61,10 @@ public class SplitService {
         }
         clearNextLastActiveSplitEndTime(athleteEvent);
         athleteEventService.decreaseAthleteEventSplitCounter(athleteEvent);
-        Instant lastSplitStartTime = getBeforeLastSplit(athleteEvent).getEnd();
-        athleteEvent.setLastSplitTime(lastSplitStartTime);
+        if (athleteEvent.getSplitCounter() != 0) {
+            Instant lastSplitStartTime = getBeforeLastSplit(athleteEvent).getEnd();
+            athleteEvent.setLastSplitTime(lastSplitStartTime);
+        }
     }
 
     private static boolean isInFinishedStatus(AthleteEvent athleteEvent) {

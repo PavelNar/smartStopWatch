@@ -56,8 +56,8 @@ public class HeatService {
         heatRepository.save(heat);
     }
 
-    public Heat findActiveHeat(Integer eventId) {
-        return heatRepository.findHeatByHeatNumber(true, eventId);
+    public Heat findActiveHeat(Integer eventId, Integer heatNumber) {
+        return heatRepository.findHeatBy(true,eventId, heatNumber);
     }
 
     public Heat findHeatToStop(HeatStopRequest stopRequest) {

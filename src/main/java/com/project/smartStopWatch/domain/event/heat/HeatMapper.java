@@ -17,6 +17,7 @@ public interface HeatMapper {
     @Mapping(source = "hasStarted", target = "heatButtonStatus", qualifiedByName = "hasStartedToButtonStatus")
     @Mapping(source = "event.id", target = "eventId")
     @Mapping(source = "start", target = "heatStartTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
+    @Mapping(source = "end", target = "heatFinishTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
     HeatRow heatToHeatRow(Heat heat);
 
 
