@@ -35,7 +35,7 @@ public class SplitService {
     }
 
     public void processSplits(Instant timestamp, AthleteEvent athleteEvent) {
-        Heat heat = heatService.findActiveHeat(athleteEvent.getHeatNumber());
+        Heat heat = heatService.findActiveHeat(athleteEvent.getEvent().getId(), athleteEvent.getHeatNumber());
         if (isLastSplit(athleteEvent)) {
             athleteEventService.updateAthleteEventFinishTime(timestamp, athleteEvent);
             getLastSplit(athleteEvent).setEnd(timestamp);
