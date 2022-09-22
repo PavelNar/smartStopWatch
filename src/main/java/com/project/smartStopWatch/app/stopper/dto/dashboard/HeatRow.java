@@ -15,5 +15,6 @@ public class HeatRow {
     private Boolean hasFinished;
     private String heatButtonStatus;
     private Long heatStartTimeMilliseconds;
+    private Long heatFinishTimeMilliseconds;
     private List<AthleteEventDto> athleteEvents = new ArrayList<>();
 }
