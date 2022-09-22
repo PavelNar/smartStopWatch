@@ -3,6 +3,10 @@ package com.project.smartStopWatch.domain.event.heat;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.mapstruct.ReportingPolicy;
 
 import java.time.Instant;
 import java.util.List;

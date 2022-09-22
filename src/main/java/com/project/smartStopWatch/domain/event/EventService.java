@@ -1,7 +1,6 @@
 package com.project.smartStopWatch.domain.event;
 
 import com.project.smartStopWatch.app.setup.dto.event.EventSettingsRequest;
-import com.project.smartStopWatch.app.stopper.dto.dashboard.StopperDashboard;
 import com.project.smartStopWatch.domain.split.length.SplitLength;
 import com.project.smartStopWatch.domain.split.length.SplitLengthService;
 import com.project.smartStopWatch.domain.stroke.Stroke;
@@ -11,7 +10,6 @@ import com.project.smartStopWatch.domain.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 @Service
 public class EventService {

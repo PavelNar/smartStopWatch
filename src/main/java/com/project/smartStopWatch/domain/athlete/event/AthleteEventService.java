@@ -83,8 +83,9 @@ public class AthleteEventService {
         athleteEventRepository.saveAll(athleteEvents);
     }
 
-    public AthleteEvent increaseAthleteEventSplitCounter(AthleteEvent athleteEvent) {
+    public AthleteEvent increaseAthleteEventSplitCounterAndLastSplitTime(Instant timestamp, AthleteEvent athleteEvent) {
         athleteEvent.setSplitCounter(athleteEvent.getSplitCounter() + 1);
+        athleteEvent.setLastSplitTime(timestamp);
         athleteEventRepository.save(athleteEvent);
         return athleteEvent;
     }
@@ -116,8 +117,15 @@ public class AthleteEventService {
         return athleteEventRepository.findAthleteEventsBy(true, eventId);
     }
 
-    public void updateAthleteEventLastSplitTime(Instant timestamp, AthleteEvent athleteEvent) {
-        athleteEvent.setLastSplitTime(timestamp);
-        athleteEventRepository.save(athleteEvent);
+    public void clearAthleteEvent(List<AthleteEvent> athleteEvents) {
+        for (AthleteEvent athleteEvent : athleteEvents) {
+            athleteEvent.setSplitCounter(0);
+            athleteEvent.setLastSplitTime(null);
+        }
+        athleteEventRepository.saveAll(athleteEvents);
+    }
+
+    public List<AthleteEvent> findActiveAthleteEvents(Integer eventId, Integer heatNumber) {
+        return athleteEventRepository.findActiveAthleteEventsByx(true, eventId, heatNumber);
     }
 }

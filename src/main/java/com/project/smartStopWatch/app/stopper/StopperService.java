@@ -59,7 +59,7 @@ public class StopperService {
         Heat heat = heatService.findHeatToStop(stopRequest);
         List<Split> splits = splitService.findActiveSplitsBy(stopRequest);
         athleteEventService.clearAthleteEventsStartTime(athleteEvents);
-        splitService.clearAthleteEventsLastSplitTimeAndSplitCounter(athleteEvents);
+        splitService.clearAthleteEvent(athleteEvents);
         heatService.clearHeatStartTime(heat);
         splitService.clearHeatAllSplits(splits);
     }
@@ -68,7 +68,7 @@ public class StopperService {
     public void processSplitClick(Instant timestamp, Integer athleteEventId) {
         AthleteEvent athleteEvent = athleteEventService.findAthleteEventBy(athleteEventId);
         ValidationService.validateSplitClickAllowed(athleteEvent);
-        athleteEventService.increaseAthleteEventSplitCounter(athleteEvent);
+        athleteEventService.increaseAthleteEventSplitCounterAndLastSplitTime(timestamp, athleteEvent);
         splitService.processSplits(timestamp, athleteEvent);
     }
 

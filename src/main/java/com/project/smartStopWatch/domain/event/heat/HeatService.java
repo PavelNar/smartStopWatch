@@ -1,6 +1,7 @@
 package com.project.smartStopWatch.domain.event.heat;
 
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
+import com.project.smartStopWatch.domain.athlete.event.AthleteEvent;
 import com.project.smartStopWatch.domain.event.Event;
 import org.springframework.stereotype.Service;
 
@@ -52,13 +53,22 @@ public class HeatService {
     public void updateHeatEnd(Instant timestamp, Heat heat) {
         heat.setEnd(timestamp);
         heat.setHasFinished(true);
+        heatRepository.save(heat);
     }
 
     public Heat findActiveHeat(Integer eventId) {
-        return heatRepository.findHeatBy(true, eventId);
+        return heatRepository.findHeatByHeatNumber(true, eventId);
     }
 
     public Heat findHeatToStop(HeatStopRequest stopRequest) {
         return heatRepository.findByEventIdAndHeatNumber(stopRequest.getEventId(), stopRequest.getHeatNumber());
+    }
+
+    public Heat removeHeatEndTime(AthleteEvent athleteEvent) {
+        Heat heat = heatRepository.findByEventIdAndHeatNumber(athleteEvent.getEvent().getId(), athleteEvent.getHeatNumber());
+        heat.setEnd(null);
+        heat.setHasFinished(false);
+        heatRepository.save(heat);
+        return heat;
     }
 }
