@@ -18,7 +18,7 @@ public class StopperController {
 
     @PostMapping("/start")
     @Operation(summary = "Heat start")
-    private void startHeat(HeatStartRequest startRequest) {
+    private void startHeat(@RequestBody HeatStartRequest startRequest) {
         Instant timestamp = Instant.now();
         stopperService.startHeat(timestamp, startRequest);
     }

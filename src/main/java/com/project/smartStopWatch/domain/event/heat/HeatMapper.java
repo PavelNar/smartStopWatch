@@ -4,6 +4,7 @@ import com.project.smartStopWatch.app.stopper.dto.dashboard.HeatRow;
 import com.project.smartStopWatch.app.stopper.dto.heat.HeatStopRequest;
 import org.mapstruct.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -11,6 +12,7 @@ public interface HeatMapper {
 
     @Mapping(source = "hasStarted", target = "heatButtonStatus", qualifiedByName = "hasStartedToButtonStatus")
     @Mapping(source = "event.id", target = "eventId")
+    @Mapping(source = "start", target = "heatStartTimeMilliseconds", qualifiedByName = "timestampToMilliseconds")
     HeatRow heatToHeatRow(Heat heat);
 
 
@@ -32,9 +34,9 @@ public interface HeatMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Heat updateHeatFromHeatStopRequest(HeatStopRequest heatStopRequest, @MappingTarget Heat heat);
 
-//    @Named("timestampToMilliseconds")
-//    static Long timestampToMilliseconds(Instant start) {
-//        return start.toEpochMilli();
-//    }
+    @Named("timestampToMilliseconds")
+    static Long timestampToMilliseconds(Instant start) {
+        return start == null ? null : start.toEpochMilli();
+    }
 
 }
