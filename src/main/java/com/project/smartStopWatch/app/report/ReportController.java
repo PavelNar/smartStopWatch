@@ -4,10 +4,7 @@ import com.project.smartStopWatch.app.setup.dto.athlete.AthleteInfo;
 import com.project.smartStopWatch.app.stopper.dto.dashboard.AthleteEventDto;
 import com.project.smartStopWatch.app.stopper.dto.split.SplitDto;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,7 +19,7 @@ public class ReportController {
 
     @GetMapping("/athlete")
     @Operation(summary = "Find athlete by athlete name and userId")
-    public AthleteInfo findAthleteByName(Integer userId, String athleteName) {
+    public AthleteInfo findAthleteByName(@RequestParam Integer userId,@RequestParam  String athleteName) {
         return reportService.findAthleteByName(userId, athleteName);
     }
 

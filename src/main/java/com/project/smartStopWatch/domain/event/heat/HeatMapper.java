@@ -23,25 +23,14 @@ public interface HeatMapper {
 
     List<HeatRow> heatsToHeatRows(List<Heat> heat);
 
-
     @Named("hasStartedToButtonStatus")
     static String hasStartedToButtonStatus(Boolean hasStarted) {
         return hasStarted ? "Stop" : "Start";
     }
 
-    @Mapping(source = "eventId", target = "event.id")
-    Heat heatStopRequestToHeat(HeatStopRequest heatStopRequest);
-
-    @Mapping(source = "event.id", target = "eventId")
-    HeatStopRequest heatToHeatStopRequest(Heat heat);
-
-    @Mapping(source = "eventId", target = "event.id")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Heat updateHeatFromHeatStopRequest(HeatStopRequest heatStopRequest, @MappingTarget Heat heat);
-
     @Named("timestampToMilliseconds")
-    static Long timestampToMilliseconds(Instant start) {
-        return start == null ? null : start.toEpochMilli();
+    static Long timestampToMilliseconds(Instant instant) {
+        return instant == null ? null : instant.toEpochMilli();
     }
 
 }

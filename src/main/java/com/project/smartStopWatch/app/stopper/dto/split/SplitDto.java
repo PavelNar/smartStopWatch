@@ -9,6 +9,6 @@ import java.time.Instant;
 @Data
 public class SplitDto implements Serializable {
     @NotNull
-    private final Instant start;
-    private final Instant end;
+    private final Long start;
+    private final Long end;
 }
