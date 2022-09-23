@@ -9,10 +9,10 @@ import javax.validation.constraints.Size;
 public class LoginRequest {
 
     @NotNull
-    @Size(min = 3, max = 20, message = "Kasutajanimi peab olema vahemikus 3-20 tähemärki")
+    @Size(min = 3, max = 20, message = "Username must be at least 3 characters")
     private String userName;
 
     @NotNull
-    @Size(min = 3, max = 255, message = "Parool peab olema vahemikus 3-255 tähemärki")
+    @Size(min = 3, max = 255, message = "Password must be at least 3 characters")
     private String password;
 }
